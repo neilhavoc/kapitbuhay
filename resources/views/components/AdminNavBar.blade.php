@@ -24,11 +24,11 @@
         </div>
     </nav>
     <ul class="nav nav-tabs fs-6" style="background-color:gray;">
-       <li class="nav-item" ><a class="nav-link " href="Dashboard" style="color: black;">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link " href="IncidentReports" style="color: black;">Incident Reports</a></li>
-        <li class="nav-item"><a class="nav-link " href="ManageAccount" style="color: black;">Manage Accounts</a></li>
-        <li class="nav-item"><a class="nav-link " href="Articles" style="color: black;">Articles</a></li>
-        <li class="nav-item"><a class="nav-link " href="UserFeedbacks" style="color: black;">User Feedbacks</a></li>
+       <li class="nav-item" ><a class="nav-link " href="dashboard" style="color: black;">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link " href="incidentreport" style="color: black;">Incident Reports</a></li>
+        <li class="nav-item"><a class="nav-link " href="account" style="color: black;">Manage Accounts</a></li>
+        <li class="nav-item"><a class="nav-link " href="article" style="color: black;">Articles</a></li>
+        <li class="nav-item"><a class="nav-link " href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
     </ul>
 
 </body>
