@@ -1,0 +1,33 @@
+//Run Server
+php artisan serve
+
+//Create Controller
+php artisan make:controller ControllerName -r
+
+//route Controller
+php artisan route:list
+
+//.env
+FIREBASE_CREDENTIALS="insert our firebase credential here"
+FIREBASE_DATABASE_URL="insert our data base url here"
+
+//Page Template
+@extends('layouts.index')
+
+<!-- Page Title -->
+@section('title', 'Title')
+
+<!-- Styles -->
+@section('styles')
+
+@stop
+
+<!-- Content -->
+@section('content')
+
+@stop
+
+<!-- Scripts -->
+@section('scripts')
+
+@stop

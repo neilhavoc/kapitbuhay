@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +14,9 @@ use App\Http\Controllers\LoginController;;
 */
 
 Route::get('/', function () {
-    return view('loginpage');
+    return view('layouts.index');
 });
 Route::resource('/controller', LoginController::class);
+
+Route::resource('/account', AccountsController::class);
+Route::resource('/article', ArticleController::class);
