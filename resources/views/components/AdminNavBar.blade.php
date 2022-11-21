@@ -24,7 +24,7 @@
             </div>
         </div>
     </nav>
-    <<nav class="navbar navbar-light navbar-expand-md bg-secondary" id="snav">
+    <nav class="navbar navbar-light navbar-expand-md bg-secondary" id="snav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"></a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
@@ -33,13 +33,13 @@
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="dashboard" style="color: black;">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="incidentreport" style="color: black;">Incident Reports</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="report" style="color: black;">Incident Reports</a></li>
                     <li class="nav-item"><a class="nav-link"  href="account" style="color: black;">Manage Accounts</a></li>
                     <li class="nav-item"><a class="nav-link"  href="article" style="color: black;">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="feedback" style="color: black;">User Feedbacks</a></li>
                 </ul>
             </div>
-        </div>
+        </div>s
     </nav>
     <script>
        const activePage = window.location.pathname;
