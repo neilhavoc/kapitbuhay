@@ -3,17 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Auth;
-use Kreait\Firebase\Contract\Firestore;
-use Kreait\Laravel\Firebase\Facades\Firebase;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
-use Kreait\Firebase\Database;
-use Kreait\Firebase\Value\Uid;
 
-use Session;
-
-class ArticleController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +13,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('pages.manage_articles');
-
+        //
+        return view('pages.manage_dashboard');
     }
+
     /**
      * Show the form for creating a new resource.
      *
