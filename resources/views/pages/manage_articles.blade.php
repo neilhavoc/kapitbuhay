@@ -9,7 +9,7 @@
  .search {
     margin-top: 100px;
  }
- 
+
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
@@ -42,7 +42,7 @@
 }
 
 .wrapper .active {
-    border: none; 
+    border: none;
 }
 
 .wrapper .image{
@@ -77,7 +77,7 @@
     display: none;
     right: 15px;
     top: 15px;
-    
+
 }
 
 .wrapper.active:hover #cancel-btn i {
@@ -130,7 +130,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">   
+<div class="container search">
     <div class="row g-1">
         <div class="col-md-5">
             <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -178,26 +178,26 @@
                 </div>
             <div id="cancel-btn">
                 <i class="fas fa-times"></i>
-            </div>            
+            </div>
             <div class="file-name">
                 File name here
             </div>
             </div>
             <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
             <input id="default-btn" type="file" hidden>
-        
+
 </div>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
         <div class="col-md-2 mb-2 text-start fw-bold">
-           Article Title: 
+           Article Title:
         </div>
     </div>
     <div class="row ">
         <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
     </div>
     <div class="row mt-3">
-       <div class="col-md-2 text-start fw-bold">Article Contents: </div>
+       <div class="col-md-2 text-start">Article Contents: </div>
     </div>
     <div class="row mt-2">
         <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
@@ -230,8 +230,8 @@
                     </tr>
                 </tbody>
     </div>
-    </div> 
-     
+    </div>
+
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
@@ -240,6 +240,7 @@
         <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
       </div>
       <div class="modal-body">
+        <h2 class="d-flex justify-content-center fw-bold">Create New Article</h2>
         <div class="container-text-center">
         <div class="wrapper">
             <div class="image">
@@ -252,51 +253,50 @@
                 </div>
             <div id="cancel-btn">
                 <i class="fas fa-times"></i>
-            </div>            
+            </div>
             <div class="file-name">
                 File name here
             </div>
             </div>
             <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
             <input id="default-btn" type="file" hidden>
-        
-</div>
-<div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-    <div class="row">
-        <div class="col-md-4 mb-2 fw-bold">
-           Article Title:
-        </div>
-    </div>
-    <div class="row ">
-        <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
-    </div>
-    <div class="row mt-2">
-       <div class="col-md-8 fw-bold">Add in: </div>
-    </div>
-    <div class="row mt-2 ">
-        <div class="col-md-3">  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Coping Mechanism Article
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul></div>
-    </div>
-    <div class="row mt-3 fw-bold">
-       <div class="col-md-8">Article Contents: </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
-    </div>
-</div>
-      <div class="modal-footer-text-center">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
+        </div>
+        <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                   Article Title:
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
+            </div>
+            <div class="row mt-2">
+               <div class="col-md-8">Add in: </div>
+            </div>
+            <div class="row mt-2 ">
+                <div class="col-md-3">  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Coping Mechanism Article
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul></div>
+            </div>
+            <div class="row mt-3">
+               <div class="col-md-8">Article Contents: </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
+            </div>
+        </div>
+              <div class="modal-footer-text-center">
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 @stop
 
