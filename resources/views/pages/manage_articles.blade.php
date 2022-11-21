@@ -9,7 +9,7 @@
  .search {
     margin-top: 100px;
  }
- 
+
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
@@ -42,7 +42,7 @@
 }
 
 .wrapper .active {
-    border: none; 
+    border: none;
 }
 
 .wrapper .image{
@@ -77,7 +77,7 @@
     display: none;
     right: 15px;
     top: 15px;
-    
+
 }
 
 .wrapper.active:hover #cancel-btn i {
@@ -130,7 +130,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">   
+<div class="container search">
     <div class="row g-1">
         <div class="col-md-5">
             <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -179,14 +179,14 @@
                 </div>
             <div id="cancel-btn">
                 <i class="fas fa-times"></i>
-            </div>            
+            </div>
             <div class="file-name">
                 File name here
             </div>
             </div>
             <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
             <input id="default-btn" type="file" hidden>
-        
+
 </div>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
@@ -231,8 +231,8 @@
                     </tr>
                 </tbody>
     </div>
-    </div> 
-     
+    </div>
+
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
@@ -254,14 +254,34 @@
                 </div>
             <div id="cancel-btn">
                 <i class="fas fa-times"></i>
-            </div>            
+            </div>
             <div class="file-name">
                 File name here
             </div>
             </div>
             <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
             <input id="default-btn" type="file" hidden>
-        
+@extends('layouts.index')
+
+<!-- Page Title -->
+@section('title', 'Title')
+
+<!-- Styles -->
+@section('styles')
+
+@stop
+
+<!-- Content -->
+@section('content')
+
+@stop
+
+<!-- Scripts -->
+@section('scripts')
+
+@stop
+
+
 </div>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
