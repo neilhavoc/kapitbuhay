@@ -45,6 +45,7 @@
     margin-right: -250px;
 }
 
+
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -132,29 +133,17 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    Start Bootstrap
+                    Accounts
                 </a>
             </li>
             <li>
-                <a href="#">Dashboard</a>
+                <a class="btn btn-secondary text-dark" id="police">Police</a>
             </li>
             <li>
-                <a href="#">Shortcuts</a>
+                <a class="btn btn-secondary text-dark" id="vaw">VAW</a>
             </li>
             <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
+                <a class="btn btn-secondary text-dark" id="victim">Victim</a>
             </li>
         </ul>
     </div>
@@ -163,12 +152,15 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <a href="" class="btn btn-default " id="menu-toggle"><i class="fa-solid fa-arrow-left-long"></i></a>
+            <a href="" class="btn btn-default " id="menu-toggle">
+                <i class="fa-solid fa-arrow-left-long" id="icon"></i>
+            </a>
 
-            <div class="row">
+            <div class="row" >
                 <div class="col-lg-12">
-                        YAWA
-
+                    <p id="content_police">Police Content</p>
+                    <p id="content_vaw">Vaw Content</p>
+                    <p id="content_victim">Victime Content</p>
                 </div>
             </div>
         </div>
@@ -182,10 +174,29 @@
 
 @section('scripts')
 <script>
+     $(document).ready(function(){
+        $("#content_victim").hide();
+        $("#content_vaw").hide();
+        $("#content_police").hide();
+      $("#police").click(function(){
+        $("#content_police").show();
+        $("#content_victim").hide();
+        $("#content_vaw").hide();
+      });
+      $("#vaw").click(function(){
+        $("#content_police").hide();
+        $("#content_victim").hide();
+        $("#content_vaw").show();
+      });
+      $("#victim").click(function(){
+        $("#content_police").hide();
+        $("#content_victim").show();
+        $("#content_vaw").hide();
+      });
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
+    });
 </script>
-
 @stop

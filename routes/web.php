@@ -23,8 +23,8 @@ Route::get('/', function () {
     return view('layouts.index');
 });
 Route::resource('/controller', LoginController::class);
-
 Route::resource('/account', AccountsController::class);
 Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
 Route::resource('/dashboard', DashboardController::class);
+

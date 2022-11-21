@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>NavBar</title>
     @include ('components.AdminHeader')
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
                     <li class="nav-item"><a class="nav-link" href="#" style="color: gray;font-size: large;font-weight: 500;">Admin&nbsp;<i class="far fa-user-circle" style="font-size: 25px;"></i></a></li>
                 </ul>
             </div>
@@ -28,14 +29,14 @@
         <li class="nav-item"><a class="nav-link " href="incidentreport" style="color: black;">Incident Reports</a></li>
         <li class="nav-item"><a class="nav-link " href="account" style="color: black;">Manage Accounts</a></li>
         <li class="nav-item"><a class="nav-link " href="article" style="color: black;">Articles</a></li>
-        <li class="nav-item"><a class="nav-link " href="feedback" style="color: black;">User Feedbacks</a></li>
+        <li class="nav-item"><a class="nav-link " href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
     </ul>
 
 </body>
 
 </html>
 
-<style scoped>
+<style>
 
   .navbar-brand {
   font-weight: 500;
@@ -43,5 +44,11 @@
   color: gray;
   }
 
+  .navbar ul li a.active{
+    background: white;
+    border-radius: 25px;
+  }
 
 </style>
+
+
