@@ -78,10 +78,10 @@
         <h5 class="modal-title" id="staticBackdropLabel"></h5>
       </div>
       <div class="modal-body">
-        <h2 class="d-flex justify-content-center">View User Feedback</h2>
+        <h2 class="d-flex justify-content-center fw-bold">View User Feedback</h2>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-2 fw-bold">
            Feedback ID:
         </div>
     </div>
@@ -89,19 +89,19 @@
         <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
     </div>
     <div class="row mt-2">
-       <div class="col-md-8">Submitted By:</div>
+       <div class="col-md-8 fw-bold">Submitted By:</div>
     </div>
     <div class="row mt-2 ">
         <div class="col-md-3"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
     </div>
     <div class="row mt-2">
-       <div class="col-md-8">Date Created: </div>
+       <div class="col-md-8 fw-bold">Date Created: </div>
     </div>
     <div class="row mt-2">
         <div class="col-md-4"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
     </div>
     <div class="row mt-5">
-       <div class="col-md-8">Feedback Contents: </div>
+       <div class="col-md-8 fw-bold">Feedback Contents: </div>
     </div>
     <div class="row mt-2">
     <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>

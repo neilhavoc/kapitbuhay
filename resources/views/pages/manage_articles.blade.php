@@ -190,7 +190,7 @@
 </div>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
-        <div class="col-md-2 mb-2 text-start">
+        <div class="col-md-2 mb-2 text-start fw-bold">
            Article Title:
         </div>
     </div>
@@ -198,7 +198,7 @@
         <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
     </div>
     <div class="row mt-3">
-       <div class="col-md-2 text-start">Article Contents: </div>
+       <div class="col-md-2 text-start fw-bold">Article Contents: </div>
     </div>
     <div class="row mt-2">
         <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
@@ -241,7 +241,7 @@
         <h5 class="modal-title" id="staticBackdropLabel"></h5>
       </div>
       <div class="modal-body">
-        <h2 class="d-flex justify-content-center">Create New Article</h2>
+        <h2 class="d-flex justify-content-center fw-bold">Create New Article</h2>
         <div class="container-text-center">
         <div class="wrapper">
             <div class="image">
@@ -285,7 +285,7 @@
 </div>
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-2 fw-bold">
            Article Title:
         </div>
     </div>
@@ -293,7 +293,7 @@
         <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
     </div>
     <div class="row mt-2">
-       <div class="col-md-8">Add in: </div>
+       <div class="col-md-8 fw-bold">Add in: </div>
     </div>
     <div class="row mt-2 ">
         <div class="col-md-3">  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -305,7 +305,7 @@
     <li><a class="dropdown-item" href="#">Something else here</a></li>
   </ul></div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 fw-bold">
        <div class="col-md-8">Article Contents: </div>
     </div>
     <div class="row mt-3">
