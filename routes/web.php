@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\DashboardController;
 
@@ -26,5 +26,6 @@ Route::resource('/controller', LoginController::class);
 Route::resource('/account', AccountsController::class);
 Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
+Route::resource('/report', ReportController::class);
 Route::resource('/dashboard', DashboardController::class);
 
