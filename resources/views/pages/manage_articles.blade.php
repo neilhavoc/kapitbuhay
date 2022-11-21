@@ -163,10 +163,9 @@
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Update Article</h3>
       </div>
       <div class="modal-body">
-        <h2 class="d-flex justify-content-center">Update Article</h2>
         <div class="container-text-center">
         <div class="wrapper">
             <div class="image">
@@ -191,7 +190,7 @@
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
         <div class="col-md-2 mb-2 text-start fw-bold">
-           Article Title:
+           Article Title: 
         </div>
     </div>
     <div class="row ">
@@ -238,10 +237,9 @@
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
       </div>
       <div class="modal-body">
-        <h2 class="d-flex justify-content-center fw-bold">Create New Article</h2>
         <div class="container-text-center">
         <div class="wrapper">
             <div class="image">
