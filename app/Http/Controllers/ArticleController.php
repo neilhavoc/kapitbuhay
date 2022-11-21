@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.manage_articles');
 
     }
 

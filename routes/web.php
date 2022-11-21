@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ArticleController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,6 @@ Route::get('/', function () {
     return view('layouts.index');
 });
 Route::resource('/controller', LoginController::class);
-
 Route::resource('/account', AccountsController::class);
 Route::resource('/article', ArticleController::class);
+
