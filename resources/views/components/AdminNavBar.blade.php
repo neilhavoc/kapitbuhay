@@ -28,7 +28,7 @@
         <li class="nav-item"><a class="nav-link " href="incidentreport" style="color: black;">Incident Reports</a></li>
         <li class="nav-item"><a class="nav-link " href="account" style="color: black;">Manage Accounts</a></li>
         <li class="nav-item"><a class="nav-link " href="article" style="color: black;">Articles</a></li>
-        <li class="nav-item"><a class="nav-link " href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
+        <li class="nav-item"><a class="nav-link " href="feedback" style="color: black;">User Feedbacks</a></li>
     </ul>
 
 </body>
