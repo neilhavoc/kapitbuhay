@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Contract\Auth;
 use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Firebase\Contract\Firestore;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\Contract\Firestore;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
-use App\Http\Helpers\FirebaseHelper;
+use Kreait\Firebase\Value\Uid;
 
-
-class LoginController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,6 +23,8 @@ class LoginController extends Controller
     public function index()
     {
 
+
+        //$auth = app('firebase.auth');
     }
 
     /**
@@ -46,24 +47,32 @@ class LoginController extends Controller
     {
         $auth = app('firebase.auth');
 
-        $email = $request->input('email');
-        $clearTextPassword = $request->input('password');
+        $userProperties = [
+            'email' => $request->input('email'),
+            'emailVerified' => false,
+            'phoneNumber' => sprintf('+63%s', $request->input('cellnum')),
+            'password' => $request->input('password'),
+            'displayName' => sprintf('%s %s',
+                             $request->input('firstname'),
+                             $request->input('lastname')),
+            'disabled' => false,
+        ];
 
-        $signInResult = $auth->signInWithEmailAndPassword($email, $clearTextPassword);
-
-        /*$loginuid = $signInResult->firebaseUserId();
+        $createdUser = $auth->createUser($userProperties);
 
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $data = [
-            'email' => $request->input('email'),
-            'user-uid' => $loginuid,
-
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'fullname' => sprintf('%s %s',
+                            $request->input('firstname'),
+                            $request->input('lastname')),
         ];
 
-        $database->collection('admin')->document($loginuid)->set($data);
-        */
-        return redirect('manage_articles');
+        $database->collection('admin')->newDocument()->set($data);
+
+        return redirect('Register');
     }
 
     /**

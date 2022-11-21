@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,11 @@ use App\Http\Controllers\ArticleController;
 */
 
 Route::get('/', function () {
-    return view('layouts.index');
+    return view('pages.loginpage');
 });
-Route::resource('/controller', LoginController::class);
 
+
+Route::resource('/loginpage', LoginController::class);
+Route::resource('/register', RegisterController::class);
 Route::resource('/account', AccountsController::class);
-Route::resource('/article', ArticleController::class);
+Route::resource('/manage_articles', ArticleController::class);
