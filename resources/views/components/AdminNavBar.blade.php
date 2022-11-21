@@ -24,32 +24,14 @@
             </div>
         </div>
     </nav>
-    <nav class="navbar navbar-light navbar-expand-md bg-secondary" id="snav">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2">
-                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-2">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="dashboard" style="color: black;">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="incidentreport" style="color: black;">Incident Reports</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="account" style="color: black;">Manage Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="article" style="color: black;">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <script>
-       const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll('#snav a').forEach(link => {
-  if(link.href.includes(`${activePage}`)){
-    link.classList.add('active');
-    console.log(link);
-  }
-})
-    </script>
+    <ul class="nav nav-tabs fs-6" style="background-color:gray;">
+       <li class="nav-item" ><a class="nav-link " href="dashboard" style="color: black;">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link " href="incidentreport" style="color: black;">Incident Reports</a></li>
+        <li class="nav-item"><a class="nav-link " href="account" style="color: black;">Manage Accounts</a></li>
+        <li class="nav-item"><a class="nav-link " href="article" style="color: black;">Articles</a></li>
+        <li class="nav-item"><a class="nav-link " href="userFeedbacks" style="color: black;">User Feedbacks</a></li>
+    </ul>
+
 </body>
 
 </html>
