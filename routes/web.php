@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\PoliceAccountController;
+use App\Http\Controllers\VawAccountController;
+use App\Http\Controllers\VictimAccountController;
+use App\Http\Controllers\AccountsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +30,7 @@ Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
 Route::resource('/report', ReportController::class);
 Route::resource('/dashboard', DashboardController::class);
+Route::resource('/policeAcc', DashboardController::class);
+Route::resource('/VawAcc', DashboardController::class);
+Route::resource('/VictimAcc', DashboardController::class);
 
