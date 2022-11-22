@@ -30,7 +30,7 @@ Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
 Route::resource('/report', ReportController::class);
 Route::resource('/dashboard', DashboardController::class);
-Route::resource('/policeAcc', DashboardController::class);
-Route::resource('/VawAcc', DashboardController::class);
-Route::resource('/VictimAcc', DashboardController::class);
+Route::resource('/policeAcc', PoliceAccountController::class);
+Route::resource('/VawAcc', VawAccountController::class);
+Route::resource('/VictimAcc', VictimAccountController::class);
 
