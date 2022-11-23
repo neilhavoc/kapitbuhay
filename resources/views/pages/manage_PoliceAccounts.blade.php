@@ -1,0 +1,166 @@
+@extends('layouts.manage_accounts')
+
+<!-- Page Title -->
+@section('title', 'Title')
+
+<!-- Styles -->
+@section('styles')
+<style>
+.profile{
+    height: 200px;
+    width: 200px;
+}
+.credential{
+    height: 200px;
+    width: 50px;
+}
+.head-credential{
+    font-size: 12px;
+}
+
+</style>
+
+@stop
+
+<!-- Content -->
+@section('content')
+
+    <div class="container search">
+        <div class="row">
+            <div class="col-md-5">
+                <input class= "container-fluid h-100" type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <table class="table table-hover table-bordered text-center">
+                <thead class="bill-header cs">
+                    <tr>
+                        <th id="trs-hd-1" class="col-lg-1">ID</th>
+                        <th id="trs-hd-2" class="col-lg-3">Police Station Name</th>
+                        <th id="trs-hd-3" class="col-lg-3">Address</th>
+                        <th id="trs-hd-4" class="col-lg-3">Email</th>
+                        <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                        <th id="trs-hd-4" class="col-lg-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="justify-contents-center ">
+                        <td>01</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="viewPolice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                        <h5 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">View Police Profile</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                            <div class="row row1">
+                                <div class="col-md-2">
+                                    <img src="ball.jpg" alt="Ball" class="profile">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <h5 class="col-md-2">User ID: </h5>
+                                        <h5 id="userID" class="col-md-4">sample</h5>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Police Station Name:</h5>
+                                        <input type="text" class="col-md-4">
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Contact No:</h5>
+                                        <input type="text" class="col-md-4">
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Email:</h5>
+                                        <input type="text" class="col-md-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row2">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h1 class="fw-heavy">
+                                                Address:
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                            <h5 class="col-md-2">
+                                                City:
+                                            </h5>
+                                            <input type="text" class="col-md-3">
+                                            <h5 class="col-md-2">
+                                                Barangay:
+                                            </h5>
+                                            <input type="text" class="col-md-3">
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-2">
+                                            Purok:
+                                        </h5>
+                                        <input type="text" class="col-md-6">
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-2">
+                                            Street:
+                                        </h5>
+                                        <input type="text" class="col-md-6">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h2 class="fw-light head-credential">
+                                            Photo of Valid Credentials:
+                                        </h2>
+                                    </div>
+                                    <div class="row">
+                                        <img src="ball.jpg" alt="Ball" class="credential">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row3">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h5>
+                                            Verification Status:
+                                        </h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Dropdown button
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                              <li><a class="dropdown-item" href="#">Action</a></li>
+                                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@stop
+
+<!-- Scripts -->
+@section('scripts')
+
+@stop

@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Contract\Firestore;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+use App\Http\Helpers\FirebaseHelper;
+
 
 class LoginController extends Controller
 {
@@ -11,9 +20,10 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+
     }
 
     /**
@@ -34,7 +44,26 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auth = app('firebase.auth');
+
+        $email = $request->input('email');
+        $clearTextPassword = $request->input('password');
+
+        $signInResult = $auth->signInWithEmailAndPassword($email, $clearTextPassword);
+
+        /*$loginuid = $signInResult->firebaseUserId();
+
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $data = [
+            'email' => $request->input('email'),
+            'user-uid' => $loginuid,
+
+        ];
+
+        $database->collection('admin')->document($loginuid)->set($data);
+        */
+        return redirect('manage_articles');
     }
 
     /**
