@@ -75,10 +75,10 @@
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View User Feedback</h3>
       </div>
       <div class="modal-body">
-        <h2 class="d-flex justify-content-center fw-bold">View User Feedback</h2>
+        
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
         <div class="col-md-4 mb-2 fw-bold">
@@ -107,10 +107,6 @@
     <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
     </div>
 </div>
-</div>
-<div class="modal-footer-text-center">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
 </div>
     </div>
   </div>
