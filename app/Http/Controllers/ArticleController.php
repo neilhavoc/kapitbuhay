@@ -10,8 +10,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use Kreait\Firebase\Value\Uid;
-
-use Session;
+use App\Http\Helpers\FirebaseHelper;
 
 class ArticleController extends Controller
 {
@@ -22,7 +21,16 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('pages.manage_articles');
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $articleRef = $database->collection('articles');
+        $query = $articleRef->where('Active', '=', 'isActive');
+        $documentRef = $query->documents();
+        //$civilianUsers = $documentRef->snapshot();
+
+        return view('pages.manage_articles', [
+            'document' => $documentRef,
+        ]);
 
     }
     /**

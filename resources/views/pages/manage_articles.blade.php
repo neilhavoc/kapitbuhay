@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'Articles')
 
 <!-- Styles -->
 @section('styles')
@@ -137,11 +137,11 @@
         </div>
         <div class="col-md-6 ">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Create New Article
-</button>
-        </div>
+            Create New Article
+        </button>
+    </div>
 
-    <div class="form-group mt-5">
+<div class="form-group mt-5">
     <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
@@ -153,13 +153,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr class="justify-contents-center ">
-                        <td>01</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Update</button>
-                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
+                    @if ($document == null)
+                    <tr>
+                        <td class="text-center" colspan="3">No Data!</td>
+                    </tr>
+                @else
+                    @foreach ($document as $item)
+                        <tr>
+                            <td> 001</td>
+                            <td>{{ $item['article_title'] }}</td>
+                            <td> Sample</td>
+                            <td>
+                                <!-- Modal trigger button -->
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Update</button>
+                                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                @endif
+
+</div>
+
+<div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>

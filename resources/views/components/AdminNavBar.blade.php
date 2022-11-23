@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>NavBar</title>
-    @include ('components.AdminHeader')
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-</head>
-
 <body>
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid">

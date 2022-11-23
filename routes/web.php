@@ -32,5 +32,4 @@ Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
 Route::resource('/report', ReportController::class);
 Route::resource('/dashboard', DashboardController::class);
-
 Route::resource('/manage_articles', ArticleController::class);
