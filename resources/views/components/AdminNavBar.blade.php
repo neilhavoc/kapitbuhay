@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Manage Accounts</title>
+    @include ('components.AdminHeader')
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
 <body>
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid">
@@ -31,17 +39,8 @@
                     <li class="nav-item"><a class="nav-link"  href="feedback" style="color: black;">User Feedbacks</a></li>
                 </ul>
             </div>
-        </div>s
+        </div>
     </nav>
-    <script>
-       const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll('#snav a').forEach(link => {
-  if(link.href.includes(`${activePage}`)){
-    link.classList.add('active');
-    console.log(link);
-  }
-})
-    </script>
 
 </body>
 
@@ -55,10 +54,12 @@ const navLinks = document.querySelectorAll('#snav a').forEach(link => {
   color: gray;
   }
 
-  .navbar ul li a.active{
+  .navbar .navbar-nav .nav-link:hover{
     background: white;
-    border-radius: 25px;
+    border-radius: 2px;
+    margin:none;
   }
+
 
 </style>
 
