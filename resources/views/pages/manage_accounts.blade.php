@@ -140,8 +140,8 @@
 @stop
 
 @section('content')
-<div id="wrapper">
-    <!-- Sidebar -->
+<div id="wrapper"><!--man_account-->
+    <!-- Sidebar  components-->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -160,7 +160,7 @@
             </li>
         </ul>
     </div>
-    <!-- /#sidebar-wrapper -->
+    <!-- /#sidebar-wrapper manage accounts-->
 
     <div id="page-content-wrapper">
         <div class="container-fluid">
@@ -171,7 +171,7 @@
             <div class="row" >
                 <div class="col-lg-12">
 
-                    <!--police contents-->
+                    <!--police contents pages-->
                     <div id="content_police">
                         <div class="container search">
                             <div class="row">
@@ -240,7 +240,7 @@
                         </div>
                     </div>
 
-                    <!--VAW contents-->
+                    <!--VAW contents papges-->
                     <div id="content_vaw">
                         <div class="container search">
                             <div class="row">
@@ -309,7 +309,7 @@
                         </div>
                     </div>
 
-                    <!--Victim contents-->
+                    <!--Victim contents pages-->
                     <div id="content_victim">
                         <div class="container search">
                             <div class="row">
