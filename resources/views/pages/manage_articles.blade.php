@@ -172,7 +172,8 @@
                         </tr>
                     @endforeach
                 @endif
-
+                </tbody>
+    </table>
 </div>
 
 <div class="modal-dialog modal-fullscreen">

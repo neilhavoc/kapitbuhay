@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Contract\Firestore;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+use App\Http\Helpers\FirebaseHelper;
 
 class PoliceAccountController extends Controller
 {
@@ -13,7 +21,19 @@ class PoliceAccountController extends Controller
      */
     public function index()
     {
-        return view('pages.manage_PoliceAccounts');
+        $auth = app('firebase.auth');
+        $user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
+        $userid = $user->uid;
+
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $userRef = $database->collection('civilian-users');
+        $idRef = $userRef->document($userid);
+        $civilianUsers = $idRef->snapshot();
+
+        return view('pages.manage_PoliceAccounts', [
+            'account' => $civilianUsers,
+        ]);
     }
 
     /**
