@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'Dashboard')
 
 <!-- Styles -->
 @section('styles')
