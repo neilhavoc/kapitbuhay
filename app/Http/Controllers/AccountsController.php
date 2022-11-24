@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Contract\Firestore;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+use App\Http\Helpers\FirebaseHelper;
 
 class AccountsController extends Controller
 {
@@ -45,7 +53,7 @@ class AccountsController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

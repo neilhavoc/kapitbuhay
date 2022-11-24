@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'Articles')
 
 <!-- Styles -->
 @section('styles')
@@ -137,11 +137,11 @@
         </div>
         <div class="col-md-6 ">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Create New Article
-</button>
-        </div>
+            Create New Article
+        </button>
+    </div>
 
-    <div class="form-group mt-5">
+<div class="form-group mt-5">
     <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
@@ -153,62 +153,77 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr class="justify-contents-center ">
-                        <td>01</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Update</button>
-                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Update Article</h3>
-      </div>
-      <div class="modal-body">
-        <div class="container-text-center">
-        <div class="wrapper">
-            <div class="image">
-                <img src="ball.jpg" alt="Ball">
-            </div>
-            <div class="content">
-                <div class="text">
-                    Attach Image
-                </div>
-                </div>
-            <div id="cancel-btn">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="file-name">
-                File name here
-            </div>
-            </div>
-            <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
-            <input id="default-btn" type="file" hidden>
+                    @if ($document == null)
+                    <tr>
+                        <td class="text-center" colspan="3">No Data!</td>
+                    </tr>
+                @else
+                    @foreach ($document as $item)
+                        <tr>
+                            <td> 001</td>
+                            <td>{{ $item['article_title'] }}</td>
+                            <td> Sample</td>
+                            <td>
+                                <!-- Modal trigger button -->
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Update</button>
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                @endif
 
 </div>
-<div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-    <div class="row">
-        <div class="col-md-2 mb-2 text-start fw-bold">
-           Article Title:
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Update Article</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container-text-center">
+                    <div class="wrapper">
+                        <div class="image">
+                            <img src="ball.jpg" alt="Ball">
+                        </div>
+                        <div class="content">
+                            <div class="text">
+                                Attach Image
+                            </div>
+                        </div>
+                        <div id="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="file-name">
+                            File name here
+                        </div>
+                    </div>
+                    <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+                </div>
+                <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                    <div class="row">
+                        <div class="col-md-2 mb-2 text-start fw-bold">
+                            Article Title:
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-2 text-start">Article Contents: </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer-text-center">
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
         </div>
     </div>
-    <div class="row ">
-        <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
-    </div>
-    <div class="row mt-3">
-       <div class="col-md-2 text-start">Article Contents: </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
-    </div>
 </div>
-      <div class="modal-footer-text-center">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div></td>
                         <td><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">Delete</button>
                         <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

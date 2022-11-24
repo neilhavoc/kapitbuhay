@@ -10,7 +10,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PoliceAccountController;
 use App\Http\Controllers\VawAccountController;
 use App\Http\Controllers\VictimAccountController;
-use App\Http\Controllers\AccountsController;
 
 use App\Http\Controllers\RegisterController;
 /*

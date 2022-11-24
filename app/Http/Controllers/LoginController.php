@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Alert;
+use App\Http\Controllers\Exception;
+use App\Http\Controllers\FailedToVerifyToken as failedToVerifyToken;
 use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Exception\Auth\UserNotFound as usernotFound;
 use Kreait\Firebase\Auth\SignInResult\SignInResult;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Kreait\Firebase\Factory;
@@ -23,7 +27,7 @@ class LoginController extends Controller
 
     public function index()
     {
-
+        return view('pages.loginpage');
     }
 
     /**
@@ -47,9 +51,40 @@ class LoginController extends Controller
         $auth = app('firebase.auth');
 
         $email = $request->input('email');
-        $clearTextPassword = $request->input('password');
+        $password = $request->input('password');
 
-        $signInResult = $auth->signInWithEmailAndPassword($email, $clearTextPassword);
+        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+        /*try {
+            $user = $auth->getUserByEmail($email);
+
+            try {
+                $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+                $idTokenString = $signInResult->idToken();
+
+                try {
+                    $verifiedIdToken = $auth->verifyIdToken($idTokenString);
+
+                } catch (failedToVerifyToken $e) {
+                    echo 'The token is invalid: '.$e->getMessage();
+                }
+            } catch(usernotFound $e) {
+                return redirect('loginpage');
+                exit();
+            }
+
+        } catch(usernotFound $e) {
+            $_SESSION = "Invalid Email Address";
+            return redirect('loginpage');
+            exit();
+        }*/
+
+
+        return redirect('manage_articles');
+
+
+
+
+
 
         /*$loginuid = $signInResult->firebaseUserId();
 
@@ -63,7 +98,8 @@ class LoginController extends Controller
 
         $database->collection('admin')->document($loginuid)->set($data);
         */
-        return redirect('manage_articles');
+
+
     }
 
     /**

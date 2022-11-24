@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'User Feedbacks')
 
 <!-- Styles -->
 @section('styles')
@@ -9,7 +9,7 @@
  .search {
     margin-top: 100px;
  }
- 
+
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
@@ -22,8 +22,8 @@
 
 
 
- 
-	
+
+
 
 </style>
 
@@ -31,7 +31,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">   
+<div class="container search">
     <div class="row g-1">
     <div class="input-group mb-3">
   <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
@@ -78,7 +78,7 @@
         <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View User Feedback</h3>
       </div>
       <div class="modal-body">
-        
+
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row">
         <div class="col-md-4 mb-2 fw-bold">
@@ -111,7 +111,7 @@
     </div>
   </div>
 </div>
-    
+
 
 
 @stop
