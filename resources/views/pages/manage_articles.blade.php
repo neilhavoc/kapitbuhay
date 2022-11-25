@@ -253,7 +253,7 @@
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
+        <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
       </div>
       <div class="modal-body">
         <div class="container-text-center">

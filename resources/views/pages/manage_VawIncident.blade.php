@@ -1,4 +1,4 @@
-@extends('layouts.manage_accounts')
+@extends('layouts.manage_incidentreport')
 
 <!-- Page Title -->
 @section('title', 'Title')
@@ -47,27 +47,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($account == null)
-                        <tr>
-                            <td class="text-center" colspan="3">No Data!</td>
-                        </tr>
-                    @else
-
-                        <tr>
-                            <td> 001</td>
-                            <td>{{ $account['fName'] }} {{ $account['lName'] }}</td>
-                            <td>{{ $account['street'] }} {{ $account['barangay'] }} {{ $account['city'] }}</td>
-                            <td>{{ $account['email'] }}</td>
-                            <td>{{ $account['phonenumber'] }}</td>
-                            <td>
-                                <!-- Modal trigger button -->
-                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">
-                                    View
-                                </button>
-                            </td>
-
-                        </tr>
-                    @endif
+                    <tr class="justify-contents-center ">
+                        <td>01</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">View</button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
