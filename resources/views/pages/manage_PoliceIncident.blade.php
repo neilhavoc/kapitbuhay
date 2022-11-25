@@ -1,4 +1,4 @@
-@extends('layouts.manage_accounts')
+@extends('layouts.manage_incidentreport')
 
 <!-- Page Title -->
 @section('title', 'Title')

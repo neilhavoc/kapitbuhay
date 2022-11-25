@@ -11,7 +11,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PoliceAccountController;
 use App\Http\Controllers\VawAccountController;
 use App\Http\Controllers\VictimAccountController;
-
+use App\Http\Controllers\PoliceIncidentController;
+use App\Http\Controllers\VawIncidentController;
 use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,6 @@ Route::resource('/dashboard', DashboardController::class);
 Route::resource('/policeAcc', PoliceAccountController::class);
 Route::resource('/VawAcc', VawAccountController::class);
 Route::resource('/VictimAcc', VictimAccountController::class);
-
+Route::resource('/PoliceReport', PoliceIncidentController::class);
+Route::resource('/VawReport', VawIncidentController::class);
 Route::resource('/manage_articles', ArticleController::class);

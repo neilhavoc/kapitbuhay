@@ -3,16 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Auth;
-use Kreait\Firebase\Auth\SignInResult\SignInResult;
-use Kreait\Laravel\Firebase\Facades\Firebase;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\Contract\Firestore;
-use Kreait\Firebase\ServiceAccount;
-use Kreait\Firebase\Database;
-use App\Http\Helpers\FirebaseHelper;
 
-class AccountsController extends Controller
+class PoliceIncidentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +13,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        return view('pages.manage_PoliceAccounts');
+        return view('pages.manage_PoliceIncident');
     }
 
     /**
@@ -53,7 +45,7 @@ class AccountsController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
