@@ -29,7 +29,6 @@ Route::get('/', function () {
 
 Route::resource('/loginpage', LoginController::class);
 Route::resource('/register', RegisterController::class);
-Route::resource('/account', AccountsController::class);
 Route::resource('/article', ArticleController::class);
 Route::resource('/feedback', FeedbackController::class);
 Route::resource('/report', ReportController::class);
