@@ -7,11 +7,11 @@
 @section('styles')
 <style>
 .profile{
-    height: 200px;
+    height: 170x;
     width: 200px;
 }
 .credential{
-    height: 200px;
+    height: 150px;
     width: 50px;
 }
 .head-credential{
@@ -21,7 +21,6 @@
     text-align: center;
     margin-bottom: 1%;
 }
-
 </style>
 @stop
 
@@ -80,7 +79,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-                            <div class="row row1">
+                            <div class="row row1 mt-3">
                                 <div class="col-md-2">
                                     <img src="ball.jpg" alt="Ball" class="profile">
                                 </div>
@@ -103,8 +102,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row2">
-                                <div class="col-md-9">
+                            <div class="row row2 mt-3">
+                                <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h1 class="fw-heavy">
@@ -142,12 +141,14 @@
                                         </h2>
                                     </div>
                                     <div class="row">
-                                        <img src="ball.jpg" alt="Ball" class="credential">
+                                        <img src="ball.jpg" alt="Ball" class="credential col-md-6">
+                                        <img src="ball.jpg" alt="Ball" class="credential col-md-6">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row3">
-                                <div class="row">
+                            <div class="row row3 mt-5">
+                                <div class="col-md-8">
+                                    <div class="row">
                                     <div class="col-md-2">
                                         <h5>
                                             Verification Status:
@@ -165,10 +166,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row row4 mt-5">
-                                <div class="row">
+                                    </div>
+                                    <div class="row mt-3">
                                     <div class="col-md-2">
                                         <h5>
                                             Account Status:
@@ -186,11 +185,27 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <h5 class="col-md-3">ID Type: </h5>
+                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <h5 class="col-md-4">ID Number: </h5>
+                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <h5 class="col-md-4">Expire Date: </h5>
+                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer-text-center fixed-bottom">
-                <button type="button" class="btn btn-primary">Update</button>
+                            <hr class="fw-heavy">
+                <button type="button" class="btn btn-success">Update</button>
               </div>
                     </div>
                 </div>
