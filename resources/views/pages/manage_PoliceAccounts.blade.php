@@ -7,17 +7,20 @@
 @section('styles')
 <style>
 .profile{
-    height: 200px;
+    height: 170x;
     width: 200px;
 }
 .credential{
-    height: 200px;
-    width: 50px;
+    height: 170x;
+    width: 200px;
 }
 .head-credential{
     font-size: 12px;
 }
-
+.modal-footer-text-center{
+    text-align: center;
+    padding-bottom: 50px;
+}
 </style>
 
 @stop
@@ -77,8 +80,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-                            <div class="row row1">
-                                <div class="col-md-2">
+                            <div class="row mb-3 row1">
+                                <div class="col-md-2 mx-5">
                                     <img src="ball.jpg" alt="Ball" class="profile">
                                 </div>
                                 <div class="col-md-8">
@@ -100,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row2">
+                            <div class="row mb-3 row2">
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -109,7 +112,7 @@
                                             </h1>
                                         </div>
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt-2">
                                             <h5 class="col-md-2">
                                                 City:
                                             </h5>
@@ -119,13 +122,13 @@
                                             </h5>
                                             <input type="text" class="col-md-3">
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt-2">
                                         <h5 class="col-md-2">
                                             Purok:
                                         </h5>
                                         <input type="text" class="col-md-6">
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt-2">
                                         <h5 class="col-md-2">
                                             Street:
                                         </h5>
@@ -151,6 +154,24 @@
                                         </h5>
                                     </div>
                                     <div class="col-md-7">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Dropdown button
+                                          </button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                          </ul>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-2">
+                                        <h5>
+                                            Account Status:
+                                        </h5>
+                                    </div>
+                                    <div class="col-md-7">
+
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                               Dropdown button
@@ -161,10 +182,17 @@
                                               <li><a class="dropdown-item" href="#">Something else here</a></li>
                                             </ul>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer-text-center fixed-bottom">
+                        <hr class="mt-5">
+                        <button style="width: 100px;">
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>
