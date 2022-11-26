@@ -51,7 +51,17 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $data = [
+            'Active' => 'isActive',
+            'article_title' => $request->input('createArticleTitle'),
+            'article_content' => $request->input('createArticleContent'),
+        ];
+
+        $database->collection('articles')->newDocument()->set($data);
+
+        return redirect('article');
     }
 
     /**
@@ -85,7 +95,17 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $data = [
+            'Active' => 'isActive',
+            'article_content' => $request->input('updateArticleContent'),
+            'article_title' => $request->input('updateArticleTitle'),
+        ];
+
+        $database->collection('articles')->document($id)->set($data);
+
+        return redirect('article');
     }
 
     /**
@@ -96,6 +116,10 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $deletedoc = $database->collection('articles')->document($id)->delete();
+
+        return redirect('article');
     }
 }
