@@ -157,24 +157,24 @@
                     <tr>
                         <td class="text-center" colspan="3">No Data!</td>
                     </tr>
-                @else
-                    @foreach ($document as $item)
-                        <tr>
-                            <td>{{ $item->id() }}</td>
-                            <td>{{ $item['article_title'] }}</td>
-                            <td> Sample</td>
-                            <td>
-                                <!-- Modal trigger button -->
-                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2{{ $item->id() }}">Update</button>
+                    @else
+                        @foreach ($document as $item)
+                            <tr>
+                                <td>{{ $item->id() }}</td>
+                                <td>{{ $item['article_title'] }}</td>
+                                <td> Sample</td>
+                                <td>
+                                    <!-- Modal trigger button -->
+                                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2{{ $item->id() }}">Update</button>
 
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop3{{ $item->id() }}">Delete</button>
-                            </td>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop3{{ $item->id() }}">Delete</button>
+                                </td>
 
-                        </tr>
-                    @endforeach
-                @endif
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
     </table>
 </div>
