@@ -294,9 +294,9 @@
             Coping Mechanism Article
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item btn btn-primary" >Action</a></li>
+            <li><a class="dropdown-item btn btn-primary" >Another action</a></li>
+            <li><a class="dropdown-item btn btn-primary" >Something else here</a></li>
           </ul></div>
             </div>
             <div class="row mt-3">

@@ -66,34 +66,56 @@
       <div class="modal-body">
 
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-    <div class="row">
-        <div class="col-md-4 mb-2 fw-bold">
-           Report ID:
-        </div>
-    </div>
-    <div class="row ">
-        <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
+    <div class="row mt-5">
+        <div class="col-md-6 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
+        <div class="col-md-2 fw-bold ">Date/Time:&nbsp;<label>sample</label></div>
     </div>
     <div class="row mt-2">
-       <div class="col-md-8 fw-bold">Created By:</div>
+       <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
+       <div class="col-md-2 fw-bold ">Location Link:&nbsp;<label>sample</label></div>
     </div>
-    <div class="row mt-2 ">
-        <div class="col-md-3"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
-    </div>
-    <div class="row mt-2">
-       <div class="col-md-8 fw-bold">Date Created: </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
-    </div>
-    <div class="row mt-2">
-       <div class="col-md-8 fw-bold">User Involve: </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
+    <div class="row mt-3">
+       <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
+       <div class="col-md-2 fw-bold ">Report status:&nbsp;<label>sample</label></div>
     </div>
     <div class="row mt-5">
-    <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
+        <div class="row">
+            <div class="col-md-3 fw-bold ">Distress Message: </div>
+        </div>
+       <div class="row">
+            <div class="col-md-12">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
+       </div>
+    </div>
+    <div class="row mt-5">
+    <div class="col-md-10 fw-bold"> Report Details: <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
+    <div class="col-md-2">
+        <div class="row">
+            <div class="row">
+                <div class="fw-bold ">Time/Date Created:</div>
+            </div>
+            <div class="row">
+                <label>sample</label>
+            </div>
+            <div class="row">
+                <div class="fw-bold ">Police Station:</div>
+            </div>
+            <div class="row">
+                <label>sample</label>
+            </div>
+            <div class="row">
+                <div class="fw-bold ">Report Created By:</div>
+            </div>
+            <div class="row">
+                <label>sample</label>
+            </div>
+            <div class="row">
+                <div class="fw-bold ">Position:</div>
+            </div>
+            <div class="row">
+                <label>sample</label>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 </div>
