@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Alert;
 use App\Http\Controllers\Exception;
-use App\Http\Controllers\FailedToVerifyToken as failedToVerifyToken;
 use Kreait\Firebase\Contract\Auth;
-use Kreait\Firebase\Exception\Auth\UserNotFound as usernotFound;
 use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Firebase\Auth\SignIn\FailedToSignIn as invalidInput;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Contract\Firestore;
@@ -16,6 +15,7 @@ use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use App\Http\Helpers\FirebaseHelper;
 
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -40,6 +40,12 @@ class LoginController extends Controller
         //
     }
 
+    public function invalidEmailorPassword($isInvalid)
+    {
+        $isInvalid = 1;
+        echo 'alert("Invalid Email or Password!")';
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,51 +59,16 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-        /*try {
-            $user = $auth->getUserByEmail($email);
+        try
+        {
+            $signInResult = $auth->signInWithEmailAndPassword($email, $password);
 
-            try {
-                $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-                $idTokenString = $signInResult->idToken();
+            return redirect('manage_articles');
+        } catch(invalidInput $e) {
 
-                try {
-                    $verifiedIdToken = $auth->verifyIdToken($idTokenString);
-
-                } catch (failedToVerifyToken $e) {
-                    echo 'The token is invalid: '.$e->getMessage();
-                }
-            } catch(usernotFound $e) {
-                return redirect('loginpage');
-                exit();
-            }
-
-        } catch(usernotFound $e) {
-            $_SESSION = "Invalid Email Address";
+            $_SESSION["isInvalid"] = 1;
             return redirect('loginpage');
-            exit();
-        }*/
-
-
-        return redirect('manage_articles');
-
-
-
-
-
-
-        /*$loginuid = $signInResult->firebaseUserId();
-
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $data = [
-            'email' => $request->input('email'),
-            'user-uid' => $loginuid,
-
-        ];
-
-        $database->collection('admin')->document($loginuid)->set($data);
-        */
+        };
 
 
     }

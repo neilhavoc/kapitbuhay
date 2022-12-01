@@ -13,7 +13,14 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        return view('pages.manage_userfeedbacks');
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $feedbackRef = $database->collection('user_feedBack');
+        $documentRef = $feedbackRef->documents();
+
+        return view('pages.manage_userfeedbacks', [
+            'document' => $documentRef,
+        ]);
     }
 
     /**
@@ -45,7 +52,15 @@ class FeedbackController extends Controller
      */
     public function show($id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $articleRef = $database->collection('articles');
+        $query = $articleRef->where($articleRef->id(), '=', $id);
+        $documentRef = $query->documents();
+
+        return view('pages.manage_userfeedbacks', [
+            'document' => $documentRef,
+        ]);
     }
 
     /**

@@ -61,57 +61,88 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr class="justify-contents-center ">
-                        <td>01</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View</button></td>
+                    @if ($document == null)
+                    <tr>
+                        <td> - </td>
+                        <td> - </td>
+                        <td> - </td>
                     </tr>
+                    @else
+                        @foreach ($document as $item)
+                            <tr class="justify-contents-center ">
+                                <td>{{ $item['feedBack_ID'] }}</td>
+                                <td>{{ $item['sender_name'] }}</td>
+                                <td>{{ $item['feedback_DATE'] }}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->id() }}">
+                                        View
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View User Feedback</h3>
-      </div>
-      <div class="modal-body">
 
-<div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
-    <div class="row">
-        <div class="col-md-4 mb-2 fw-bold">
-           Feedback ID:
+@if ($document == null)
+    @else
+    @foreach ($document as $item)
+    <div class="modal fade" id="staticBackdrop{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+
+                <div class="modal-content">
+                    <form action="feedback/{{ $item->id() }}" method="GET">
+                        @csrf
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                            <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View User Feedback</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                                <div class="row">
+                                    <div class="col-md-4 mb-2 fw-bold">
+                                        Feedback ID:
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-4 ">
+                                        <input name="feedBackID" id="feedBackID" type="text" class="form-control align-content-center w-100"  placeholder="{{ $item['feedBack_ID'] }}" disabled="disabled" >
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-8 fw-bold">Submitted By:</div>
+                                </div>
+                                <div class="row mt-2 ">
+                                    <div class="col-md-3">
+                                        <input name="senderName" id="senderName" type="text" class="form-control align-content-center w-100"  placeholder="{{ $item['sender_name'] }}" disabled="disabled" >
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-8 fw-bold">Date Created: </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4">
+                                        <input name="date" id="date" type="text" class="form-control align-content-center w-100"  placeholder="{{ $item['feedback_DATE'] }}" disabled="disabled" >
+                                    </div>
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-8 fw-bold">Feedback Contents: </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-mb-3">
+                                        <textarea class="feedbackContent" name="feedbackContent" id="exampleFormControlTextarea1" rows="3" disabled="disabled">{{ $item['feedback_contents'] }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
         </div>
     </div>
-    <div class="row ">
-        <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
-    </div>
-    <div class="row mt-2">
-       <div class="col-md-8 fw-bold">Submitted By:</div>
-    </div>
-    <div class="row mt-2 ">
-        <div class="col-md-3"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
-    </div>
-    <div class="row mt-2">
-       <div class="col-md-8 fw-bold">Date Created: </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4"> <input  id="DoB" type="text" class="form-control align-content-center w-100"  placeholder="" disabled="disabled" ></div>
-    </div>
-    <div class="row mt-5">
-       <div class="col-md-8 fw-bold">Feedback Contents: </div>
-    </div>
-    <div class="row mt-2">
-    <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
-    </div>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-
+    @endforeach
+@endif
 
 
 @stop

@@ -13,15 +13,15 @@ class VictimAccountController extends Controller
      */
     public function index()
     {
-        $auth = app('firebase.auth');
-        $user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
-        $userid = $user->uid;
+        //$auth = app('firebase.auth');
+        //$user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
+        //$userid = $user->uid;
 
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->document($userid);
-        $civilianUsers = $idRef->snapshot();
+        $idRef = $userRef->where('verification_status', '=', '1');
+        $civilianUsers = $idRef->documents();
 
         return view('pages.manage_VictimAccounts', [
             'account' => $civilianUsers,
@@ -57,7 +57,15 @@ class VictimAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $userRef = $database->collection('civilian-users');
+        $idRef = $userRef->where->where($userRef->id(), '=', $id);
+        $civilianUsers = $idRef->documents();
+
+        return view('pages.manage_VictimAccounts', [
+            'account' => $civilianUsers,
+        ]);
     }
 
     /**
