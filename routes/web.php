@@ -13,6 +13,10 @@ use App\Http\Controllers\VictimAccountController;
 use App\Http\Controllers\PoliceIncidentController;
 use App\Http\Controllers\VawIncidentController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PoliceDistressController;
+use App\Http\Controllers\PoliceManageAccountController;
+use App\Http\Controllers\PoliceReportsController;
+use App\Http\Controllers\DistressController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +44,8 @@ Route::resource('/VictimAcc', VictimAccountController::class);
 Route::resource('/PoliceReport', PoliceIncidentController::class);
 Route::resource('/VawReport', VawIncidentController::class);
 Route::resource('/manage_articles', ArticleController::class);
+Route::resource('/police_distress', PoliceDistressController::class);
+Route::resource('/police_report', PoliceReportsController::class);
+Route::resource('/police_manageaccount', PoliceManageAccountController::class);
+Route::resource('/distress', DistressController::class);
+

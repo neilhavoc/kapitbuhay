@@ -84,25 +84,25 @@
                                     <h5 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">View Victim's Profile</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                                    <div class="container border-secondary" style=" margin-top:0%; margin-bottom:0%;">
                                         <div class="row row1 mt-3">
                                             <div class="col-md-2">
                                                 <img src="ball.jpg" alt="Ball" class="profile">
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="row ms-3">
+                                                <div class="row mx-3">
                                                     <h5 class="col-md-2">User ID: </h5>
                                                     <h5 id="userID" class="col-md-4">{{ $item->id() }}</h5>
                                                 </div>
-                                                <div class="row mt-1 ms-3">
+                                                <div class="row mt-1 mx-3">
                                                     <h5 class="col-md-4">Name:</h5>
                                                     <input type="text" class="col-md-4" value="{{ $item['fName'] }}">
                                                 </div>
-                                                <div class="row mt-1 ms-3">
+                                                <div class="row mt-1 mx-3">
                                                     <h5 class="col-md-4">Contact No:</h5>
                                                     <input type="text" class="col-md-4" value="{{ $item['lName'] }}">
                                                 </div>
-                                                <div class="row mt-1 ms-3">
+                                                <div class="row mt-1 mx-3">
                                                     <h5 class="col-md-4">Email:</h5>
                                                     <input type="text" class="col-md-4" value="{{ $item['email'] }}">
                                                 </div>
@@ -203,10 +203,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer-text-center fixed-bottom">
-                                        <hr class="fw-heavy">
-                                        <button type="submit" class="btn btn-success">Update</button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer-text-center">
+                                    <hr class="fw-heavy">
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>
