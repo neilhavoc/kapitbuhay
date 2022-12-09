@@ -20,7 +20,7 @@ class VictimAccountController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where('verification_status', '=', '1');
+        $idRef = $userRef->where('fName', '=', '7ysbs');
         $civilianUsers = $idRef->documents();
 
         return view('pages.manage_VictimAccounts', [
