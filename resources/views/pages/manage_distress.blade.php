@@ -1,4 +1,4 @@
-@extends('layouts.manage_incidentreport')
+@extends('layouts.index')
 
 <!-- Page Title -->
 @section('title', 'Title')
@@ -6,20 +6,9 @@
 <!-- Styles -->
 @section('styles')
 <style>
-.profile{
-    height: 170x;
-    width: 200px;
-}
-.credential{
-    height: 170x;
-    width: 200px;
-}
-.head-credential{
-    font-size: 12px;
-}
-.modal-footer-text-center{
-    text-align: center;
-    padding-bottom: 50px;
+.bill-header.cs {
+  background-color: rgba(37,71,106,0.56);
+  color: #fff;
 }
 </style>
 
@@ -27,41 +16,38 @@
 
 <!-- Content -->
 @section('content')
-
-    <div class="container search">
-        <div class="row">
-            <div class="col-md-5">
-                <input class= "container-fluid h-100" type="text" placeholder="Search">
-            </div>
-        </div>
-        <div class="form-group mt-3">
+<div class="container">
+    <h1>List of Distress Message</h1>
+    <div class="form-group mt-3">
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
-                        <th id="trs-hd-1" class="col-lg-1">REC ID</th>
-                        <th id="trs-hd-2" class="col-lg-3">Police Station Name</th>
+                        <th id="trs-hd-1" class="col-lg-1">Log ID</th>
+                        <th id="trs-hd-2" class="col-lg-3">From User</th>
                         <th id="trs-hd-3" class="col-lg-3">Date/Time</th>
-                        <th id="trs-hd-4" class="col-lg-3">User Invovle</th>
-                        <th id="trs-hd-4" class="col-lg-2"></th>
+                        <th id="trs-hd-4" class="col-lg-3">Sent To</th>
+                        <th id="trs-hd-2" class="col-lg-3">Status</th>
+                        <th id="trs-hd-6" class="col-lg-2"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="justify-contents-center ">
-                        <td>01</td>
                         <td>Sample</td>
                         <td>Sample</td>
                         <td>Sample</td>
-                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">View</button></td>
+                        <td>Sample</td>
+                        <td>Sample</td>
+                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewDistress">View</button></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="modal fade" id="viewPolice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="viewDistress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Incident Report</h3>
+        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Distress Message</h3>
       </div>
       <div class="modal-body">
 
@@ -122,8 +108,7 @@
     </div>
   </div>
         </div>
-    </div>
-
+</div>
 @stop
 
 <!-- Scripts -->

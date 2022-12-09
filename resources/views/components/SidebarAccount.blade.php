@@ -49,7 +49,7 @@
         position: fixed;
         background: rgb(248, 88, 88);
         width: 250px;
-        height: 100%;
+        height: 100vh;
     }
 
     .sidebar h3{

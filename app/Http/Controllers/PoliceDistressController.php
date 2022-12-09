@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase\Contract\Storage;
-use Kreait\Firebase\Contract\Firestore;
 
-class VictimAccountController extends Controller
+class PoliceDistressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +13,8 @@ class VictimAccountController extends Controller
      */
     public function index()
     {
-        //$auth = app('firebase.auth');
-        //$user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
-        //$userid = $user->uid;
-
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where('fName', '=', '7ysbs');
-        $civilianUsers = $idRef->documents();
-
-        return view('pages.manage_VictimAccounts', [
-            'account' => $civilianUsers,
-        ]);
+        //
+        return view('pages.police_distress');
     }
 
     /**
@@ -59,15 +46,7 @@ class VictimAccountController extends Controller
      */
     public function show($id)
     {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where->where($userRef->id(), '=', $id);
-        $civilianUsers = $idRef->documents();
-
-        return view('pages.manage_VictimAccounts', [
-            'account' => $civilianUsers,
-        ]);
+        //
     }
 
     /**
