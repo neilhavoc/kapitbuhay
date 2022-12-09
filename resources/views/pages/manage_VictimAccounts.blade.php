@@ -141,8 +141,8 @@
                                                     </h2>
                                                 </div>
                                                 <div class="row">
-                                                    <img src="ball.jpg" alt="Ball" class="credential col-md-6">
-                                                    <img src="ball.jpg" alt="Ball" class="credential col-md-6">
+                                                    <img src="{{ $item['id_picture_link'] }}" alt="Ball" class="credential col-md-6">
+                                                    <img src="{{ $item['selfie_picture_link'] }}" alt="Ball" class="credential col-md-6">
                                                 </div>
                                             </div>
                                         </div>
