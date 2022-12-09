@@ -47,6 +47,11 @@
                     </div>
                 </div>
             </form>
+            @if (session('success'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ session()->get('success') }}
+                </div>
+            @enderror
             <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg p-5">
                     <div class="modal-content">

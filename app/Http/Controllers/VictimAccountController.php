@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kreait\Firebase\Contract\Storage;
+use Kreait\Firebase\Contract\Firestore;
 
 class VictimAccountController extends Controller
 {

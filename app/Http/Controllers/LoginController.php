@@ -65,9 +65,7 @@ class LoginController extends Controller
 
             return redirect('manage_articles');
         } catch(invalidInput $e) {
-
-            $_SESSION["isInvalid"] = 1;
-            return redirect('loginpage');
+            return redirect('loginpage')->withSuccess('Invalid Email or Password!');
         };
 
 
