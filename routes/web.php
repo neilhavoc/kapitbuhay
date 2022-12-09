@@ -17,6 +17,7 @@ use App\Http\Controllers\PoliceDistressController;
 use App\Http\Controllers\PoliceManageAccountController;
 use App\Http\Controllers\PoliceReportsController;
 use App\Http\Controllers\DistressController;
+use App\Http\Controllers\RegisterPoliceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,4 +49,5 @@ Route::resource('/police_distress', PoliceDistressController::class);
 Route::resource('/police_report', PoliceReportsController::class);
 Route::resource('/police_manageaccount', PoliceManageAccountController::class);
 Route::resource('/distress', DistressController::class);
+Route::resource('/register_police', RegisterPoliceController::class);
 
