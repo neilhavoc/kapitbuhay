@@ -10,16 +10,16 @@
     height: 170x;
     width: 200px;
 }
-.credential{
-    height: 170x;
-    width: 200px;
-}
 .head-credential{
     font-size: 12px;
 }
 .modal-footer-text-center{
     text-align: center;
     padding-bottom: 50px;
+}
+.modal-profile
+{
+    width: 100%;
 }
 </style>
 
@@ -71,7 +71,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="modal fade" id="viewPolice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        {{-- view modal --}}
+        <div class="modal fade" id="viewPolice" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -83,6 +84,7 @@
                             <div class="row mb-3 row1">
                                 <div class="col-md-2 mx-5">
                                     <img src="ball.jpg" alt="Ball" class="profile">
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
@@ -142,7 +144,7 @@
                                         </h2>
                                     </div>
                                     <div class="row">
-                                        <img src="ball.jpg" alt="Ball" class="credential">
+                                        <img src="ball.jpg" alt="Ball" class="profile">
                                     </div>
                                 </div>
                             </div>
@@ -153,15 +155,13 @@
                                             Verification Status:
                                         </h5>
                                     </div>
-                                    <div class="col-md-7">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Dropdown button
-                                          </button>
-                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                          </ul>
+                                    <div class="col-md-5">
+                                        <select class="form-select" id="verification" aria-label="verification selection">
+                                            <option selected disabled>Select One</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                          </select>
                                     </div>
                                 </div>
                                 <div class="row mt-4">
@@ -170,17 +170,15 @@
                                             Account Status:
                                         </h5>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
 
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Dropdown button
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                              <li><a class="dropdown-item" href="#">Action</a></li>
-                                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
+                                            <select class="form-select" id="Account Status" aria-label="Account selection">
+                                                <option selected disabled>Select One</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                              </select>
                                         </div>
 
                                     </div>
@@ -188,11 +186,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer-text-center fixed-bottom">
+                    <div class="modal-footer-text-center">
                         <hr class="mt-5">
                         <button style="width: 100px;">
                             Update
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- picture modal --}}
+        <div class="modal fade" id="picmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="ball.jpg" alt="Ball" class="modal-profile">
                     </div>
                 </div>
             </div>
@@ -203,5 +214,14 @@
 
 <!-- Scripts -->
 @section('scripts')
-
+<script>
+    document.addEventListener("click", function(e){
+       if(e.target.classList.contains("profile")){
+        const src = e.target.getAttribute("src");
+        document.querySelector(".modal-profile").src = src;
+        const myModal = new bootstrap.Modal(document.getElementById('picmodal'));
+        myModal.show();
+       }
+    })
+</script>
 @stop

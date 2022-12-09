@@ -54,7 +54,7 @@
                             <h1 class="modal-title fs-5" id="registerModalLabel">Registration</h1>
                             <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="height: 400px;">
                             @include('pages.register')
                          </div>
                     </div>
@@ -63,3 +63,4 @@
         </div>
     </body>
 </html>
+
