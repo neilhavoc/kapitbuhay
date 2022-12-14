@@ -96,7 +96,7 @@
                                         <td>Sample</td>
                                         <td>Sample</td>
                                         <td>Sample</td>
-                                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVAW2">View</button></td>
+                                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVAW2"">View</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -107,12 +107,12 @@
         </div>
             </div>
 
-        <div class="modal fade" id="viewVAW2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="viewVAW2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <a class="btn btn-primary" data-bs-toggle="modal" href="#viewVAW1" role="button">Open first modal</a>
-                        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Barangay VAW Desk Report</h3>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Victim Health Status Record</h3>
                     </div>
                     <div class="modal-body">
                         <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
@@ -173,6 +173,74 @@
                 </div>
             </div>
         </div>
+        
+        <div class="modal fade" id="viewVAW3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-dismiss="modal">Back</button>
+                        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Days Monitoring Report</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                            <div class="row mb-3 row1">
+                                <div class="col-md-2 mx-5">
+                                    <img src="ball.jpg" alt="Ball" class="profile">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <h5 class="col-md-4">User ID: </h5>
+                                        <h5 id="userID" class="col-md-1">sample</h5>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Victim:</h5>
+                                        <h5 id="victim" class="col-md-1">sample</h5>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Address:</h5>
+                                        <h5 id="address" class="col-md-1">sample</h5>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <h5 class="col-md-4">Location Link:</h5>
+                                        <h5 id="loclink" class="col-md-1">sample</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <h5 class="col-md-2">Monitoring: </h5>
+                            </div>
+                            <div class="form-group mt-2">
+                                <table class="table table-hover table-bordered text-center ">
+                                    <thead class="bill-header cs">
+                                        <tr>
+                                            <th id="trs-hd-1" class="col-lg-2">Date Created</th>
+                                            <th id="trs-hd-2" class="col-lg-1">Title</th>
+                                            <th id="trs-hd-3" class="col-lg-2">Physical Health</th>
+                                            <th id="trs-hd-4" class="col-lg-2">Mental Health</th>
+                                            <th id="trs-hd-5" class="col-lg-2">Last Modified</th>
+                                            <th id="trs-hd-6" class="col-lg-3">Monitoring Status</th>
+                                            <th id="trs-hd-7" class="col-lg-2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="justify-contents-center ">
+                                            <td>01</td>
+                                            <td>Sample</td>
+                                            <td>Sample</td>
+                                            <td>Sample</td>
+                                            <td>Sample</td>
+                                            <td>Sample</td>
+                                            <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVAW3">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
