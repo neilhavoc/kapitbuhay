@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: gray;font-size: large;font-weight: 500;">Police&nbsp;<i class="far fa-user-circle" style="font-size: 25px;"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: gray;font-size: large;font-weight: 500;">Barangay VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;"></i></a></li>
                 </ul>
             </div>
         </div>
