@@ -14,7 +14,14 @@ class DistressController extends Controller
     public function index()
     {
         //
-        return view('pages.manage_distress');
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $distressRef = $database->collection('sos-distress-message');
+        $messageRef = $distressRef->documents();
+
+        return view('pages.manage_distress', [
+            'message' => $messageRef,
+        ]);
     }
 
     /**
@@ -46,7 +53,15 @@ class DistressController extends Controller
      */
     public function show($id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $distressRef = $database->collection('sos-distress-message');
+        $idRef = $distressRef->where($distressRef->id(), '=', $id);
+        $messageRef = $idRef->documents();
+
+        return view('pages.manage_distress', [
+            'message' => $messageRef,
+        ]);
     }
 
     /**

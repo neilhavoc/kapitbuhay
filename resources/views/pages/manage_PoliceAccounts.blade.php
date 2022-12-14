@@ -52,21 +52,22 @@
                             <td class="text-center" colspan="3">No Data!</td>
                         </tr>
                     @else
+                        @foreach ($account as $item)
+                            <tr>
+                                <td>{{ $item->id() }}</td>
+                                <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
+                                <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
+                                <td>{{ $item['email'] }}</td>
+                                <td>{{ $item['phonenumber'] }}</td>
+                                <td>
+                                    <!-- Modal trigger button -->
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">
+                                        View
+                                    </button>
+                                </td>
 
-                        <tr>
-                            <td> 001</td>
-                            <td>{{ $account['fName'] }} {{ $account['lName'] }}</td>
-                            <td>{{ $account['street'] }} {{ $account['barangay'] }} {{ $account['city'] }}</td>
-                            <td>{{ $account['email'] }}</td>
-                            <td>{{ $account['phonenumber'] }}</td>
-                            <td>
-                                <!-- Modal trigger button -->
-                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">
-                                    View
-                                </button>
-                            </td>
-
-                        </tr>
+                            </tr>
+                        @endforeach
                     @endif
                 </tbody>
             </table>
@@ -171,16 +172,14 @@
                                         </h5>
                                     </div>
                                     <div class="col-md-5">
-
                                         <div class="dropdown">
-                                            <select class="form-select" id="Account Status" aria-label="Account selection">
+                                            <select class="form-select" id="AccountStatus" aria-label="Account selection">
                                                 <option selected disabled>Select One</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
                                                 <option value="3">Three</option>
                                               </select>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

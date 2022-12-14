@@ -28,7 +28,7 @@ class PoliceAccountController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        //$idRef = $userRef->document($userid);
+        //$idRef = $userRef->where('verification_status', '=', '0');
         $civilianUsers = $userRef->documents();
 
         return view('pages.manage_PoliceAccounts', [

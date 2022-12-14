@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'Distress Messages')
 
 <!-- Styles -->
 @section('styles')
@@ -31,66 +31,90 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="justify-contents-center ">
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td>Sample</td>
-                        <td><button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewDistress">View</button></td>
+                    @if ($message == null)
+                    <tr>
+                        <td> - </td>
+                        <td> - </td>
+                        <td> - </td>
+                        <td> - </td>
+                        <td> - </td>
                     </tr>
+                    @else
+                        @foreach ($message as $item)
+                        <tr class="justify-contents-center ">
+                            <td>{{ $item->id() }}</td>
+                            <td>{{ $item['sender_FullName'] }}</td>
+                            <td>{{ $item['Date/Time'] }}</td>
+                            <td>Barangay VAW</td>
+                            <td>{{ $item['status'] }}</td>
+                            <td>
+                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewDistress{{ $item->id() }}">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
 </div>
-<div class="modal fade" id="viewDistress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+@if ($message == null)
+    @else
+    @foreach ($message as $item)
+    <div class="modal fade" id="viewDistress{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-            <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Distress Message</h3>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="container " style="margin-top:0%; margin-bottom:0%;">
-                        <div class="row mt-5">
-                            <div class="col-md-6 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
-                            <div class="col-md-6 fw-bold ">Date/Time:&nbsp;<label>sample</label></div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
-                            <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>sample</label></div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="row">
-                                <div class="col-md-3 fw-bold ">Distress Message: </div>
+            <div class="modal-content">
+                <form action="feedback/{{ $item->id() }}" method="GET">
+                    @csrf
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View Distress Message</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="container " style="margin-top:0%; margin-bottom:0%;">
+                                    <div class="row mt-5">
+                                        <div class="col-md-6 fw-bold " >Reference ID:&nbsp;<label>{{ $item->id() }}</label></div>
+                                        <div class="col-md-6 fw-bold ">Date/Time:&nbsp;<label>{{ $item['Date/Time'] }}</label></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-6 fw-bold ">From:&nbsp;<label>{{ $item['sender_FullName'] }}</label></div>
+                                        <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>sample</label></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="row">
+                                            <div class="col-md-3 fw-bold ">Distress Message: </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled">{{ $item['distressMessage'] }}</textarea></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6 fw-bold ">Distress Message Status:&nbsp;<label>{{ $item['status'] }}</label></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
+                            <div class="col-md-6">
+                                <div class="row mt-3">
+                                    <div class="col-md-6 fw-bold ">Location Link:</div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6 fw-bold ">Distress Message Status:&nbsp;<label>sample</label></div>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row mt-3">
-                        <div class="col-md-6 fw-bold ">Location Link:</div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 fw-bold "><a href="">example</a></div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-  </div>
-</div>
-</div>
+    @endforeach
+@endif
 @stop
 
 <!-- Scripts -->
