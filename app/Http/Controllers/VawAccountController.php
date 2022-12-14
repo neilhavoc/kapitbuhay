@@ -13,15 +13,11 @@ class VawAccountController extends Controller
      */
     public function index()
     {
-        $auth = app('firebase.auth');
-        $user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
-        $userid = $user->uid;
-
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->document($userid);
-        $civilianUsers = $idRef->snapshot();
+        $idRef = $userRef->where('verification_status', '=', '0');
+        $civilianUsers = $userRef->documents();
 
         return view('pages.manage_VawAccounts', [
             'account' => $civilianUsers,

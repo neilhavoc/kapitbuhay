@@ -52,13 +52,13 @@
                             <td class="text-center" colspan="3">No Data!</td>
                         </tr>
                 @else
-
+                    @foreach ($account as $item)
                     <tr>
-                        <td> 001</td>
-                        <td>{{ $account['fName'] }} {{ $account['lName'] }}</td>
-                        <td>{{ $account['street'] }} {{ $account['barangay'] }} {{ $account['city'] }}</td>
-                        <td>{{ $account['email'] }}</td>
-                        <td>{{ $account['phonenumber'] }}</td>
+                        <td>{{ $item->id() }}</td>
+                        <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
+                        <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
+                        <td>{{ $item['email'] }}</td>
+                        <td>{{ $item['phonenumber'] }}</td>
                         <td>
                             <!-- Modal trigger button -->
                             <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVaw">
@@ -66,7 +66,8 @@
                             </button>
                         </td>
 
-                        </tr>
+                    </tr>
+                    @endforeach
                 @endif
             </tbody>
         </table>
@@ -153,17 +154,13 @@
                                             Verification Status:
                                         </h5>
                                     </div>
-                                    <div class="col-md-7">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Dropdown button
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                              <li><a class="dropdown-item" href="#">Action</a></li>
-                                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="col-md-5">
+                                        <select class="form-select" id="verification" aria-label="verification selection">
+                                            <option selected disabled>Select One</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
@@ -174,17 +171,13 @@
                                             Account Status:
                                         </h5>
                                     </div>
-                                    <div class="col-md-7">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Dropdown button
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                              <li><a class="dropdown-item" href="#">Action</a></li>
-                                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="col-md-5">
+                                        <select class="form-select" id="AccountStatus" aria-label="verification selection">
+                                            <option selected disabled>Select One</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
