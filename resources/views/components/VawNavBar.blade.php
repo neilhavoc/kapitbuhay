@@ -19,7 +19,11 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: gray;font-size: large;font-weight: 500;">Barangay VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;"></i></a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:200px;" >Barangay VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-danger fw-heavy" href="#">Log out</a></li>
+                          </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -32,9 +36,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="police_distress" style="color: black;">Distress</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="police_report" style="color: black;">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="police_manageaccount" style="color: black;">Manage Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vaw_reports" style="color: black;">Incident Report</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Victim's Monitoring</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Victim's Health Report</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Manage Account</a></li>
                 </ul>
             </div>
         </div>
