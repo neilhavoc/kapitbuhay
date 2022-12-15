@@ -19,6 +19,7 @@ use App\Http\Controllers\PoliceReportsController;
 use App\Http\Controllers\DistressController;
 use App\Http\Controllers\RegisterPoliceController;
 use App\Http\Controllers\RegisterVawController;
+use App\Http\Controllers\VawReportsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,4 +53,5 @@ Route::resource('/police_manageaccount', PoliceManageAccountController::class);
 Route::resource('/distress', DistressController::class);
 Route::resource('/register_police', RegisterPoliceController::class);
 Route::resource('/register_vaw', RegisterVawController::class);
+Route::resource('/vaw_reports', VawReportsController::class);
 
