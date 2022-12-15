@@ -92,16 +92,12 @@ class VictimAccountController extends Controller
     {
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where($userRef->id(), '=', $id);
-        $civilianUsers = $idRef->documents();
 
-        $data = [
-            'city' => $request->input('city'),
-            'verification_status' => '1',
-        ];
-        $database->collection('civilian-users')->document($id)->update($data);
-        return view('manage_VictimAccounts');
+        $civilianUsers = $database->collection('civilian-users')->document($id);
+        $civilianUsers->update([
+                    ['path' => 'verification_status', 'value' => $request->input('verification')]
+                ]);
+        return redirect('VictimAcc');
     }
 
     /**

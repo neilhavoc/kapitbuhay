@@ -81,10 +81,10 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-md-6 fw-bold ">From:&nbsp;<label>{{ $item['sender_FullName'] }}</label></div>
-                                        <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>sample</label></div>
+                                        <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>{{ $item['sender_userID'] }}</label></div>
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
+                                        <div class="col-md-6 fw-bold ">User Address:&nbsp;<label>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</label></div>
                                     </div>
                                     <div class="row mt-5">
                                         <div class="row">

@@ -156,13 +156,12 @@
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-5">
-                                                        <input type="text" name="verification" class="col-md-6" value="{{ $item['verification_status'] }}">
-                                                        <!--<select class="form-control" name="verification[]" aria-label="verification selection">
+                                                        <select class="form-select" name="verification" aria-label="verification selection">
                                                             <option value="{{ $item['verification_status'] }}">{{ $item['verification_status'] }}</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
-                                                        </select>-->
+                                                        </select>
                                                     </div>
                                                     </div>
                                                     <div class="row mt-3">
@@ -184,15 +183,15 @@
                                                 <div class="col-md-4">
                                                     <div class="row">
                                                         <h5 class="col-md-3">ID Type: </h5>
-                                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                                        <h5 id="IDtype" class="col-md-4">{{ $item['ID_Type'] }}</h5>
                                                     </div>
                                                     <div class="row mt-3">
                                                         <h5 class="col-md-4">ID Number: </h5>
-                                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                                        <h5 id="IDtype" class="col-md-4">{{ $item['ID_Number'] }}</h5>
                                                     </div>
                                                     <div class="row mt-3">
                                                         <h5 class="col-md-4">Expire Date: </h5>
-                                                        <h5 id="IDtype" class="col-md-4">sample</h5>
+                                                        <h5 id="IDtype" class="col-md-4">{{ $item['ID_ExpiryDate'] }}</h5>
                                                     </div>
                                                 </div>
                                             </div>
