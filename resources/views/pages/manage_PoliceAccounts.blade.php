@@ -6,6 +6,7 @@
 <!-- Styles -->
 @section('styles')
 <style>
+
 .profile{
     height: 170x;
     width: 200px;
@@ -28,7 +29,7 @@
 <!-- Content -->
 @section('content')
 
-    <div class="container search">
+    <div class="container search" style="overflow: hidden; overflow-y: scroll;">
         <div class="row">
             <div class="col-md-5">
                 <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -194,19 +195,6 @@
                 </div>
             </div>
         </div>
-        {{-- picture modal --}}
-        <div class="modal fade" id="picmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="ball.jpg" alt="Ball" class="modal-profile">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 @stop
@@ -214,13 +202,5 @@
 <!-- Scripts -->
 @section('scripts')
 <script>
-    document.addEventListener("click", function(e){
-       if(e.target.classList.contains("profile")){
-        const src = e.target.getAttribute("src");
-        document.querySelector(".modal-profile").src = src;
-        const myModal = new bootstrap.Modal(document.getElementById('picmodal'));
-        myModal.show();
-       }
-    })
 </script>
 @stop

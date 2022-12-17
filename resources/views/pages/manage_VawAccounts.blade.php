@@ -28,7 +28,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">
+<div class="container search" style="overflow: hidden; overflow-y: scroll;">
     <div class="row">
         <div class="col-md-5">
             <input class= "container-fluid h-100" type="text" placeholder="Search">

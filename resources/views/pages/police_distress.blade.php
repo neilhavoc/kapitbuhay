@@ -38,7 +38,7 @@
     <li><a class="dropdown-item" href="#">Separated link</a></li>
   </ul>
 </div>
-    
+
 
     <div class="row">
     <div class="col-md-6  mb-0">
