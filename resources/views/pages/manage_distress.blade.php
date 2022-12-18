@@ -106,6 +106,9 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
                                 </div>
+                                <div class="row mt-3 ">
+                                    <div id="googleMap" style="width:90%;height:400px; " ></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,5 +122,14 @@
 
 <!-- Scripts -->
 @section('scripts')
-
+<script>
+    function myMap() {
+    var mapProp= {
+      center:new google.maps.LatLng(51.508742,-0.120850),
+      zoom:5,
+    };
+    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwBnZtVNK_pmkcdWB6BQeH9S9LQUlXew&callback=myMap"></script>
 @stop
