@@ -46,27 +46,12 @@ class RegisterVawController extends Controller
      */
     public function store(Request $request)
     {
+        //initialize firebase
         $storage = app('firebase.storage');
-
-        $bucket = $storage->getBucket();
-        $image = $request->file('filename');
-        $imgname = $image->getClientOriginalName();
-        //$extension = $image->getClientOriginalExtension();
-        //$file      = $image. '.' . $extension;
-        $localfolder = public_path('storage-temp-folder') .'/';
-        $storagedata = [
-            'name' => 'barangay-vaw/credentials/new-name.png',
-        ];
-
-        if ($image->move($localfolder, $imgname)) {
-            $imgfile = fopen($localfolder.$imgname, 'r');
-            $bucket->upload($imgfile, $storagedata);
-            //will remove from local laravel folder
-            unlink($localfolder . $imgname);
-          }
-
         $auth = app('firebase.auth');
+        $firestore = app('firebase.firestore');
 
+        //store user details for auth account
         $userProperties = [
             'email' => $request->input('email'),
             'emailVerified' => false,
@@ -76,26 +61,47 @@ class RegisterVawController extends Controller
             'disabled' => false,
         ];
 
+        //create user
         $createdUser = $auth->createUser($userProperties);
 
+        //signin user to get the UID
         $signInResult = $auth->signInWithEmailAndPassword($request->input('email'), $request->input('password'));
 
         $loginuid = $signInResult->firebaseUserId();
 
-        $firestore = app('firebase.firestore');
+        //store image in firebase storage
+        $bucket = $storage->getBucket();
+        $fileLocation = $bucket;
+        $image = $request->file('filename');
+        $imgname = $image->getClientOriginalName();
+        $localfolder = public_path('storage-temp-folder') .'/';
 
+        $storagedata = [
+            'name' => 'barangay-vaw/' . $loginuid . '/credentials/Barangay-Logo.png',
+        ];
+
+        if ($image->move($localfolder, $imgname)) {
+            $imgfile = fopen($localfolder.$imgname, 'r');
+            $bucket->upload($imgfile, $storagedata);
+            //will remove from local laravel folder
+            unlink($localfolder . $imgname);
+          }
+
+        //get the link of the uploaded image
+        //store user details in firestore
         $database = $firestore->database();
         $data = [
-            'brgyName' => $request->input('brgyName'),
+            'brgyName'        => $request->input('brgyName'),
             'brgyContactNum1' => $request->input('brgyConNum1'),
             'brgyContactNum2' => $request->input('brgyConNum2'),
-            'brgyProvince' => $request->input('province'),
-            'brgycity' => $request->input('city'),
-            'barangay' => $request->input('barangay'),
-            'brgyPurok' => $request->input('purok'),
-            'brgyStreet' => $request->input('street'),
-            'brgyEmail' => $request->input('email'),
-            'brgyPassword' => $request->input('password'),
+            //'brgyLogo'        => $imageReference,
+            'brgyProvince'    => $request->input('province'),
+            'brgycity'        => $request->input('city'),
+            'barangay'        => $request->input('barangay'),
+            'brgyPurok'       => $request->input('purok'),
+            'brgyStreet'      => $request->input('street'),
+            'brgyEmail'       => $request->input('email'),
+            'brgyPassword'    => $request->input('password'),
         ];
 
         $database->collection('barangay_accounts')->document($loginuid)->set($data);
