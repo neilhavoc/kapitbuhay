@@ -46,11 +46,11 @@
     }
 
     .sidebar{
-        position: fixed;
+        position: fixed !important;
         background: rgb(248, 88, 88);
         width: 250px;
         height: 100vh;
-    }
+    } 
 
     .sidebar h3{
         color: white;
