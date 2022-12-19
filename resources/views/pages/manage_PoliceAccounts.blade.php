@@ -6,6 +6,7 @@
 <!-- Styles -->
 @section('styles')
 <style>
+
 .profile{
     height: 170x;
     width: 200px;
@@ -28,7 +29,7 @@
 <!-- Content -->
 @section('content')
 
-    <div class="container search">
+    <div class="container search" style="overflow: hidden; overflow-y: scroll;">
         <div class="row">
             <div class="col-md-5">
                 <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -52,21 +53,22 @@
                             <td class="text-center" colspan="3">No Data!</td>
                         </tr>
                     @else
+                        @foreach ($account as $item)
+                            <tr>
+                                <td>{{ $item->id() }}</td>
+                                <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
+                                <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
+                                <td>{{ $item['email'] }}</td>
+                                <td>{{ $item['phonenumber'] }}</td>
+                                <td>
+                                    <!-- Modal trigger button -->
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">
+                                        View
+                                    </button>
+                                </td>
 
-                        <tr>
-                            <td> 001</td>
-                            <td>{{ $account['fName'] }} {{ $account['lName'] }}</td>
-                            <td>{{ $account['street'] }} {{ $account['barangay'] }} {{ $account['city'] }}</td>
-                            <td>{{ $account['email'] }}</td>
-                            <td>{{ $account['phonenumber'] }}</td>
-                            <td>
-                                <!-- Modal trigger button -->
-                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice">
-                                    View
-                                </button>
-                            </td>
-
-                        </tr>
+                            </tr>
+                        @endforeach
                     @endif
                 </tbody>
             </table>
@@ -171,16 +173,14 @@
                                         </h5>
                                     </div>
                                     <div class="col-md-5">
-
                                         <div class="dropdown">
-                                            <select class="form-select" id="Account Status" aria-label="Account selection">
+                                            <select class="form-select" id="AccountStatus" aria-label="Account selection">
                                                 <option selected disabled>Select One</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
                                                 <option value="3">Three</option>
                                               </select>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -195,19 +195,6 @@
                 </div>
             </div>
         </div>
-        {{-- picture modal --}}
-        <div class="modal fade" id="picmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="ball.jpg" alt="Ball" class="modal-profile">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 @stop
@@ -215,13 +202,5 @@
 <!-- Scripts -->
 @section('scripts')
 <script>
-    document.addEventListener("click", function(e){
-       if(e.target.classList.contains("profile")){
-        const src = e.target.getAttribute("src");
-        document.querySelector(".modal-profile").src = src;
-        const myModal = new bootstrap.Modal(document.getElementById('picmodal'));
-        myModal.show();
-       }
-    })
 </script>
 @stop

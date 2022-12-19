@@ -25,13 +25,13 @@
                         <div class="row mt-5 no-gutters">
                             <div class="col-md-5 text-end">Email</div>
                             <div class="col-md-7">
-                                <input type="email" name="email" id="email" class="form-control">
+                                <input type="email" name="email" id="email" class="form-control" required>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-5 text-end">Password</div>
                             <div class="col-md-7">
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password" class="form-control" required>
                             </div>
                         </div>
                         <div class="row mt-5 mx-3">

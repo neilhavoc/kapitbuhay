@@ -22,8 +22,7 @@ class VictimAccountController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where('fName', '=', '7ysbs');
-        $civilianUsers = $idRef->documents();
+        $civilianUsers = $userRef->documents();
 
         return view('pages.manage_VictimAccounts', [
             'account' => $civilianUsers,
@@ -62,7 +61,7 @@ class VictimAccountController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where->where($userRef->id(), '=', $id);
+        $idRef = $userRef->where($userRef->id(), '=', $id);
         $civilianUsers = $idRef->documents();
 
         return view('pages.manage_VictimAccounts', [
@@ -78,7 +77,7 @@ class VictimAccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        //VictimAcc/{VictimAcc}
     }
 
     /**
@@ -90,7 +89,14 @@ class VictimAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $civilianUsers = $database->collection('civilian-users')->document($id);
+        $civilianUsers->update([
+                    ['path' => 'verification_status', 'value' => $request->input('verification')]
+                ]);
+        return redirect('VictimAcc');
     }
 
     /**

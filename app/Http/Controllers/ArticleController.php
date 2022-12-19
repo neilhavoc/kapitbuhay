@@ -97,13 +97,12 @@ class ArticleController extends Controller
     {
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
-        $data = [
-            'Active' => 'isActive',
-            'article_content' => $request->input('updateArticleContent'),
-            'article_title' => $request->input('updateArticleTitle'),
-        ];
 
-        $database->collection('articles')->document($id)->set($data);
+        $articleRef = $database->collection('articles')->document($id);
+        $articleRef->update([
+                    ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
+                    ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
+                ]);
 
         return redirect('article');
     }

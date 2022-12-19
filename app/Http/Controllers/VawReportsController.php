@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class VawAccountController extends Controller
+class VawReportsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,15 +13,8 @@ class VawAccountController extends Controller
      */
     public function index()
     {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where('verification_status', '=', '0');
-        $civilianUsers = $userRef->documents();
-
-        return view('pages.manage_VawAccounts', [
-            'account' => $civilianUsers,
-        ]);
+        //
+        return view('pages.vaw_incidents');
     }
 
     /**

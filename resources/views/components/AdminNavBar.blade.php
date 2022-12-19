@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Manage Accounts</title>
+    <title></title>
     @include ('components.AdminHeader')
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
-                    <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500;" >Admin&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
+                    <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:150px;" >Admin&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-danger fw-heavy" href="#">Log out</a></li>
                           </ul>
@@ -46,6 +46,7 @@
             </div>
         </div>
     </nav>
+    {{-- scripts --}}
 
 </body>
 
@@ -64,6 +65,7 @@
     border-radius: 2px;
     margin:none;
   }
+
 
 
 </style>

@@ -336,35 +336,13 @@
                 </div>
             </div>
 
-            <div class="row ">
-                <div class="col-md-4 "><input  id="Fname" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
-            </div>
-            <div class="row mt-2">
-               <div class="col-md-8">Add in: </div>
-            </div>
-            <div class="row mt-2 ">
-                <div class="col-md-3">  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Coping Mechanism Article
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item btn btn-primary" >Action</a></li>
-            <li><a class="dropdown-item btn btn-primary" >Another action</a></li>
-            <li><a class="dropdown-item btn btn-primary" >Something else here</a></li>
-          </ul></div>
-            </div>
-            <div class="row mt-3">
-               <div class="col-md-8">Article Contents: </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-mb-3">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div>
-            </div>
         </div>
                <div class="modal-footer-text-center">
                     <button type="submit" class="btn btn-primary"> Save </button>
                 </div>
             </div>
           </div>
-        </div>              
+        </div>
         </form>
 
 
