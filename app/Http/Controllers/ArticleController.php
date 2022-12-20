@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Google\Cloud\Storage\StorageClient;
+use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\Contract\Firestore;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use Kreait\Firebase\Value\Uid;
-use App\Http\Helpers\FirebaseHelper;
 
 class ArticleController extends Controller
 {
@@ -24,8 +27,8 @@ class ArticleController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $articleRef = $database->collection('articles');
-        $query = $articleRef->where('Active', '=', 'isActive');
-        $documentRef = $query->documents();
+        //$query = $articleRef->where('Active', '=', 'isActive');
+        $documentRef = $articleRef->documents();
         //$civilianUsers = $documentRef->snapshot();
 
         return view('pages.manage_articles', [
@@ -51,15 +54,51 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //initialize firebase
+        $storage = app('firebase.storage');
         $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $data = [
-            'Active' => 'isActive',
-            'article_title' => $request->input('createArticleTitle'),
-            'article_content' => $request->input('createArticleContent'),
+
+        $title = str_replace(' ', '', $request->input('createArticleTitle'));
+        //store image in firebase storage
+        $bucket = $storage->getBucket();
+
+        //get the user-input image
+        $imageArticle = $request->file('articleimage');
+
+        //get the original name of the file
+        $articleImageName = $imageArticle->getClientOriginalName();
+
+        //store to temporary local folder
+        $localfolder = public_path('storage-temp-folder') .'/';
+
+        //create file path in storage
+        $articlePath = [
+            'name' => 'articles/' . $title . '/Article-Image.png',
         ];
 
-        $database->collection('articles')->newDocument()->set($data);
+        //upload barangay Logo in Storage
+        if ($imageArticle->move($localfolder, $articleImageName)) {
+            $imgfile = fopen($localfolder.$articleImageName, 'r');
+            $bucket->upload($imgfile, $articlePath);
+            //will remove from local laravel folder
+            unlink($localfolder . $articleImageName);
+        }
+
+
+        //initialize database of firestore
+        $database = $firestore->database();
+
+        //store article data in fields
+        $data = [
+            'Active'            => 'isActive',
+            'article_title'     => $request->input('createArticleTitle'),
+            'article_content'   => $request->input('createArticleContent'),
+            'image'             => 'empty',
+        ];
+
+        //save in firestore database
+        $database->collection('articles')->document($title)->set($data);
+
 
         return redirect('article');
     }
