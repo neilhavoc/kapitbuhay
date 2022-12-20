@@ -106,26 +106,18 @@
                             <div class="col-md-12">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
                        </div>
                     </div>
-                    <div class="row mt-3 mx-5 mb-5">
-                        <div class="col-md-8">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Verify
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                  Unverified
-                                </label>
-                              </div>
+                    <div class="row mt-3 mx-5 mb-5 justify-content-between">
+                        <div class="col-md-6">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Unread</option>
+                                <option value="1">Help is on the Way</option>
+                              </select>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-danger">Report</button>
                         </div>
                     </div>
-                    <div class="row mt-5 mx-5 justify-contents-center">
+                    <div class="row mt-5 mx-5 justify-content-evenly">
                         <div class="col-md-6">
                             <a role="button" class="btn btn-success"  href="vaw_createReports">Create Report</a>
                         </div>

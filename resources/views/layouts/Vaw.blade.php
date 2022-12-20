@@ -19,7 +19,10 @@
 
     <body>
         @include('components.VawNavBar')
-        <div class="container-fluid">
+        <div class="d-flex flex-row-reverse">
+            <div style="margin-right: 250px;">
+                @include('components.SideBar_Vaw')
+            </div>
             @yield('content')
         </div>
 
