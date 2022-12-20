@@ -209,9 +209,9 @@
                                         File name here
                                     </div>
                                 </div>
-                                <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+                                <button id="custom-btn">Choose a file</button>
                             </div>
-                            <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                            <div class="container border-secondary" style="margin-top:0%; margin-bottom:0%;">
                                 <div class="row">
                                     <div class="col-md-2 mb-2 text-start fw-bold">
                                         Article Title:
