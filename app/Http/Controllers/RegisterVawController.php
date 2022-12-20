@@ -71,7 +71,7 @@ class RegisterVawController extends Controller
 
         //store image in firebase storage
         $bucket = $storage->getBucket();
-        $fileLocation = $bucket;
+        //$fileLocation = $bucket;
 
         //get the user-input image
         $imagebrgyLogo = $request->file('fileBrgyLogo');
@@ -96,9 +96,6 @@ class RegisterVawController extends Controller
         $brgyValidIDBack = [
             'name' => 'barangay-vaw/' . $loginuid . '/credentials/Barangay-Valid-ID-Back.png',
         ];
-
-
-        //$object = $bucket->object('barangay-vaw/' . $loginuid . '/credentials/Barangay-Logo.png');
 
         //upload barangay Logo in Storage
         if ($imagebrgyLogo->move($localfolder, $brgyLogoName)) {
@@ -132,20 +129,22 @@ class RegisterVawController extends Controller
         //store user details in firestore
         $database = $firestore->database();
         $data = [
-            'brgyName'        => $request->input('brgyName'),
-            'brgyContactNum1' => $request->input('brgyConNum1'),
-            'brgyContactNum2' => $request->input('brgyConNum2'),
-            'brgyLogo'        => 'empty',
-            'brgyValidIDFront'=> 'empty',
-            'brgyValidIDBack' => 'empty',
-            'brgyUID'         => $loginuid,
-            'brgyProvince'    => $request->input('province'),
-            'brgycity'        => $request->input('city'),
-            'barangay'        => $request->input('barangay'),
-            'brgyPurok'       => $request->input('purok'),
-            'brgyStreet'      => $request->input('street'),
-            'brgyEmail'       => $request->input('email'),
-            'brgyPassword'    => $request->input('password'),
+            'brgyName'              => $request->input('brgyName'),
+            'brgyContactNum1'       => $request->input('brgyConNum1'),
+            'brgyContactNum2'       => $request->input('brgyConNum2'),
+            'brgyLogo'              => 'empty',
+            'brgyValidIDFront'      => 'empty',
+            'brgyValidIDBack'       => 'empty',
+            'brgyUID'               => $loginuid,
+            'brgyProvince'          => $request->input('province'),
+            'brgycity'              => $request->input('city'),
+            'barangay'              => $request->input('barangay'),
+            'brgyPurok'             => $request->input('purok'),
+            'brgyStreet'            => $request->input('street'),
+            'brgyEmail'             => $request->input('email'),
+            'brgyPassword'          => $request->input('password'),
+            'verification_status'   => '1',
+            'account_status'        => '1',
         ];
 
         $database->collection('barangay_accounts')->document($loginuid)->set($data);

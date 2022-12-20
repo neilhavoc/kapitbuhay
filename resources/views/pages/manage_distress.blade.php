@@ -123,12 +123,21 @@
 <!-- Scripts -->
 @section('scripts')
 <script>
+    //import { collection, query, where, getDocs } from "firebase/firestore";
+
+    //const q = query(collection(db, "sos-distress-message"), where("status", "==", 'unread'));
     function myMap() {
-    var mapProp= {
-      center:new google.maps.LatLng({{ $item['Latitude'] }},{{ $item['Longitude'] }}),
-      zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        //$firestore = app('firebase.firestore');
+        //$database = $firestore->database();
+        //$userRef = $database->collection('sos-distress-message');
+        //$civilianUsers = $userRef->documents();
+
+        var mapProp= {
+        center:new google.maps.LatLng(10.3155681,123.99116),
+        zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwBnZtVNK_pmkcdWB6BQeH9S9LQUlXew&callback=myMap"></script>

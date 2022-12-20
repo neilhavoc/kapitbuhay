@@ -238,9 +238,8 @@
 
     @endforeach
 @endif
-    <td>
-    @if ($document == null)
-    @else
+@if ($document == null)
+@else
         @foreach ($document as $item)
             <div class="modal fade" id="staticBackdrop3{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -266,52 +265,54 @@
                 </div>
             </div>
         @endforeach
-    @endif
+@endif
     </td>
     </tr>
     </tbody>
     </div>
 </div>
 
+<form action="article" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-        <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
-      </div>
-      <div class="modal-body">
-        <div class="container-text-center">
-        <div class="wrapper">
-            <div class="image">
-                <img src="ball.jpg" alt="Ball">
-            </div>
-            <div class="content">
-                <div class="text">
-                    Attach Image
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                    <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Create New Article</h3>
                 </div>
+                <div class="modal-body">
+                    <div class="container-text-center">
+                        <div class="wrapper">
+                            <div class="image">
+                                <img src="ball.jpg" alt="Ball">
+                            </div>
+                        <div class="content">
+                         <div class="text">
+                            Attach Image
+                        </div>
+                    </div>
+                    <div id="cancel-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="file-name">
+                        File name here
+                    </div>
                 </div>
-            <div id="cancel-btn">
-                <i class="fas fa-times"></i>
+                <div class="col-md-8">
+                    <input name="articleimage" id="myFileArticleImage" type="file" class="form-control align-content-center w-120" required>
+                </div>
             </div>
-            <div class="file-name">
-                File name here
-            </div>
-            </div>
-            <button >Choose a file</button>
-
-
-        </div>
-        <form action="article" method="POST">
-            @csrf
-            <div class="container border-secondary" style="margin-top:0%; margin-bottom:0%;">
+            <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
                 <div class="row">
                     <div class="col-md-4 mb-2">
-                    Article Title:
+                        Article Title:
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col-md-4 "><input name="createArticleTitle" id="createArticleTitle" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
+                    <div class="col-md-4 ">
+                        <input name="createArticleTitle" id="createArticleTitle" type="text" class="form-control align-content-center w-100"  placeholder="Title" >
+                    </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-8">Add in: </div>
@@ -337,13 +338,11 @@
             </div>
 
         </div>
-               <div class="modal-footer-text-center">
-                    <button type="submit" class="btn btn-primary"> Save </button>
-                </div>
-            </div>
-          </div>
+        <div class="modal-footer-text-center">
+            <button type="submit" class="btn btn-primary"> Save </button>
         </div>
-        </form>
+    </div>
+</form>
 
 
 @stop
