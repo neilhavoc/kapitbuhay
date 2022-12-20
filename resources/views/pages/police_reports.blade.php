@@ -6,9 +6,6 @@
 <!-- Styles -->
 @section('styles')
 <style>
- .search {
-    margin-top: 100px;
- }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
@@ -19,7 +16,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">
+<div class="container search" style="overflow: hidden; overflow-y: scroll;">
 <div class="row g-1 mb-5">
             <div class="col-md-5">
                 <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -82,7 +79,8 @@
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row mt-5">
         <div class="col-md-6 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
-        <div class="col-md-2 fw-bold ">Date/Time:&nbsp;<label>sample</label></div>
+        <div class="col-md-3 fw-bold ">Date:&nbsp;<label>sample</label></div>
+        <div class="col-md-2 fw-bold ">Time:&nbsp;<label>sample</label></div>       
     </div>
     <div class="row mt-2">
        <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>

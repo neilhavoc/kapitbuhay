@@ -6,9 +6,6 @@
 <!-- Styles -->
 @section('styles')
 <style>
- .search {
-    margin-top: 100px;
- }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
@@ -19,7 +16,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">
+<div class="container search" style="overflow: hidden; overflow-y: scroll;">
 <div class="row g-1 mb-5">
             <div class="col-md-5">
                 <input class= "container-fluid h-100" type="text" placeholder="Search">
