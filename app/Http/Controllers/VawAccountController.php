@@ -3,6 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Kreait\Firebase\Contract\Auth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Google\Cloud\Storage\StorageClient;
+use Google\Cloud\Firestore\FirestoreClient;
+use Kreait\Firebase\Contract\Firestore;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+use Kreait\Firebase\Value\Uid;
 
 class VawAccountController extends Controller
 {
@@ -14,11 +25,56 @@ class VawAccountController extends Controller
     public function index()
     {
         $firestore = app('firebase.firestore');
+        $storage = app('firebase.storage');
+
         $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        $idRef = $userRef->where('verification_status', '=', '0');
+        $userRef = $database->collection('barangay_accounts');
+        //$idRef = $userRef->where('brgyValidIDFront', '=', 'empty');
         $civilianUsers = $userRef->documents();
 
+        $bucket = $storage->getBucket();
+
+        foreach($civilianUsers as $uid)
+        {
+            $uuid = $uid['brgyUID'];
+            $brgyLogo = $bucket->object('barangay-vaw/'. $uuid .'/credentials/Barangay-Logo.png');
+            $brgyIDFront = $bucket->object('barangay-vaw/'.$uuid.'/credentials/Barangay-Valid-ID-Front.png');
+            $brgyIDBack = $bucket->object('barangay-vaw/'.$uuid.'/credentials/Barangay-Valid-ID-Back.png');
+
+            $urlLogo = $brgyLogo->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $urlIDFront = $brgyIDFront->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $urlIDBack = $brgyIDBack->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $civilianUsers = $database->collection('barangay_accounts')->document($uuid);
+
+            $civilianUsers->update([
+                        ['path' => 'brgyLogo', 'value' => $urlLogo],
+                        ['path' => 'brgyValidIDFront', 'value' => $urlIDFront],
+                        ['path' => 'brgyValidIDBack', 'value' => $urlIDBack]
+                    ]);
+        };
+
+        $civilianUsers = $userRef->documents();
         return view('pages.manage_VawAccounts', [
             'account' => $civilianUsers,
         ]);
@@ -53,7 +109,16 @@ class VawAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $firestore = app('firebase.firestore');
+
+        $database = $firestore->database();
+        $userRef = $database->collection('barangay_accounts');
+        $idRef = $userRef->where($userRef->id(), '=', $id);
+        $civilianUsers = $idRef->documents();
+
+        return view('pages.manage_VictimAccounts', [
+            'account' => $civilianUsers,
+        ]);
     }
 
     /**
