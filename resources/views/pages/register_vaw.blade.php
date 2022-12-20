@@ -94,7 +94,7 @@
                         <label for="password" class="col-form-label">Password:</label>
                     </div>
                     <div class="col-md-3">
-                        <input name="password" id="password" type="text" class="form-control align-content-center w-100" aria-describedby="passwordHelpInline" required>
+                        <input name="password" id="password" type="password" class="form-control align-content-center w-100" aria-describedby="passwordHelpInline" required>
                     </div>
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
@@ -107,15 +107,35 @@
                         <label for="conpassword" class="col-form-label">Confirm Password:</label>
                     </div>
                     <div class="col-md-3">
-                        <input name="password" id="conpassword" type="text" class="form-control align-content-center w-100" required>
+                        <input name="password" id="conpassword" type="password" class="form-control align-content-center w-100" required>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-8">Upload Valid Credentials for Verification</div>
-                    <div class="col-md-8">
-                        <input type="file" id="myFile" name="filename">
+                    <div class="row mt-2 ">
+                        <div class="col-auto">
+                            <label for="myFileBrgyLogo" class="col-form-label">Barangay Logo:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="fileBrgyLogo" id="myFileBrgyLogo" type="file" class="form-control align-content-center w-100" required>
+                        </div>
                     </div>
-
+                    <div class="row mt-2 ">
+                        <div class="col-auto">
+                            <label for="myFileBrgyIDFront" class="col-form-label">Valid ID Front:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="fileBrgyIDFront" id="myFileBrgyIDFront" type="file" class="form-control align-content-center w-100" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 ">
+                        <div class="col-auto">
+                            <label for="myFileBrgyIDBack" class="col-form-label">Valid ID Back:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="fileBrgyIDBack" id="myFileBrgyIDBack" type="file" class="form-control align-content-center w-100" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center m-5"><button type="submit" class="btn btn-light w-25">Submit</button></div>
