@@ -27,9 +27,13 @@ class ArticleController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
         $articleRef = $database->collection('articles');
-        //$query = $articleRef->where('Active', '=', 'isActive');
+
         $documentRef = $articleRef->documents();
-        //$civilianUsers = $documentRef->snapshot();
+
+
+        //$query = $articleRef->where('image', '=', 'empty');
+
+        //if($query['image'])
 
         return view('pages.manage_articles', [
             'document' => $documentRef,
@@ -90,10 +94,12 @@ class ArticleController extends Controller
 
         //store article data in fields
         $data = [
+            'article_id'        => $title,
             'Active'            => 'isActive',
             'article_title'     => $request->input('createArticleTitle'),
             'article_content'   => $request->input('createArticleContent'),
             'image'             => 'empty',
+            'source_link'       => 'empty',
         ];
 
         //save in firestore database
