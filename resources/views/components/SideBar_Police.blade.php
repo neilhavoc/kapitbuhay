@@ -14,8 +14,20 @@
         <!-- Sidebar -->
         <div class="sidebar">
             {{-- Contents goes here --}}
+            <h3>Distress Message</h3>
             <div class="my-3 mx-3" style="border:solid; border-color:black; height:100px;">
-                contents ari diri
+            <div class="row">
+                        <div class="col-md-6 fw-bold " ><label>REF ID:</label>&nbsp;<label>sample</label></div>
+            </div>
+            <div class="row">
+                        <div class="col-md-6 fw-bold "><label>From:</label>&nbsp;<label>sample</label></div>
+            </div>
+            <div class="row">
+                        <div class="col-md-6 fw-bold "><label>sample</label>&nbsp;<label>sample</label></div>
+            </div>
+            <div class="row">
+                        <div class="col-md-6 fw-bold "><label>sample</label></div>
+            </div>
             </div>
         </div>
         {{-- scripts --}}
@@ -45,7 +57,7 @@
     }
 
     .sidebar h3{
-        color: white;
+        color: black;
         width: 100%;
         margin-left: 10px;
     }
@@ -88,5 +100,9 @@
         padding-left:0;
     }
 
+}
+.sidebar label{
+        font-size: x-small;
+        margin-left: 1%;
 }
 </style>
