@@ -93,7 +93,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
-                        <div class="col-md-6 fw-bold ">user ID:&nbsp;<label>sample</label></div>
+                        <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>sample</label></div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
@@ -119,11 +119,12 @@
                             Not Verified
                             </label>
                             </div>
-                            <div class="row mt-3 mx-5 justify-content-between">
+                            <div class="row mt-1 mx-5 justify-content-between">
                         <div class="col-md-8">
-                            <button type="button" class="btn btn-danger">Report User</button>
+                            <button type="button" class="btn btn-danger float-md-end">Report User</button>
                         </div>
                     </div>
+                         
                         </div>
                        
                     <div class="row mt-5 mx-5 justify-content-evenly">
