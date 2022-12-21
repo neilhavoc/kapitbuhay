@@ -12,7 +12,7 @@
     margin-top: 50px;
 }
 .footer{
-    margin-left: 410px;
+    margin-left: 380px;
 }    
 </style>
 
@@ -20,16 +20,16 @@
 
 <!-- Content -->
 @section('content')
-<div class="container" style="overflow: hidden; overflow-y: scroll;">
+<div class="container" style="overflow: hidden; overflow-y: scroll; margin-top:0%; margin-bottom:0%;">
 <div class="position-relative mb-3">
   <h1 class="position-absolute top-0 start-0"> Manage Account</h1>
 </div>
                             <div class="row mb-5 row1">
-                                <div class="col-md-2 mt-5">
+                                <div class="col-md-2 mt-1">
                                     <img src="ball.jpg" alt="Ball" class="profile">
                                 </div>
                                 
-                                    <div class="row mt-5">
+                                    <div class="row mt-2">
                                         <h5 class="col-md-2">User ID: </h5>
                                         <h5 id="userID" class="col-md-4">sample</h5>
                                     </div>
@@ -105,7 +105,7 @@
                                         <h5 class="col-md-2">Username:</h5>
                                         <input type="text" class="col-md-5">
                                     </div>
-                                    <div class="row mt-2 mb-5">
+                                    <div class="row mt-2 mb-3">
                                         <h5 class="col-md-2">Password:</h5>
                                         <input type="text" class="col-md-5">
                                     </div>
