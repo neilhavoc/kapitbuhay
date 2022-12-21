@@ -184,7 +184,7 @@
         <div class="modal fade" id="staticBackdrop2{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
-                    <form action="article/{{ $item->id() }}" method="POST">
+                    <form action="article/{{ $item->id() }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-header">
@@ -195,7 +195,7 @@
                             <div class="container-text-center">
                                 <div class="wrapper">
                                     <div class="image">
-                                        <img src="ball.jpg" alt="Ball">
+                                        <img src="{{ $item['image'] }}" alt="Article Image">
                                     </div>
                                     <div class="content">
                                         <div class="text">
@@ -209,7 +209,9 @@
                                         File name here
                                     </div>
                                 </div>
-                                <button id="custom-btn">Choose a file</button>
+                                <div class="col-md-8">
+                                    <input name="articleimage" id="myFileArticleImage" type="file" class="form-control align-content-center w-120">
+                                </div>
                             </div>
                             <div class="container border-secondary" style="margin-top:0%; margin-bottom:0%;">
                                 <div class="row">
@@ -218,13 +220,13 @@
                                     </div>
                                 </div>
                                 <div class="row ">
-                                    <div class="col-md-4 "><input name="updateArticleTitle" id="updateArticleTitle" type="text" class="form-control align-content-center w-100"  placeholder="Title" ></div>
+                                    <div class="col-md-4 "><input name="updateArticleTitle" id="updateArticleTitle" type="text" class="form-control align-content-center w-100"  placeholder="Title" value="{{ $item['article_title'] }}"></div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-2 text-start">Article Contents: </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-mb-3">  <textarea class="form-control" name="updateArticleContent" id="updateArticleContent" rows="3"></textarea></div>
+                                    <div class="col-mb-3">  <textarea class="form-control" name="updateArticleContent" id="updateArticleContent" rows="3">{{ $item['article_content'] }}</textarea></div>
                                 </div>
                             </div>
                         </div>

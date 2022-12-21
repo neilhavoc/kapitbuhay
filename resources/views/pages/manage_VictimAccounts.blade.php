@@ -42,6 +42,7 @@
                         <th id="trs-hd-3" class="col-lg-3">Address</th>
                         <th id="trs-hd-4" class="col-lg-3">Email</th>
                         <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                        <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2"></th>
                     </tr>
                 </thead>
@@ -58,6 +59,7 @@
                             <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
                             <td>{{ $item['email'] }}</td>
                             <td>{{ $item['phonenumber'] }}</td>
+                            <td>{{ $item['verification_status'] }}</td>
                             <td>
                                 <!-- Modal trigger button -->
                                 <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVictim{{ $item->id() }}">
@@ -97,15 +99,15 @@
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Name:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['fName'] }} {{ $item['lName'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['fName'] }} {{ $item['lName'] }}">
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Contact No:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['phonenumber'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['phonenumber'] }}">
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Email:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['email'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['email'] }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,17 +124,17 @@
                                                             <h5 class="col-md-2">
                                                                 City:
                                                             </h5>
-                                                            <input type="text" name='city' disabled = "true" class="col-md-3" value="{{ $item['city'] }}">
+                                                            <input type="text" name='city' disabled ="true" class="col-md-3" value="{{ $item['city'] }}">
                                                             <h5 class="col-md-2">
                                                                 Barangay:
                                                             </h5>
-                                                            <input type="text" disabled = "true" class="col-md-3" value="{{ $item['barangay'] }}">
+                                                            <input type="text" disabled ="true" class="col-md-3" value="{{ $item['barangay'] }}">
                                                     </div>
                                                     <div class="row mt-1">
                                                         <h5 class="col-md-2">
                                                             Street:
                                                         </h5>
-                                                        <input type="text" disabled = "true" class="col-md-6" value="{{ $item['street'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-6" value="{{ $item['street'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -158,9 +160,9 @@
                                                     <div class="col-md-5">
                                                         <select class="form-select" name="verification" aria-label="verification selection">
                                                             <option value="{{ $item['verification_status'] }}">{{ $item['verification_status'] }}</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
+                                                            <option value="Verified">Verified</option>
+                                                            <option value="To Verify">To Verify</option>
+                                                            <option value="Verification Failed">Verification Failed</option>
                                                         </select>
                                                     </div>
                                                     </div>
@@ -172,10 +174,10 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <select class="form-select" id="AccountStatus" aria-label="verification selection">
-                                                            <option selected disabled>Select One</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option selected disabled>{{ $item['account_status'] }}</option>
+                                                            <option value="Not Banned">Not Banned</option>
+                                                            <option value="Banned">Banned</option>
+                                                            <option value="warning">Warning</option>
                                                         </select>
                                                     </div>
                                                     </div>

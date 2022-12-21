@@ -21,16 +21,56 @@ class PoliceAccountController extends Controller
      */
     public function index()
     {
-        //$auth = app('firebase.auth');
-        //$user = $auth->getUserByEmail('sarioneiljohm@gmail.com');
-        //$userid = $user->uid;
-
         $firestore = app('firebase.firestore');
+        $storage = app('firebase.storage');
+
         $database = $firestore->database();
-        $userRef = $database->collection('civilian-users');
-        //$idRef = $userRef->where('verification_status', '=', '0');
+        $userRef = $database->collection('police_accounts');
         $civilianUsers = $userRef->documents();
 
+        $bucket = $storage->getBucket();
+
+        foreach($civilianUsers as $uid)
+        {
+            $uuid = $uid['policeUID'];
+            $brgyLogo = $bucket->object('police-accounts/'. $uuid .'/credentials/Police-Logo.png');
+            $brgyIDFront = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Front.png');
+            $brgyIDBack = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Back.png');
+
+            $urlLogo = $brgyLogo->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $urlIDFront = $brgyIDFront->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $urlIDBack = $brgyIDBack->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $civilianUsers = $database->collection('police_accounts')->document($uuid);
+
+            $civilianUsers->update([
+                        ['path' => 'policeLogo', 'value' => $urlLogo],
+                        ['path' => 'policeValidIDFront', 'value' => $urlIDFront],
+                        ['path' => 'policeValidIDBack', 'value' => $urlIDBack]
+                    ]);
+        };
+
+        $civilianUsers = $userRef->documents();
         return view('pages.manage_PoliceAccounts', [
             'account' => $civilianUsers,
         ]);
@@ -88,7 +128,15 @@ class PoliceAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $civilianUsers = $database->collection('police_accounts')->document($id);
+        $civilianUsers->update([
+                    ['path' => 'verification_status', 'value' => $request->input('verification')],
+                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+                ]);
+        return redirect('policeAcc');
     }
 
     /**

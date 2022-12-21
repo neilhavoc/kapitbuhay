@@ -49,11 +49,10 @@
     }
 
     .sidebar{
-        position: fixed;
+        position: fixed !important;
         background: rgb(248, 88, 88);
         width: 250px;
         height: 100vh;
-        overflow-y: hidden;
     }
 
     .sidebar h3{

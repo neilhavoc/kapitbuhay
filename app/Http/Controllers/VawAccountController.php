@@ -141,7 +141,15 @@ class VawAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $civilianUsers = $database->collection('barangay_accounts')->document($id);
+        $civilianUsers->update([
+                    ['path' => 'verification_status', 'value' => $request->input('verification')],
+                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+                ]);
+        return redirect('VawAcc');
     }
 
     /**
