@@ -177,7 +177,7 @@
                                                             <option selected disabled>Select One</option>
                                                             <option value="Not Banned">Not Banned</option>
                                                             <option value="Banned">Banned</option>
-                                                            <option value="Restricted">Restricted</option>
+                                                            <option value="warning">Warning</option>
                                                         </select>
                                                     </div>
                                                     </div>

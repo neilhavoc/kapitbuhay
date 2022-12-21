@@ -130,7 +130,7 @@
                                                 </h5>
                                                 <input type="text" class="col-md-3" value="{{ $item['barangay'] }}">
                                             </div>
-                                        
+
                                             <div class="row mt-1">
                                                 <h5 class="col-md-2">
                                                    Purok/Street:
@@ -179,7 +179,7 @@
                                                     <option selected disabled>Select One</option>
                                                     <option value="Not Banned">Not Banned</option>
                                                     <option value="Banned">Banned</option>
-                                                    <option value="Restricted">Restricted</option>
+                                                    <option value="Warning">Warning</option>
                                                 </select>
                                             </div>
                                         </div>
