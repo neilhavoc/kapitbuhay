@@ -94,8 +94,9 @@ class VictimAccountController extends Controller
 
         $civilianUsers = $database->collection('civilian-users')->document($id);
         $civilianUsers->update([
-                    ['path' => 'verification_status', 'value' => $request->input('verification')]
-                ]);
+            ['path' => 'verification_status', 'value' => $request->input('verification')],
+            ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+        ]);
         return redirect('VictimAcc');
     }
 

@@ -99,15 +99,15 @@
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Name:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['fName'] }} {{ $item['lName'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['fName'] }} {{ $item['lName'] }}">
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Contact No:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['phonenumber'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['phonenumber'] }}">
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Email:</h5>
-                                                        <input type="text" disabled = "true" class="col-md-4" value="{{ $item['email'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['email'] }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,17 +124,17 @@
                                                             <h5 class="col-md-2">
                                                                 City:
                                                             </h5>
-                                                            <input type="text" name='city' disabled = "true" class="col-md-3" value="{{ $item['city'] }}">
+                                                            <input type="text" name='city' disabled ="true" class="col-md-3" value="{{ $item['city'] }}">
                                                             <h5 class="col-md-2">
                                                                 Barangay:
                                                             </h5>
-                                                            <input type="text" disabled = "true" class="col-md-3" value="{{ $item['barangay'] }}">
+                                                            <input type="text" disabled ="true" class="col-md-3" value="{{ $item['barangay'] }}">
                                                     </div>
                                                     <div class="row mt-1">
                                                         <h5 class="col-md-2">
                                                             Street:
                                                         </h5>
-                                                        <input type="text" disabled = "true" class="col-md-6" value="{{ $item['street'] }}">
+                                                        <input type="text" disabled ="true" class="col-md-6" value="{{ $item['street'] }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -174,7 +174,7 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <select class="form-select" id="AccountStatus" aria-label="verification selection">
-                                                            <option selected disabled>Select One</option>
+                                                            <option selected disabled>{{ $item['account_status'] }}</option>
                                                             <option value="Not Banned">Not Banned</option>
                                                             <option value="Banned">Banned</option>
                                                             <option value="warning">Warning</option>
