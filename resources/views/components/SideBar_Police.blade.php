@@ -14,8 +14,36 @@
         <!-- Sidebar -->
         <div class="sidebar">
             {{-- Contents goes here --}}
-            <div class="my-3 mx-3" style="border:solid; border-color:black; height:100px;">
-                contents ari diri
+            <div class="my-3 mx-3" style="border:solid; border-color:black;">
+                <div class="row mx-1">
+                    <h9 class="col-sm-auto">
+                        REF ID:
+                    </h9>
+                    <h9 class="col-sm-auto">
+                        Sample
+                    </h9>
+                </div>
+                <div class="row mx-1">
+                    <h9 class="col-md-auto">
+                        From:
+                    </h9>
+                    <h9 class="col-md-auto">
+                        Sample
+                    </h9>
+                </div>
+                <div class="row mx-1">
+                    <h9 class="col-md-auto">
+                       Time
+                    </h9>
+                    <h9 class="col-md-auto">
+                        Date
+                    </h9>
+                </div>
+                <div class="row mb-3 mx-1">
+                    <h9 class="col-md-auto">
+                        Sample distress Message
+                    </h9>
+                </div>
             </div>
         </div>
         {{-- scripts --}}
