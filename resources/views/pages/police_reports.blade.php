@@ -6,11 +6,14 @@
 <!-- Styles -->
 @section('styles')
 <style>
+    .search {
+    margin-top: 100px;
+ }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
   color: #fff;
 }
- </style>
+</style>
 
 @stop
 
