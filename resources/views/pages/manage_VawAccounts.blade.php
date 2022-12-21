@@ -43,6 +43,7 @@
                     <th id="trs-hd-3" class="col-lg-3">Address</th>
                     <th id="trs-hd-4" class="col-lg-3">Email</th>
                     <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                    <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                     <th id="trs-hd-4" class="col-lg-2"></th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
                         <td>{{ $item['barangay'] }} {{ $item['brgycity'] }} {{ $item['brgyProvince'] }}</td>
                         <td>{{ $item['brgyEmail'] }}</td>
                         <td>{{ $item['brgyContactNum1'] }}</td>
+                        <td>{{ $item['verification_status'] }}</td>
                         <td>
                             <!-- Modal trigger button -->
                             <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#VawAcc{{ $item->id() }}">
@@ -97,15 +99,15 @@
                                             </div>
                                             <div class="row mt-1 ms-3">
                                                 <h5 class="col-md-4">Barangay Name:</h5>
-                                                <input type="text" class="col-md-4">
+                                                <input type="text" class="col-md-4" value="{{ $item['brgyName'] }}">
                                             </div>
                                             <div class="row mt-1 ms-3">
                                                 <h5 class="col-md-4">Contact No:</h5>
-                                                <input type="text" class="col-md-4">
+                                                <input type="text" class="col-md-4" value="{{ $item['brgyContactNum1'] }}">
                                             </div>
                                             <div class="row mt-1 ms-3">
                                                 <h5 class="col-md-4">Email:</h5>
-                                                <input type="text" class="col-md-4">
+                                                <input type="text" class="col-md-4" value="{{ $item['brgyEmail'] }}">
                                             </div>
                                         </div>
                                     </div>
@@ -122,23 +124,18 @@
                                                 <h5 class="col-md-2">
                                                     City:
                                                 </h5>
-                                                <input type="text" class="col-md-3">
+                                                <input type="text" class="col-md-3" value="{{ $item['brgycity'] }}">
                                                 <h5 class="col-md-2">
                                                     Barangay:
                                                 </h5>
-                                                <input type="text" class="col-md-3">
+                                                <input type="text" class="col-md-3" value="{{ $item['barangay'] }}">
                                             </div>
+                                        
                                             <div class="row mt-1">
                                                 <h5 class="col-md-2">
-                                                    Purok:
+                                                   Purok/Street:
                                                 </h5>
-                                                <input type="text" class="col-md-6">
-                                            </div>
-                                            <div class="row mt-1">
-                                                <h5 class="col-md-2">
-                                                    Street:
-                                                </h5>
-                                                <input type="text" class="col-md-6">
+                                                <input type="text" class="col-md-6" value="{{$item['brgyStreet'] }}" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -163,9 +160,9 @@
                                             <div class="col-md-5">
                                                 <select class="form-select" id="verification" aria-label="verification selection">
                                                     <option selected disabled>Select One</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Verified</option>
+                                                    <option value="2">Not Verified</option>
+                                                    <option value="3">Verification Failed</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -180,9 +177,9 @@
                                             <div class="col-md-5">
                                                 <select class="form-select" id="AccountStatus" aria-label="verification selection">
                                                     <option selected disabled>Select One</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Not Banned</option>
+                                                    <option value="2">Banned</option>
+                                                    <option value="3">Restricted</option>
                                                 </select>
                                             </div>
                                         </div>
