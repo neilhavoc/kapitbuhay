@@ -160,9 +160,9 @@
                                             <div class="col-md-5">
                                                 <select class="form-select" id="verification" aria-label="verification selection">
                                                     <option selected disabled>Select One</option>
-                                                    <option value="1">Verified</option>
-                                                    <option value="2">Not Verified</option>
-                                                    <option value="3">Verification Failed</option>
+                                                    <option value="Verified">Verified</option>
+                                                    <option value="To Verify">To Verify</option>
+                                                    <option value="Verification Failed">Verification Failed</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,9 +177,9 @@
                                             <div class="col-md-5">
                                                 <select class="form-select" id="AccountStatus" aria-label="verification selection">
                                                     <option selected disabled>Select One</option>
-                                                    <option value="1">Not Banned</option>
-                                                    <option value="2">Banned</option>
-                                                    <option value="3">Restricted</option>
+                                                    <option value="Not Banned">Not Banned</option>
+                                                    <option value="Banned">Banned</option>
+                                                    <option value="Restricted">Restricted</option>
                                                 </select>
                                             </div>
                                         </div>
