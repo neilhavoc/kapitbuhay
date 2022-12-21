@@ -14,20 +14,36 @@
         <!-- Sidebar -->
         <div class="sidebar">
             {{-- Contents goes here --}}
-            <h3>Distress Message</h3>
-            <div class="my-3 mx-3" style="border:solid; border-color:black; height:100px;">
-            <div class="row">
-                        <div class="col-md-6 fw-bold " ><label>REF ID:</label>&nbsp;<label>sample</label></div>
-            </div>
-            <div class="row">
-                        <div class="col-md-6 fw-bold "><label>From:</label>&nbsp;<label>sample</label></div>
-            </div>
-            <div class="row">
-                        <div class="col-md-6 fw-bold "><label>sample</label>&nbsp;<label>sample</label></div>
-            </div>
-            <div class="row">
-                        <div class="col-md-6 fw-bold "><label>sample</label></div>
-            </div>
+            <div class="my-3 mx-3" style="border:solid; border-color:black;">
+                <div class="row mx-1">
+                    <h9 class="col-sm-auto">
+                        REF ID:
+                    </h9>
+                    <h9 class="col-sm-auto">
+                        Sample
+                    </h9>
+                </div>
+                <div class="row mx-1">
+                    <h9 class="col-md-auto">
+                        From:
+                    </h9>
+                    <h9 class="col-md-auto">
+                        Sample
+                    </h9>
+                </div>
+                <div class="row mx-1">
+                    <h9 class="col-md-auto">
+                       Time
+                    </h9>
+                    <h9 class="col-md-auto">
+                        Date
+                    </h9>
+                </div>
+                <div class="row mb-3 mx-1">
+                    <h9 class="col-md-auto">
+                        Sample distress Message
+                    </h9>
+                </div>
             </div>
         </div>
         {{-- scripts --}}
