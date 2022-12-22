@@ -136,8 +136,9 @@
         //$civilianUsers = $userRef->documents();
         const latitudetoken = document.querySelector('div[id=latitude]').textContent
         const longitudetoken = document.querySelector('div[id=longitude]').textContent
+
         var mapProp= {
-        center:new google.maps.LatLng(latitudetoken,longitudetoken),
+        center:new google.maps.LatLng({{$item['Latitude']}},{{$item['Longitude']}}),
         zoom:100,
         };
         var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);

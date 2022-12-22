@@ -13,8 +13,51 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.manage_dashboard');
+
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $victimUsers = $database->collection('civilian-users');
+        $victimCount = $victimUsers->documents();
+        $barangaysUsers = $database->collection('barangay_accounts');
+        $vawCount = $barangaysUsers->documents();
+        $policeUsers = $database->collection('police_accounts');
+        $policeCount = $policeUsers->documents();
+
+        $data = [
+            'user-victims'      => 0,
+            'police-accounts'   => 0,
+            'vaw-accounts'      => 0,
+            'total-accounts'    => 0,
+        ];
+
+        foreach($victimCount as $count)
+        {
+            if($count['verification_status'] == 'Verified' || $count['verification_status'] == 'To Verify')
+            {
+                $data['user-victims'] += 1;
+            }
+        }
+        foreach($vawCount as $count)
+        {
+            if($count['verification_status'] == 'Verified' || $count['verification_status'] == 'To Verify')
+            {
+                $data['vaw-accounts'] += 1;
+            }
+        }
+        foreach($policeCount as $count)
+        {
+            if($count['verification_status'] == 'Verified' || $count['verification_status'] == 'To Verify')
+            {
+                $data['police-accounts'] += 1;
+            }
+        }
+
+        $data['total-accounts'] = $data['police-accounts'] + $data['vaw-accounts'] + $data['user-victims'];
+
+
+        return view('pages.manage_dashboard', [
+            'account' => $data,
+        ]);
     }
 
     /**

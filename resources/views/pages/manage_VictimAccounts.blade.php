@@ -90,7 +90,7 @@
                                         <div class="container border-secondary" style=" margin-top:0%; margin-bottom:0%;">
                                             <div class="row row1 mt-3">
                                                 <div class="col-md-2">
-                                                    <img src="ball.jpg" alt="Ball" class="profile">
+                                                    <img src="{{ $item['profile_image_link'] }}" alt="Ball" class="profile">
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="row mx-3">
