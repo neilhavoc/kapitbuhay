@@ -121,15 +121,16 @@
                             </div>
                             <div class="row mt-1 mx-5 justify-content-between">
                         <div class="col-md-8">
-                            <button type="button" class="btn btn-danger float-md-end">Report User</button>
+                            <button type="button" class="btn btn-danger float-md-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Report User</button>
                         </div>
                     </div>
                          
                         </div>
-                       
+
+                
                     <div class="row mt-5 mx-5 justify-content-evenly">
                         <div class="col-md-6">
-                            <a role="button" class="btn btn-success"  href="vaw_createReports">Create Report</a>
+                            <a role="button" class="btn btn-success"  href="police_createReports">Create Report</a>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-warning">Cancel</button>
