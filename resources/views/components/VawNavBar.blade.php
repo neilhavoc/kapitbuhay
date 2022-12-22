@@ -18,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-bell" style="font-size: 25px;color: gray;"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
                     <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:200px;" >Barangay VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-danger fw-heavy" href="#">Log out</a></li>
@@ -37,9 +37,10 @@
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="vaw_reports" style="color: black;">Incident Report</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Victim's Monitoring</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_monitoring" style="color: black;">Victim's Monitoring</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_record" style="color: black;">Victim's Health Records</a></li>
                     <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Victim's Health Report</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Manage Account</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_manageaccount" style="color: black;">Manage Account</a></li>
                 </ul>
             </div>
         </div>
