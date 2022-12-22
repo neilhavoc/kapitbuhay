@@ -116,7 +116,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-4 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
                                     <div class="col-md-4 fw-bold ">{{ $item['user_location'] }}</div>
-                                </div>
+                                </div>                               
                                 <div class="row mt-3 ">
                                     <div id="map" ></div>
                                 </div>
