@@ -86,23 +86,26 @@ class ArticleController extends Controller
 
         //initialize database of firestore
         $database = $firestore->database();
-        $articleRefSnap= $database->collection('articles')->document('100000');
-        $isArticleEmpty = $articleRefSnap->snapshot();
+        $articleRef = $database->collection('record_IDs')->document('article_ID');
+        $articleID = $articleRef->snapshot();
 
-        $articleRef = $database->collection('articles');
-        $article = $articleRef->documents();
-
-        if ($isArticleEmpty->exists())
+        if ($articleID->exists())
         {
-            foreach ($article as $findlatestID)
-            {
-                $newArticleID = $findlatestID['article_id'];
-            }
-            $newArticleID += 1;
+            $newArticleID = $articleID['id'] + 1;
+
+            $ArticleID_Records = $database->collection('record_IDs')->document('article_ID');
+            $ArticleID_Records->update([
+                ['path' => 'id', 'value' => $newArticleID]
+            ]);
         }
         else
         {
+            $data = [
+                'id' => '100000',
+            ];
             $newArticleID = 100000;
+
+            $database->collection('record_IDs')->document('article_ID')->set($data);
         }
 
         //store image in firebase storage
@@ -142,9 +145,6 @@ class ArticleController extends Controller
 
         //save in firestore database
         $database->collection('articles')->document($newArticleID)->set($data);
-
-
-
 
         return redirect('article');
     }
@@ -187,10 +187,12 @@ class ArticleController extends Controller
 
         //store image in firebase storage
         $bucket = $storage->getBucket();
-
-        $title = str_replace(' ', '', $request->input('updateArticleTitle'));
-
         $database = $firestore->database();
+
+        $recordIdsArticle = $database->collection('record_IDs')->document('article_ID');
+        $articleIDsnapshot = $recordIdsArticle->snapshot();
+
+
         $articleRef = $database->collection('articles');
         $articleID = $articleRef->documents();
 
@@ -199,7 +201,7 @@ class ArticleController extends Controller
 
             if($request->file('articleimage') == null)
             {
-                if($article_ID['article_id'] == $title)
+                if($article_ID['article_title'] == $request->input('updateArticleTitle'))
                 {
                     $articleRef = $database->collection('articles')->document($article_ID['article_id']);
                     $articleRef->update([
@@ -207,15 +209,25 @@ class ArticleController extends Controller
                     ]);
                     break;
                 }
-                elseif($article_ID['article_id'] != $title)
+                elseif($article_ID['article_title'] != $request->input('updateArticleTitle'))
                 {
+                    $articleRecordID = $articleIDsnapshot['id'] + 1;
+
+                    $ArticleID_Records = $database->collection('record_IDs')->document('article_ID');
+                    $ArticleID_Records->update([
+                        ['path' => 'id', 'value' => $articleRecordID]
+                    ]);
+
+                    $recordIdsArticle = $database->collection('record_IDs')->document('article_ID');
+                    $newarticleIDsnapshot = $recordIdsArticle->snapshot();
+
                     $objectArticleID = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
 
                     $copiedObject = $objectArticleID->copy($bucket, [
-                        'name' => 'articles/' . $title . '/Article-Image.png',
+                        'name' => 'articles/' . $newarticleIDsnapshot['id'] . '/Article-Image.png',
                     ]);
 
-                    $articleImage = $bucket->object('articles/'. $title .'/Article-Image.png');
+                    $articleImage = $bucket->object('articles/'. $newarticleIDsnapshot['id'] .'/Article-Image.png');
 
                     $articleImageUrl = $articleImage->signedUrl(
                         # This URL is valid for 15 minutes
@@ -229,7 +241,7 @@ class ArticleController extends Controller
                     $deletedoc = $database->collection('articles')->document($id)->delete();
 
                     $data = [
-                        'article_id'        => $title,
+                        'article_id'        => $newarticleIDsnapshot['id'],
                         'Active'            => 'isActive',
                         'article_title'     => $request->input('updateArticleTitle'),
                         'article_content'   => $request->input('updateArticleContent'),
@@ -238,7 +250,7 @@ class ArticleController extends Controller
                     ];
 
                     //save in firestore database
-                    $database->collection('articles')->document($title)->set($data);
+                    $database->collection('articles')->document($newarticleIDsnapshot['id'])->set($data);
                     $objectArticleID->delete();
                     break;
                 }
@@ -268,7 +280,7 @@ class ArticleController extends Controller
                 }
 
                 //upload barangay Logo in Storage
-                if ($article_ID['article_id'] == $title)
+                if ($article_ID['article_title'] == $request->input('updateArticleTitle'))
                 {
                     $articleRef = $database->collection('articles')->document($id);
                     $articleRef->update([
@@ -276,12 +288,22 @@ class ArticleController extends Controller
                     ]);
                     break;
                 }
-                elseif ($article_ID['article_id'] != $title)
+                elseif ($article_ID['article_title'] != $request->input('updateArticleTitle'))
                 {
+                    $articleRecordID = $articleIDsnapshot['id'] + 1;
+
+                    $ArticleID_Records = $database->collection('record_IDs')->document('article_ID');
+                    $ArticleID_Records->update([
+                        ['path' => 'id', 'value' => $articleRecordID]
+                    ]);
+
+                    $recordIdsArticle = $database->collection('record_IDs')->document('article_ID');
+                    $newarticleIDsnapshot = $recordIdsArticle->snapshot();
+
                     $objectIDArticle = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
 
                     $copiedObject = $objectIDArticle->copy($bucket, [
-                        'name' => 'articles/' . $title . '/Article-Image.png',
+                        'name' => 'articles/' . $newarticleIDsnapshot['id'] . '/Article-Image.png',
                     ]);
 
                     //delete the old article data
@@ -289,7 +311,7 @@ class ArticleController extends Controller
                     $objectIDArticle->delete();
 
                     $data = [
-                        'article_id'        => $title,
+                        'article_id'        => $newarticleIDsnapshot['id'],
                         'Active'            => 'isActive',
                         'article_title'     => $request->input('updateArticleTitle'),
                         'article_content'   => $request->input('updateArticleContent'),
@@ -298,7 +320,7 @@ class ArticleController extends Controller
                     ];
 
                     //save in firestore database
-                    $database->collection('articles')->document($title)->set($data);
+                    $database->collection('articles')->document($newarticleIDsnapshot['id'])->set($data);
 
                     break;
                 }
