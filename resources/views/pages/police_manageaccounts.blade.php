@@ -13,14 +13,14 @@
 }
 .footer{
     margin-left: 380px;
-}    
+}
 </style>
 
 @stop
 
 <!-- Content -->
 @section('content')
-<div class="container" style="overflow: hidden; overflow-y: scroll; margin-top:0%; margin-bottom:0%;">
+<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
 <div class="position-relative mb-3">
   <h1 class="position-absolute top-0 start-0"> Manage Account</h1>
 </div>
@@ -28,7 +28,7 @@
                                 <div class="col-md-2 mt-1">
                                     <img src="ball.jpg" alt="Ball" class="profile">
                                 </div>
-                                
+
                                     <div class="row mt-2">
                                         <h5 class="col-md-2">User ID: </h5>
                                         <h5 id="userID" class="col-md-4">sample</h5>
@@ -40,7 +40,7 @@
                                     <div class="row mt-2">
                                         <h5 class="col-md-2">Contact No:</h5>
                                         <input type="text" class="col-md-5">
-                                    </div> 
+                                    </div>
                                     <div class="row mt-2">
                                         <h5 class="col-md-2">Address:</h5>
                                         <div class="col-md-1 mt-2">
@@ -109,7 +109,7 @@
                                         <h5 class="col-md-2">Password:</h5>
                                         <input type="text" class="col-md-5">
                                     </div>
-                                   
+
                             <div class="footer">
                             <button type="button" class="btn btn-primary">Save</button>
                             </div>

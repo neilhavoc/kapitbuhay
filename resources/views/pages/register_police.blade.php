@@ -25,6 +25,11 @@
                         <label for="PS_name" class="col-form-label">Polise Station Name:</label>
                     </div>
                     <div class="col-auto "><input name="policeStationName" id="PS_name" type="text" class="form-control align-content-center w-100" required></div>
+                </div><div class="row mb-3">
+                    <div class="col-auto">
+                        <label for="PO_name" class="col-form-label">Polise Officer Name:</label>
+                    </div>
+                    <div class="col-auto "><input name="policeOfficerName" id="PO_name" type="text" class="form-control align-content-center w-100" required></div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
                     <div class="col-auto">

@@ -104,8 +104,8 @@
                                     <div class="row mt-3">
                                         <div class="col-md-6 fw-bold ">Distress Message Status:&nbsp;<label>{{ $item['status'] }}</label></div>
                                     </div>
-                                    <div class="col-md-4 fw-bold " id="lat" >{{ $item['Latitude'] }}</div>
-                                    <div class="col-md-4 fw-bold " id="lng" >{{ $item['Longitude'] }}</div>
+                                    <div class="col-md-4 fw-bold invisible" id="lat" >{{ $item['Latitude'] }}</div>
+                                    <div class="col-md-4 fw-bold invisible" id="lng" >{{ $item['Longitude'] }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -116,7 +116,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-4 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
                                     <div class="col-md-4 fw-bold ">{{ $item['user_location'] }}</div>
-                                </div>                               
+                                </div>
                                 <div class="row mt-3 ">
                                     <div id="map" ></div>
                                 </div>

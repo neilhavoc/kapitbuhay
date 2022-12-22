@@ -22,6 +22,8 @@ use App\Http\Controllers\RegisterVawController;
 use App\Http\Controllers\VawReportsController;
 use App\Http\Controllers\VawCreateReportController;
 use App\Http\Controllers\VawMonitoringController;
+use App\Http\Controllers\VawRecordController;
+use App\Http\Controllers\VawManageAccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,4 +60,6 @@ Route::resource('/register_vaw', RegisterVawController::class);
 Route::resource('/vaw_reports', VawReportsController::class);
 Route::resource('/vaw_createReports', VawCreateReportController::class);
 Route::resource('/vaw_monitoring', VawMonitoringController::class);
+Route::resource('/vaw_record', VawRecordController::class);
+Route::resource('/vaw_manageaccount', VawManageAccountController::class);
 

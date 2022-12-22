@@ -68,7 +68,7 @@
                         <td></td>
                         <td>
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Update
+                                View
                             </button>
                         </td>
                     </tr>
@@ -81,13 +81,13 @@
       <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Victims Health Status Monitoring</h3>
+          <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Victims Health Status Record</h3>
         </div>
         <div class="modal-body">
             <div class="row mx-3" style="height: 100vh;">
                 <div class="row mb-3">
                     <div class="col-md-2 mx-5">
-                        <img src="#" alt="Ball" class="profile">
+                        <img src="ball.jpg" alt="Ball" class="profile">
 
 
                     </div>
@@ -125,7 +125,6 @@
                                     <th id="trs-hd-4" class="col-lg-2">Mental Health</th>
                                     <th id="trs-hd-5" class="col-lg-3">Last Modified </th>
                                     <th id="trs-hd-6" class="col-lg-3">Monitoring Status</th>
-                                    <th id="trs-hd-7" class="col-lg-2"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,26 +135,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>
-                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                            Edit
-                                        </button>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <button class="btn btn-danger">
-                            Create New Record
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-success">
-                            Send Notification
-                        </button>
                     </div>
                 </div>
             </div>
