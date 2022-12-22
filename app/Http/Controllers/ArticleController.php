@@ -181,14 +181,15 @@ class ArticleController extends Controller
 
             if($request->file('articleimage') == null)
             {
-                if ($article_ID['article_id'] == $title)
+                if($article_ID['article_id'] == $title)
                 {
                     $articleRef = $database->collection('articles')->document($article_ID['article_id']);
                     $articleRef->update([
                         ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
                     ]);
+                    break;
                 }
-                else
+                elseif($article_ID['article_id'] != $title)
                 {
                     $objectArticleID = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
 
