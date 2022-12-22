@@ -84,7 +84,27 @@ class ArticleController extends Controller
         $storage = app('firebase.storage');
         $firestore = app('firebase.firestore');
 
-        $title = str_replace(' ', '', $request->input('createArticleTitle'));
+        //initialize database of firestore
+        $database = $firestore->database();
+        $articleRefSnap= $database->collection('articles')->document('100000');
+        $isArticleEmpty = $articleRefSnap->snapshot();
+
+        $articleRef = $database->collection('articles');
+        $article = $articleRef->documents();
+
+        if ($isArticleEmpty->exists())
+        {
+            foreach ($article as $findlatestID)
+            {
+                $newArticleID = $findlatestID['article_id'];
+            }
+            $newArticleID += 1;
+        }
+        else
+        {
+            $newArticleID = 100000;
+        }
+
         //store image in firebase storage
         $bucket = $storage->getBucket();
 
@@ -99,7 +119,7 @@ class ArticleController extends Controller
 
         //create file path in storage
         $articlePath = [
-            'name' => 'articles/' . $title . '/Article-Image.png',
+            'name' => 'articles/' . $newArticleID . '/Article-Image.png',
         ];
 
         //upload barangay Logo in Storage
@@ -110,13 +130,9 @@ class ArticleController extends Controller
             unlink($localfolder . $articleImageName);
         }
 
-
-        //initialize database of firestore
-        $database = $firestore->database();
-
         //store article data in fields
         $data = [
-            'article_id'        => $title,
+            'article_id'        => $newArticleID,
             'Active'            => 'isActive',
             'article_title'     => $request->input('createArticleTitle'),
             'article_content'   => $request->input('createArticleContent'),
@@ -125,7 +141,9 @@ class ArticleController extends Controller
         ];
 
         //save in firestore database
-        $database->collection('articles')->document($title)->set($data);
+        $database->collection('articles')->document($newArticleID)->set($data);
+
+
 
 
         return redirect('article');
@@ -221,99 +239,42 @@ class ArticleController extends Controller
 
                     //save in firestore database
                     $database->collection('articles')->document($title)->set($data);
-                }
-            }
-            /*
-            if ($request->file('articleimage') == null)
-            {
-                if ($article_ID['article_id'] == $title)
-                {
-                    $articleImage = $bucket->object('articles/'. $article_ID['article_id'] .'/Article-Image.png');
-
-                    $articleImageUrl = $articleImage->signedUrl(
-                        # This URL is valid for 15 minutes
-                        new \DateTime('15 min'),
-                        [
-                            'version' => 'v4',
-                        ]
-                    );
-
-                    $articleRef = $database->collection('articles')->document($id);
-                    $articleRef->update([
-                        ['path' => 'image', 'value' => $articleImageUrl],
-                        ['path' => 'article_id', 'value' => $title],
-                        ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
-                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
-                    ]);
-                }
-                elseif ($article_ID['article_id'] != $title)
-                {
-                    $objectArticleID = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
-
-                    $copiedObject = $objectArticleID->copy($bucket, [
-                        'name' => 'articles/' . $title . '/Article-Image.png',
-                    ]);
-
-                    //$object->delete();
-
-                    $articleImage = $bucket->object('articles/'. $title .'/Article-Image.png');
-
-                    $articleImageUrl = $articleImage->signedUrl(
-                        # This URL is valid for 15 minutes
-                        new \DateTime('15 min'),
-                        [
-                            'version' => 'v4',
-                        ]
-                    );
-                    //delete the old article data
-                    $deletedoc = $database->collection('articles')->document($id)->delete();
-
-                    $data = [
-                        'article_id'        => $title,
-                        'Active'            => 'isActive',
-                        'article_title'     => $request->input('updateArticleTitle'),
-                        'article_content'   => $request->input('updateArticleContent'),
-                        'image'             => 'empty',
-                        'source_link'       => 'empty',
-                    ];
-
-                    //save in firestore database
-                    $database->collection('articles')->document($title)->set($data);
+                    $objectArticleID->delete();
+                    break;
                 }
             }
             elseif ($request->file('articleimage') != null)
             {
+                //get the user-input image
+                $imageArticle = $request->file('articleimage');
+
+                //get the original name of the file
+                $articleImageName = $imageArticle->getClientOriginalName();
+
+                //store to temporary local folder
+                $localfolder = public_path('storage-temp-folder') .'/';
+
+                //create file path in storage
+                $articlePath = [
+                    'name' => 'articles/' . $article_ID['article_id'] . '/Article-Image.png',
+                ];
+
+                if ($imageArticle->move($localfolder, $articleImageName))
+                {
+                    $imgfile = fopen($localfolder.$articleImageName, 'r');
+                    $bucket->upload($imgfile, $articlePath);
+                    //will remove from local laravel folder
+                    unlink($localfolder . $articleImageName);
+                }
+
+                //upload barangay Logo in Storage
                 if ($article_ID['article_id'] == $title)
                 {
-                    //get the user-input image
-                    $imageArticle = $request->file('articleimage');
-
-                    //get the original name of the file
-                    $articleImageName = $imageArticle->getClientOriginalName();
-
-                    //store to temporary local folder
-                    $localfolder = public_path('storage-temp-folder') .'/';
-
-                    //create file path in storage
-                    $articlePath = [
-                        'name' => 'articles/' . $article_ID['article_id'] . '/Article-Image.png',
-                    ];
-
-                    //upload barangay Logo in Storage
-                    if ($imageArticle->move($localfolder, $articleImageName))
-                    {
-                        $imgfile = fopen($localfolder.$articleImageName, 'r');
-                        $bucket->upload($imgfile, $articlePath);
-                        //will remove from local laravel folder
-                        unlink($localfolder . $articleImageName);
-                    }
-
                     $articleRef = $database->collection('articles')->document($id);
                     $articleRef->update([
-                        ['path' => 'article_id', 'value' => $title],
-                        ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
                         ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
                     ]);
+                    break;
                 }
                 elseif ($article_ID['article_id'] != $title)
                 {
@@ -325,6 +286,7 @@ class ArticleController extends Controller
 
                     //delete the old article data
                     $deletedoc = $database->collection('articles')->document($id)->delete();
+                    $objectIDArticle->delete();
 
                     $data = [
                         'article_id'        => $title,
@@ -337,11 +299,10 @@ class ArticleController extends Controller
 
                     //save in firestore database
                     $database->collection('articles')->document($title)->set($data);
-                    //$object->delete();
-                }
 
+                    break;
+                }
             }
-*/
         }
 
         return redirect('article');

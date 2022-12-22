@@ -16,7 +16,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container-fluid" style="overflow-y: scroll; height:550px; overflow-x: hidden;">
+<div class="container-fluid" style="overflow-y: scroll; height:700px; overflow-x: hidden;">
     <div class="mb-5" style="margin-left:42%;">
         <h1>
             Manage Account
