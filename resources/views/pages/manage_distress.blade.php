@@ -10,6 +10,12 @@
   background-color: rgba(37,71,106,0.56);
   color: #fff;
 }
+
+#map {
+    width:90%;
+    height:400px;
+}
+
 </style>
 
 @stop
@@ -48,7 +54,7 @@
                             <td>Barangay VAW</td>
                             <td>{{ $item['status'] }}</td>
                             <td>
-                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewDistress{{ $item->id() }}">
+                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewDistress{{ $item->id() }}" >
                                     View
                                 </button>
                             </td>
@@ -58,6 +64,7 @@
                 </tbody>
             </table>
 </div>
+
 
 @if ($message == null)
     @else
@@ -84,7 +91,7 @@
                                         <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>{{ $item['sender_userID'] }}</label></div>
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6 fw-bold ">User Address:&nbsp;<label>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</label></div>
+                                        <div class="col-md-6 fw-bold ">User Permanent Address:&nbsp;<label>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</label></div>
                                     </div>
                                     <div class="row mt-5">
                                         <div class="row">
@@ -97,19 +104,21 @@
                                     <div class="row mt-3">
                                         <div class="col-md-6 fw-bold ">Distress Message Status:&nbsp;<label>{{ $item['status'] }}</label></div>
                                     </div>
+                                    <div class="col-md-4 fw-bold " id="lat" >{{ $item['Latitude'] }}</div>
+                                    <div class="col-md-4 fw-bold " id="lng" >{{ $item['Longitude'] }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row mt-3">
-                                    <div class="col-md-6 fw-bold ">Location Link:</div>
+                                    <div class="col-md-4 fw-bold ">Location Link:</div>
+                                    <div class="col-md-4 fw-bold ">User Location:</div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
-                                    <div hidden id="latitude">{{$item['Latitude']}}</div>
-                                    <div hidden id="longitude">{{$item['Longitude']}}</div>
-                                </div>
+                                    <div class="col-md-4 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
+                                    <div class="col-md-4 fw-bold ">{{ $item['user_location'] }}</div>
+                                </div>                               
                                 <div class="row mt-3 ">
-                                    <div id="googleMap" style="width:90%;height:400px; " ></div>
+                                    <div id="map" ></div>
                                 </div>
                             </div>
                         </div>
@@ -128,20 +137,31 @@
     //import { collection, query, where, getDocs } from "firebase/firestore";
 
     //const q = query(collection(db, "sos-distress-message"), where("status", "==", 'unread'));
-    function myMap() {
+    const lat = document.getElementById('lat');
+    const lng = document.getElementById('lng');
+    var latitude = Number(lat.textContent);
+    var longitute = Number(lng.textContent);
+    console.log(longitute);
+    console.log(latitude);
 
-        //$firestore = app('firebase.firestore');
-        //$database = $firestore->database();
-        //$userRef = $database->collection('sos-distress-message');
-        //$civilianUsers = $userRef->documents();
-        const latitudetoken = document.querySelector('div[id=latitude]').textContent
-        const longitudetoken = document.querySelector('div[id=longitude]').textContent
-        var mapProp= {
-        center:new google.maps.LatLng(latitudetoken,longitudetoken),
-        zoom:100,
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
+    let map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: latitude, lng: longitute },
+    zoom: 15,
+  });
+  new google.maps.Marker({
+    position: { lat: latitude, lng: longitute},
+    map: map,
+  })
+}
+
+window.initMap = initMap;
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwBnZtVNK_pmkcdWB6BQeH9S9LQUlXew&callback=myMap"></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwBnZtVNK_pmkcdWB6BQeH9S9LQUlXew&callback=myMap"></script> --}}
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnwBnZtVNK_pmkcdWB6BQeH9S9LQUlXew&callback=initMap&v=weekly"
+      defer
+    ></script>
 @stop

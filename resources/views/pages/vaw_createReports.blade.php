@@ -41,10 +41,10 @@
     <div class="row mt-3">
         <div class="row ">
             <div class="col-md-6 bg-warning">
-dasdasd
+                wala ko kaybaw unsa ni
             </div>
             <div class="col-md-6 bg-danger">
-asdasd
+                wala ko kaybaw unsa ni
             </div>
         </div>
     </div>
