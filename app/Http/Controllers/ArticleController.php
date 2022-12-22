@@ -162,39 +162,15 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         //initialize firebase
         $storage = app('firebase.storage');
         $firestore = app('firebase.firestore');
 
+        //store image in firebase storage
+        $bucket = $storage->getBucket();
+
         $title = str_replace(' ', '', $request->input('updateArticleTitle'));
-
-        if ($request->file('articleimage') != null)
-        {
-            //store image in firebase storage
-            $bucket = $storage->getBucket();
-
-            //get the user-input image
-            $imageArticle = $request->file('articleimage');
-
-            //get the original name of the file
-            $articleImageName = $imageArticle->getClientOriginalName();
-
-            //store to temporary local folder
-            $localfolder = public_path('storage-temp-folder') .'/';
-
-            //create file path in storage
-            $articlePath = [
-                'name' => 'articles/' . $title . '/Article-Image.png',
-            ];
-
-            //upload barangay Logo in Storage
-            if ($imageArticle->move($localfolder, $articleImageName)) {
-                $imgfile = fopen($localfolder.$articleImageName, 'r');
-                $bucket->upload($imgfile, $articlePath);
-                //will remove from local laravel folder
-                unlink($localfolder . $articleImageName);
-            }
-        }
 
         $database = $firestore->database();
         $articleRef = $database->collection('articles');
@@ -202,43 +178,170 @@ class ArticleController extends Controller
 
         foreach($articleID as $article_ID)
         {
-            if ($article_ID['article_id'] == $request->input('updateArticleTitle'))
+
+            if($request->file('articleimage') == null)
             {
-                $articleRef = $database->collection('articles')->document($id);
-                $articleRef->update([
-                    ['path' => 'article_id', 'value' => $title],
-                    ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
-                    ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
-                ]);
+                if ($article_ID['article_id'] == $title)
+                {
+                    $articleRef = $database->collection('articles')->document($article_ID['article_id']);
+                    $articleRef->update([
+                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
+                    ]);
+                }
+                else
+                {
+                    $objectArticleID = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
+
+                    $copiedObject = $objectArticleID->copy($bucket, [
+                        'name' => 'articles/' . $title . '/Article-Image.png',
+                    ]);
+
+                    $articleImage = $bucket->object('articles/'. $title .'/Article-Image.png');
+
+                    $articleImageUrl = $articleImage->signedUrl(
+                        # This URL is valid for 15 minutes
+                        new \DateTime('15 min'),
+                        [
+                            'version' => 'v4',
+                        ]
+                    );
+
+                    //delete the old article data
+                    $deletedoc = $database->collection('articles')->document($id)->delete();
+
+                    $data = [
+                        'article_id'        => $title,
+                        'Active'            => 'isActive',
+                        'article_title'     => $request->input('updateArticleTitle'),
+                        'article_content'   => $request->input('updateArticleContent'),
+                        'image'             => $articleImageUrl,
+                        'source_link'       => 'empty',
+                    ];
+
+                    //save in firestore database
+                    $database->collection('articles')->document($title)->set($data);
+                }
             }
-            else
+            /*
+            if ($request->file('articleimage') == null)
             {
-                //store image in firebase storage
-                $bucket = $storage->getBucket();
-                $object = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
+                if ($article_ID['article_id'] == $title)
+                {
+                    $articleImage = $bucket->object('articles/'. $article_ID['article_id'] .'/Article-Image.png');
 
-                $copiedObject = $object->copy($bucket, [
-                    'name' => 'articles/' . $title . '/Article-Image.png',
-                ]);
+                    $articleImageUrl = $articleImage->signedUrl(
+                        # This URL is valid for 15 minutes
+                        new \DateTime('15 min'),
+                        [
+                            'version' => 'v4',
+                        ]
+                    );
 
-                //delete the old article data
-                $deletedoc = $database->collection('articles')->document($id)->delete();
+                    $articleRef = $database->collection('articles')->document($id);
+                    $articleRef->update([
+                        ['path' => 'image', 'value' => $articleImageUrl],
+                        ['path' => 'article_id', 'value' => $title],
+                        ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
+                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
+                    ]);
+                }
+                elseif ($article_ID['article_id'] != $title)
+                {
+                    $objectArticleID = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
 
-                $data = [
-                    'article_id'        => $title,
-                    'Active'            => 'isActive',
-                    'article_title'     => $request->input('updateArticleTitle'),
-                    'article_content'   => $request->input('updateArticleContent'),
-                    'image'             => 'empty',
-                    'source_link'       => 'empty',
-                ];
+                    $copiedObject = $objectArticleID->copy($bucket, [
+                        'name' => 'articles/' . $title . '/Article-Image.png',
+                    ]);
 
-                //save in firestore database
-                $database->collection('articles')->document($title)->set($data);
-                $object->delete();
+                    //$object->delete();
+
+                    $articleImage = $bucket->object('articles/'. $title .'/Article-Image.png');
+
+                    $articleImageUrl = $articleImage->signedUrl(
+                        # This URL is valid for 15 minutes
+                        new \DateTime('15 min'),
+                        [
+                            'version' => 'v4',
+                        ]
+                    );
+                    //delete the old article data
+                    $deletedoc = $database->collection('articles')->document($id)->delete();
+
+                    $data = [
+                        'article_id'        => $title,
+                        'Active'            => 'isActive',
+                        'article_title'     => $request->input('updateArticleTitle'),
+                        'article_content'   => $request->input('updateArticleContent'),
+                        'image'             => 'empty',
+                        'source_link'       => 'empty',
+                    ];
+
+                    //save in firestore database
+                    $database->collection('articles')->document($title)->set($data);
+                }
             }
+            elseif ($request->file('articleimage') != null)
+            {
+                if ($article_ID['article_id'] == $title)
+                {
+                    //get the user-input image
+                    $imageArticle = $request->file('articleimage');
+
+                    //get the original name of the file
+                    $articleImageName = $imageArticle->getClientOriginalName();
+
+                    //store to temporary local folder
+                    $localfolder = public_path('storage-temp-folder') .'/';
+
+                    //create file path in storage
+                    $articlePath = [
+                        'name' => 'articles/' . $article_ID['article_id'] . '/Article-Image.png',
+                    ];
+
+                    //upload barangay Logo in Storage
+                    if ($imageArticle->move($localfolder, $articleImageName))
+                    {
+                        $imgfile = fopen($localfolder.$articleImageName, 'r');
+                        $bucket->upload($imgfile, $articlePath);
+                        //will remove from local laravel folder
+                        unlink($localfolder . $articleImageName);
+                    }
+
+                    $articleRef = $database->collection('articles')->document($id);
+                    $articleRef->update([
+                        ['path' => 'article_id', 'value' => $title],
+                        ['path' => 'article_title', 'value' => $request->input('updateArticleTitle')],
+                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
+                    ]);
+                }
+                elseif ($article_ID['article_id'] != $title)
+                {
+                    $objectIDArticle = $bucket->object('articles/' . $article_ID['article_id'] . '/Article-Image.png',);
+
+                    $copiedObject = $objectIDArticle->copy($bucket, [
+                        'name' => 'articles/' . $title . '/Article-Image.png',
+                    ]);
+
+                    //delete the old article data
+                    $deletedoc = $database->collection('articles')->document($id)->delete();
+
+                    $data = [
+                        'article_id'        => $title,
+                        'Active'            => 'isActive',
+                        'article_title'     => $request->input('updateArticleTitle'),
+                        'article_content'   => $request->input('updateArticleContent'),
+                        'image'             => 'empty',
+                        'source_link'       => 'empty',
+                    ];
+
+                    //save in firestore database
+                    $database->collection('articles')->document($title)->set($data);
+                    //$object->delete();
+                }
+
+            }
+*/
         }
-
 
         return redirect('article');
     }
