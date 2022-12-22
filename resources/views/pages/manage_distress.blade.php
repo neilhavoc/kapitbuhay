@@ -105,6 +105,8 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6 fw-bold "><a href="{{ $item['location_link'] }}">Google Maps</a></div>
+                                    <div hidden id="latitude">{{$item['Latitude']}}</div>
+                                    <div hidden id="longitude">{{$item['Longitude']}}</div>
                                 </div>
                                 <div class="row mt-3 ">
                                     <div id="googleMap" style="width:90%;height:400px; " ></div>
@@ -132,10 +134,11 @@
         //$database = $firestore->database();
         //$userRef = $database->collection('sos-distress-message');
         //$civilianUsers = $userRef->documents();
-
+        const latitudetoken = document.querySelector('div[id=latitude]').textContent
+        const longitudetoken = document.querySelector('div[id=longitude]').textContent
         var mapProp= {
-        center:new google.maps.LatLng(10.3155681,123.99116),
-        zoom:5,
+        center:new google.maps.LatLng(latitudetoken,longitudetoken),
+        zoom:100,
         };
         var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     }
