@@ -28,7 +28,6 @@ use App\Http\Controllers\VawMonitoringController;
 use App\Http\Controllers\VawRecordController;
 use App\Http\Controllers\VawManageAccountController;
 use App\Http\Controllers\PoliceReviewDistressMessageController;
-use App\Http\Controllers\VawIncidentBController;
 
 
 /*
@@ -73,5 +72,4 @@ Route::resource('/vaw_manageaccount', VawManageAccountController::class);
 Route::resource('/police_unverified', PoliceUnverifiedController::class);
 Route::resource('/vaw_unverified', VawUnverifiedController::class);
 Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
-Route::resource('/manage_VawIncidentB', VawIncidentBController::class);
 

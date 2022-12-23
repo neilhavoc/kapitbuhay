@@ -20,7 +20,7 @@
     <body>
         @include('components.VawNavBar')
         <div class="d-flex flex-row-reverse">
-            <div style="margin-right: 250px;">
+            <div style="margin-right: 300px;">
                 @include('components.SideBar_Vaw')
             </div>
             @yield('content')

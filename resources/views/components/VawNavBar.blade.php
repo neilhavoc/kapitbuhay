@@ -36,11 +36,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="vaw_reports" style="color: black;">Incident Report</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="vaw_monitoring" style="color: black;">Victim's Monitoring</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="vaw_record" style="color: black;">Victim's Health Records</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#" style="color: black;">Victim's Health Report</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="vaw_manageaccount" style="color: black;">Manage Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vaw_reports" >Incident Report</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_monitoring" >Victim's Monitoring</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_record" >Victim's Health Records</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_report" >Victim's Health Report</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_manageaccount" >Manage Account</a></li>
                 </ul>
             </div>
         </div>
@@ -58,10 +58,15 @@
   color: gray;
   }
 
+  .navbar .navbar-nav .nav-link{
+    color: white;
+  }
+
   .navbar .navbar-nav .nav-link:hover{
     background: white;
     border-radius: 2px;
     margin:none;
+    color: black;
   }
 
 

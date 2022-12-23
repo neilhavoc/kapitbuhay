@@ -36,12 +36,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="dashboard" style="color: black;">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="PoliceReport" style="color: black;">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="distress" style="color: black;">Distress Messages</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="policeAcc" style="color: black;">Manage Accounts</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="article" style="color: black;">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="feedback" style="color: black;">User Feedbacks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard" >Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="PoliceReport" >Reports</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="distress" >Distress Messages</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="policeAcc" >Manage Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="article" >Articles</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="feedback" >User Feedbacks</a></li>
                 </ul>
             </div>
         </div>
@@ -60,10 +60,15 @@
   color: gray;
   }
 
+  .navbar .navbar-nav .nav-link{
+    color: white;
+  }
+
   .navbar .navbar-nav .nav-link:hover{
     background: white;
     border-radius: 2px;
     margin:none;
+    color: black;
   }
 
 
