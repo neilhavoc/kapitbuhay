@@ -17,9 +17,9 @@
             <table class="table" >
                 <thead>
                   <tr>
-                    <th scope="col">From</th>
+                    <th scope="col">From User</th>
                     <th scope="col">Distress Message</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Date Received</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                   </tr>
                   <tr>
                     <td>Jane Dela Cruz</td>
-                    <td>Sample Message</td>
+                    <td>Tabangi ko ninyu please</td>
                     <td>Dec 23, 2022 1:00:00 AM</td>
                   </tr>
                 </tbody>
