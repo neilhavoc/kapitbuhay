@@ -36,9 +36,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="police_distress" style="color: black;">Distress</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="police_report" style="color: black;">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="police_manageaccount" style="color: black;">Manage Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="police_distress" >Distress</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="police_report">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="police_manageaccount" >Manage Accounts</a></li>
                 </ul>
             </div>
         </div>
@@ -56,10 +56,15 @@
   color: gray;
   }
 
+  .navbar .navbar-nav .nav-link{
+    color: white;
+  }
+
   .navbar .navbar-nav .nav-link:hover{
     background: white;
     border-radius: 2px;
     margin:none;
+    color: black;
   }
 
 
