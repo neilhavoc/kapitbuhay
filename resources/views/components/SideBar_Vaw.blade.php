@@ -19,24 +19,24 @@
                   <tr>
                     <th scope="col">From</th>
                     <th scope="col">Distress Message</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Petter Porker</td>
                     <td>tabangi ko please</td>
-                    <td>7Q258X8R+6F, General Aviation Road, Lapu-Lapu City, Cebu</td>
+                    <td>Dec 20, 2022 9:08:49 PM</td>
                   </tr>
                   <tr>
                     <td>Walter J White</td>
                     <td>Help me</td>
-                    <td>7Q257WW4+FP, M. J. Cuenco Avenue, Cebu City, Cebu</td>
+                    <td>Dec 21, 2022 11:07:08 AM</td>
                   </tr>
                   <tr>
                     <td>Jane Dela Cruz</td>
                     <td>Sample Message</td>
-                    <td>7Q258X8R+6F, General Aviation Road, Lapu-Lapu City, Cebu</td>
+                    <td>Dec 23, 2022 1:00:00 AM</td>
                   </tr>
                 </tbody>
               </table>
