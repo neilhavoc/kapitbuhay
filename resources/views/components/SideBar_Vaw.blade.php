@@ -14,37 +14,32 @@
         <!-- Sidebar -->
         <div class="sidebar">
             {{-- Contents goes here --}}
-            <div class="my-3 mx-3" style="border:solid; border-color:black; ">
-                <div class="row mx-1">
-                    <h9 class="col-sm-auto">
-                        REF ID:
-                    </h9>
-                    <h9 class="col-sm-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                        From:
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                       Time
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Date
-                    </h9>
-                </div>
-                <div class="row mb-3 mx-1">
-                    <h9 class="col-md-auto">
-                        Sample distress Message
-                    </h9>
-                </div>
-            </div>
+            <table class="table" >
+                <thead>
+                  <tr>
+                    <th scope="col">From</th>
+                    <th scope="col">Distress Message</th>
+                    <th scope="col">Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Petter Porker</td>
+                    <td>tabangi ko please</td>
+                    <td>7Q258X8R+6F, General Aviation Road, Lapu-Lapu City, Cebu</td>
+                  </tr>
+                  <tr>
+                    <td>Walter J White</td>
+                    <td>Help me</td>
+                    <td>7Q257WW4+FP, M. J. Cuenco Avenue, Cebu City, Cebu</td>
+                  </tr>
+                  <tr>
+                    <td>Jane Dela Cruz</td>
+                    <td>Sample Message</td>
+                    <td>7Q258X8R+6F, General Aviation Road, Lapu-Lapu City, Cebu</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
         {{-- scripts --}}
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -67,9 +62,9 @@
         position: fixed;
         border-color: black;
         border:solid;
-        width: 250px;
+        width: 300px;
         height: 100vh;
-        overflow-y: hidden;
+        overflow: hidden;
     }
 
     .sidebar h3{
