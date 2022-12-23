@@ -5,6 +5,11 @@
 
 <!-- Styles -->
 @section('styles')
+<style>
+.p{
+    font-size: xx-small;
+}
+</style>
 @stop
 
 <!-- Content -->
@@ -65,6 +70,10 @@
     </div>
     </div>
 </div>
+<div class="footer">
+            <button type="submit" class="btn btn-primary"> Save </button>
+        </div>
+        <p>(Verified incidents will Automatically Notify Complaint Assigned Barangay VAW desk for the After Incident Monitoring)</p>
 </div>
 
 @stop
