@@ -17,14 +17,19 @@ use App\Http\Controllers\PoliceCreateReportController;
 use App\Http\Controllers\PoliceDistressController;
 use App\Http\Controllers\PoliceManageAccountController;
 use App\Http\Controllers\PoliceReportsController;
+use App\Http\Controllers\PoliceUnverifiedController;
 use App\Http\Controllers\DistressController;
 use App\Http\Controllers\RegisterPoliceController;
 use App\Http\Controllers\RegisterVawController;
 use App\Http\Controllers\VawReportsController;
+use App\Http\Controllers\VawUnverifiedController;
 use App\Http\Controllers\VawCreateReportController;
 use App\Http\Controllers\VawMonitoringController;
 use App\Http\Controllers\VawRecordController;
 use App\Http\Controllers\VawManageAccountController;
+use App\Http\Controllers\PoliceReviewDistressMessageController;
+use App\Http\Controllers\VawReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,4 +69,7 @@ Route::resource('/vaw_createReports', VawCreateReportController::class);
 Route::resource('/vaw_monitoring', VawMonitoringController::class);
 Route::resource('/vaw_record', VawRecordController::class);
 Route::resource('/vaw_manageaccount', VawManageAccountController::class);
-
+Route::resource('/police_unverified', PoliceUnverifiedController::class);
+Route::resource('/vaw_unverified', VawUnverifiedController::class);
+Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
+Route::resource('/vaw_report', VawReportController::class);

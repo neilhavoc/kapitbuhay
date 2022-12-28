@@ -11,56 +11,109 @@
     width: 200px;
 
 }
+.footer{
+    margin-left: 380px;
+}
 </style>
 @stop
 
 <!-- Content -->
 @section('content')
-<div class="container-fluid" style="overflow-y: scroll; height:700px; overflow-x: hidden;">
-    <div class="mb-5" style="margin-left:42%;">
-        <h1>
-            Manage Account
-        </h1>
+<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
+    <div class="position-relative ">
+      <h1 class="position-absolute top-0 start-0"> Manage Account</h1>
     </div>
-    <div class="container" style="margin-left:30%;">
-    <div class="row mx-3 mt-4">
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold " > <img src="ball.jpg" alt="Ball" class="profile"></div>
-            <div class="col-md-3 fw-bold "><input class="form-control" type="file" ></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">User ID:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Name:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Contact No:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Address:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Street:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Email:&nbsp;<label>sample</label></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Username:&nbsp;<input type="text" class="col-md-5"></div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-md-auto fw-bold h3">Password:&nbsp;<input type="text" class="col-md-5"></div>
-        </div>
-    </div>
-    </div>
-    <div class="footer" style="margin-left:42%;">
-        <button class="btn btn-danger" >
-            Save
-        </button>
-    </div>
-</div>
+                                <div class="row mb-5 row1 " style="margin-top:5%">
+                                    <div class="col-md-2 ">
+                                        <img src="ball.jpg" alt="Ball" class="profile">
+                                    </div>
 
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">User ID: </h5>
+                                            <h5 id="userID" class="col-md-4">sample</h5>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Name:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Contact No:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Address:</h5>
+                                            <div class="col-md-1 mt-2">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Region</button>
+                                             <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                            </ul>
+                                            </div>
+                                            &nbsp;
+                                            &nbsp;
+                                            &nbsp;
+                                            <div class="col-md-1 mt-2">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Province</button>
+                                             <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                            </ul>
+                                            </div>
+                                            &nbsp;
+                                            &nbsp;
+                                            &nbsp;
+                                            &nbsp;
+                                            <div class="col-md-1 mt-2">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">City</button>
+                                             <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                            </ul>
+                                            </div>
+                                            &nbsp;
+                                            &nbsp;
+                                            <div class="col-md-1 mt-2">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Barangay</button>
+                                             <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Street:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Email:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+                                        <div class="row mt-2">
+                                            <h5 class="col-md-2">Username:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+                                        <div class="row mt-2 mb-3">
+                                            <h5 class="col-md-2">Password:</h5>
+                                            <input type="text" class="col-md-5">
+                                        </div>
+
+                                <div class="footer">
+                                <button type="button" class="btn btn-primary">Save</button>
+                                </div>
+                                </div>
+    </div>
 @stop
 
 <!-- Scripts -->

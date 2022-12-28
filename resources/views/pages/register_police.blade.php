@@ -88,6 +88,14 @@
                 </div>
                 <div class="row mt-2 ">
                     <div class="col-auto">
+                        <label for="zip" class="col-form-label">Zipcode:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="zipcode" id="zip" type="text" class="form-control align-content-center w-100" required>
+                    </div>
+                </div>
+                <div class="row mt-2 ">
+                    <div class="col-auto">
                         <label for="email" class="col-form-label">Email:</label>
                     </div>
                     <div class="col-md-auto">
