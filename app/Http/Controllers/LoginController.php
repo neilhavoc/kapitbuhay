@@ -59,16 +59,76 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $vawUsers = $database->collection('barangay_accounts');
+        $idRefVAW = $vawUsers->documents();
+        $policeUsers = $database->collection('police_accounts');
+        $idRefPolice = $policeUsers->documents();
+
+        foreach ($idRefVAW as $vawID) {
+            if ($vawID['brgyEmail'] == $email)
+            {
+                if ($vawID['verification_status'] == 'To Verify' && $vawID['account_status'] == 'Not Banned') {
+                    return redirect('loginpage')->withSuccess('Account is not yet Verified!');
+                }
+                elseif ($vawID['verification_status'] == 'Verified' && $vawID['account_status'] == 'Not Banned') {
+                    try
+                    {
+                        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+
+                        return redirect('vaw_manageaccount');
+                    } catch(invalidInput $e) {
+                        return redirect('loginpage')->withSuccess('Invalid Email or Password!');
+                    };
+                }
+                elseif ($vawID['account_status'] == 'Banned') {
+                    return redirect('loginpage')->withSuccess('Account is banned!');
+                }
+                elseif ($vawID['verification_status'] == 'Verification Failed') {
+
+                }
+            }
+        }
+
+        foreach($idRefPolice as $polID)
+        {
+            if ($polID['policeEmail'] == $email)
+            {
+                if ($polID['verification_status'] == 'To Verify' && $polID['account_status'] == 'Not Banned') {
+                    return redirect('loginpage')->withSuccess('Account is not yet Verified!');
+                }
+                elseif ($polID['verification_status'] == 'Verified' && $polID['account_status'] == 'Not Banned') {
+                    try
+                    {
+                        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+
+                        return redirect('police_manageaccount');
+                    } catch(invalidInput $e) {
+                        return redirect('loginpage')->withSuccess('Invalid Email or Password!');
+                    };
+                }
+                elseif ($polID['account_status'] == 'Banned') {
+                    return redirect('loginpage')->withSuccess('Account is banned!');
+                }
+                elseif ($polID['verification_status'] == 'Verification Failed') {
+
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
         try
         {
             $signInResult = $auth->signInWithEmailAndPassword($email, $password);
 
-            return redirect('manage_articles');
+            return redirect('dashboard');
         } catch(invalidInput $e) {
             return redirect('loginpage')->withSuccess('Invalid Email or Password!');
         };
-
-
     }
 
     /**

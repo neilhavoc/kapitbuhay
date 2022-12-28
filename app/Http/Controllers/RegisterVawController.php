@@ -143,8 +143,8 @@ class RegisterVawController extends Controller
             'brgyStreet'            => $request->input('street'),
             'brgyEmail'             => $request->input('email'),
             'brgyPassword'          => $request->input('password'),
-            'verification_status'   => '1',
-            'account_status'        => '1',
+            'verification_status'   => 'To Verify',
+            'account_status'        => 'Not Banned',
         ];
 
         $database->collection('barangay_accounts')->document($loginuid)->set($data);
