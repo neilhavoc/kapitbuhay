@@ -11,40 +11,35 @@
 
 <body style="overflow-y: hidden;">
 
-        <!-- Sidebar -->
-        <div class="sidebar">
+       <!-- Sidebar -->
+       <div class="sidebar">
             {{-- Contents goes here --}}
-            <div class="my-3 mx-3" style="border:solid; border-color:black;">
-                <div class="row mx-1">
-                    <h9 class="col-sm-auto">
-                        REF ID:
-                    </h9>
-                    <h9 class="col-sm-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                        From:
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                       Time
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Date
-                    </h9>
-                </div>
-                <div class="row mb-3 mx-1">
-                    <h9 class="col-md-auto">
-                        Sample distress Message
-                    </h9>
-                </div>
-            </div>
+            <table class="table" >
+                <thead>
+                  <tr>
+                    <th scope="col">From User</th>
+                    <th scope="col">Distress Message</th>
+                    <th scope="col">Date Received</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Petter Porker</td>
+                    <td>tabangi ko please</td>
+                    <td>Dec 20, 2022 9:08:49 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Walter J White</td>
+                    <td>Help me</td>
+                    <td>Dec 21, 2022 11:07:08 AM</td>
+                  </tr>
+                  <tr>
+                    <td>Jane Dela Cruz</td>
+                    <td>Tabangi ko ninyu please</td>
+                    <td>Dec 23, 2022 1:00:00 AM</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
         {{-- scripts --}}
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
