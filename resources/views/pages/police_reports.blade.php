@@ -81,16 +81,16 @@
 
 <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
     <div class="row mt-5">
-        <div class="col-md-6 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
+        <div class="col-md-5 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
         <div class="col-md-3 fw-bold ">Date:&nbsp;<label>sample</label></div>
         <div class="col-md-2 fw-bold ">Time:&nbsp;<label>sample</label></div>       
     </div>
     <div class="row mt-2">
-       <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
+       <div class="col-md-5 fw-bold ">From:&nbsp;<label>sample</label></div>
        <div class="col-md-2 fw-bold ">Location Link:&nbsp;<label>sample</label></div>
     </div>
     <div class="row mt-3">
-       <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
+       <div class="col-md-5 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
        <div class="col-md-2 fw-bold ">Status:&nbsp;<label>sample</label></div>
     </div>
     <div class="row mt-5">

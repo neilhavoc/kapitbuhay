@@ -10,12 +10,16 @@
     text-align: center;
     margin-bottom: 1%;
 }    
+.footer{
+    text-align: center;
+    margin-bottom: 1%;
+}
 </style>
 @stop
 
 <!-- Content -->
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
     <div>
         <h1>
             Review Distress Message
@@ -30,8 +34,8 @@
                         <div class="col-md-4 fw-bold ">Time:&nbsp;<label>sample</label></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
-                        <div class="col-md-6 fw-bold ">User ID:&nbsp;<label>sample</label></div>
+                        <div class="col-md-5 fw-bold ">From:&nbsp;<label>sample</label></div>
+                        <div class="col-md-5 fw-bold ">User ID:&nbsp;<label>sample</label></div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
@@ -45,35 +49,30 @@
                        </div>
                     </div>
                     <div class="row mt-3 mx-5 mb-5 justify-content-between">
-                    <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            Verify
-                            </label>
-                            </div>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            Not Verified
-                            </label>
-                            </div>
-                            <div class="row mt-1 mx-5 justify-content-between">
-                        <div class="col-md-8">
-                            <button type="button" class="btn btn-danger float-md-end" data-bs-toggle="modal" data-bs-target="#reportUser">Report User</button>
+                        <div class="col-md-6">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Unread</option>
+                                <option value="1">Help is on the Way</option>
+                              </select>
+                        </div>
+                        <div class="col-md-4">
+                        <button type="button" class="btn btn-danger float-md-end" data-bs-toggle="modal" data-bs-target="#reportUser">Report User</button>
                         </div>
                     </div>
-                         
-                        </div>
 
                 
                     <div class="row mt-5 mx-5 justify-content-evenly">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <a role="button" class="btn btn-success"  href="police_createReports">Create Report</a>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-warning">Cancel</button>
                         </div>
                     </div>
+
+                    <div class="footer mt-4">
+            <button type="submit" class="btn btn-primary"> Save </button>
+        </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="row mt-3 ">
@@ -93,9 +92,10 @@
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
-        <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Report User</h3>
+        <!-- <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Report User</h3> -->
       </div>
       <div class="modal-body">
+        <h3 class="text-center">Report User</h3>
       <div class="row mt-3 mx-5 mb-5 justify-content-between">
                     <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -133,6 +133,8 @@
     </div>
   </div>
         </div>
+        
+        
 
 @stop
 
