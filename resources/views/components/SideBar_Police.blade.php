@@ -11,7 +11,7 @@
 
 <body style="overflow-y: hidden;">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" style="overflow: hidden; overflow-y: scroll;">
 
             {{-- Contents goes here --}}
             <table class="table" >

@@ -45,7 +45,7 @@
                 <button class="btn btn-primary h-100" type="button">List of Distress Message</button>
             </div>
         </div>
-        <div class="form-group mt-0">
+        <div class="form-group mt-0" style="overflow: hidden; overflow-y: scroll;">
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
