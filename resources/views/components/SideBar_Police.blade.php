@@ -10,11 +10,6 @@
 </head>
 
 <body style="overflow-y: hidden;">
-
-
-       <!-- Sidebar -->
-       <div class="sidebar">
-
         <!-- Sidebar -->
         <div class="sidebar">
 
@@ -27,28 +22,9 @@
                     <th scope="col">Date Received</th>
                   </tr>
                 </thead>
-
-                <tbody>
-                  <tr>
-                    <td>Petter Porker</td>
-                    <td>tabangi ko please</td>
-                    <td>Dec 20, 2022 9:08:49 PM</td>
-                  </tr>
-                  <tr>
-                    <td>Walter J White</td>
-                    <td>Help me</td>
-                    <td>Dec 21, 2022 11:07:08 AM</td>
-                  </tr>
-                  <tr>
-                    <td>Jane Dela Cruz</td>
-                    <td>Tabangi ko ninyu please</td>
-                    <td>Dec 23, 2022 1:00:00 AM</td>
-                  </tr>
+                <tbody id="tbody2">
                 </tbody>
 
-                <tbody id="tbody2">
-                </tbody>    
-                  
               </table>
         </div>
         {{-- scripts --}}
@@ -84,7 +60,7 @@
         async function GetAllDataRealtime(){
         const dbRef = collection(db,'sos-distress-message');
         const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"));
-  
+
         onSnapshot(q,(querySnapshot)=>{
             var distress_notif = [];
             querySnapshot.forEach(doc => {
@@ -113,7 +89,7 @@ var tbody = document.getElementById('tbody2');
   }
 
   window.onload = GetAllDataRealtime();
-</script> 
+</script>
 </body>
 
 
