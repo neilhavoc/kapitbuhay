@@ -13,8 +13,14 @@ class VawDistressMessageController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_distressmessage');
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $distressRef = $database->collection('sos-distress-message');
+        $messageRef = $distressRef->documents();
+
+        return view('pages.vaw_distressmessage', [
+            'message' => $messageRef,
+        ]);
     }
 
     /**

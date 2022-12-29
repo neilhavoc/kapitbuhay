@@ -59,17 +59,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="justify-contents-center ">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a role="button" class="btn btn-success"  href="vaw_reviewdistressmessage">View</a>
-                        </td>
-                    </tr>
+                    <@if ($message == null)
+                        <tr class="justify-contents-center ">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @else
+                        @foreach ($message as $item)
+                            <tr class="justify-contents-center ">
+                                <td>{{ $item->id() }}</td>
+                                <td>{{ $item['sender_FullName'] }}</td>
+                                <td>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</td>
+                                <td>{{ $item['sender_phoneNo'] }}</td>
+                                <td>{{ $item['distressMessage'] }}</td>
+                                <td>{{ $item['status'] }}</td>
+                                <td>
+                                    <a role="button" class="btn btn-success"  href="vaw_reviewdistressmessage">View</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
