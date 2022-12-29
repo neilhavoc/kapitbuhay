@@ -10,47 +10,85 @@
 </head>
 
 <body style="overflow-y: hidden;">
-
         <!-- Sidebar -->
         <div class="sidebar">
             {{-- Contents goes here --}}
-            <div class="my-3 mx-3" style="border:solid; border-color:black;">
-                <div class="row mx-1">
-                    <h9 class="col-sm-auto">
-                        REF ID:
-                    </h9>
-                    <h9 class="col-sm-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                        From:
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Sample
-                    </h9>
-                </div>
-                <div class="row mx-1">
-                    <h9 class="col-md-auto">
-                       Time
-                    </h9>
-                    <h9 class="col-md-auto">
-                        Date
-                    </h9>
-                </div>
-                <div class="row mb-3 mx-1">
-                    <h9 class="col-md-auto">
-                        Sample distress Message
-                    </h9>
-                </div>
-            </div>
+            <table class="table" >
+                <thead>
+                  <tr>
+                    <th scope="col">From User</th>
+                    <th scope="col">Distress Message</th>
+                    <th scope="col">Date Received</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody2">
+                </tbody>    
+                  
+              </table>
         </div>
         {{-- scripts --}}
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="module">
 
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import {
+            getFirestore, doc, getDoc, getDocs, onSnapshot, collection, query, where
+        } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoTsZLj3mdmt-knoDXPBiAM6XDSo34fO0",
+            authDomain: "projectkapitbuhay.firebaseapp.com",
+            projectId: "projectkapitbuhay",
+            storageBucket: "projectkapitbuhay.appspot.com",
+            messagingSenderId: "383943948579",
+            appId: "1:383943948579:web:532296ffdafb3a6e3db496",
+            measurementId: "G-9DKK3YCYTL"
+        };
+
+// Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore();
+
+        async function GetAllDataRealtime(){
+        const dbRef = collection(db,'sos-distress-message');
+        const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"));
+  
+        onSnapshot(q,(querySnapshot)=>{
+            var distress_notif = [];
+            querySnapshot.forEach(doc => {
+            distress_notif.push(doc.data());
+        });
+            AddAllItemsToTable(distress_notif);
+        });
+
+        }
+
+var tbody = document.getElementById('tbody2');
+
+  function AddAllItemsToTable(TheDistressMSG){
+      tbody.innerHTML="";
+      var content = "";
+      TheDistressMSG.forEach(element =>{
+         // AddItemToTable(element.sosID,element.sender_FullName,element.user_location, element.sender_phoneNo,element.distressMessage, element.status);
+          let html = `<tr>
+          <td><i class="fa-sharp fa-solid fa-eye"></i> ${element.sender_FullName}</td>
+          <td>${element.distressMessage}</td>
+          <td>${element.sendDate}</td>
+          </tr>`;
+          content += html;
+          tbody.innerHTML = content;
+      });
+  }
+
+  window.onload = GetAllDataRealtime();
+</script> 
 </body>
 
 

@@ -22,30 +22,74 @@
                     <th scope="col">Date Received</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Petter Porker</td>
-                    <td>tabangi ko please</td>
-                    <td>Dec 20, 2022 9:08:49 PM</td>
-                  </tr>
-                  <tr>
-                    <td>Walter J White</td>
-                    <td>Help me</td>
-                    <td>Dec 21, 2022 11:07:08 AM</td>
-                  </tr>
-                  <tr>
-                    <td>Jane Dela Cruz</td>
-                    <td>Tabangi ko ninyu please</td>
-                    <td>Dec 23, 2022 1:00:00 AM</td>
-                  </tr>
-                </tbody>
+                <tbody id="tbody2">
+                </tbody>    
+                  
               </table>
         </div>
         {{-- scripts --}}
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="module">
 
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import {
+            getFirestore, doc, getDoc, getDocs, onSnapshot, collection, query, where
+        } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoTsZLj3mdmt-knoDXPBiAM6XDSo34fO0",
+            authDomain: "projectkapitbuhay.firebaseapp.com",
+            projectId: "projectkapitbuhay",
+            storageBucket: "projectkapitbuhay.appspot.com",
+            messagingSenderId: "383943948579",
+            appId: "1:383943948579:web:532296ffdafb3a6e3db496",
+            measurementId: "G-9DKK3YCYTL"
+        };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+
+async function GetAllDataRealtime(){
+  const dbRef = collection(db,'sos-distress-message');
+  const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"), where("receiving_Brgy","==","Buaya"));
+  
+  onSnapshot(q,(querySnapshot)=>{
+      var distress_notif = [];
+      querySnapshot.forEach(doc => {
+      distress_notif.push(doc.data());
+  });
+      AddAllItemsToTable(distress_notif);
+  });
+
+}
+
+var tbody = document.getElementById('tbody2');
+
+  function AddAllItemsToTable(TheDistressMSG){
+      tbody.innerHTML="";
+      var content = "";
+      TheDistressMSG.forEach(element =>{
+         // AddItemToTable(element.sosID,element.sender_FullName,element.user_location, element.sender_phoneNo,element.distressMessage, element.status);
+          let html = `<tr>
+          <td><i class="fa-sharp fa-solid fa-eye"></i> ${element.sender_FullName}</td>
+          <td>${element.distressMessage}</td>
+          <td>${element.sendDate}</td>
+          </tr>`;
+          content += html;
+          tbody.innerHTML = content;
+      });
+  }
+
+  window.onload = GetAllDataRealtime();
+</script> 
 </body>
 
 
