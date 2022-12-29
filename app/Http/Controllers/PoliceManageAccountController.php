@@ -13,8 +13,58 @@ class PoliceManageAccountController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.police_manageaccounts');
+        $firestore = app('firebase.firestore');
+        $storage = app('firebase.storage');
+
+        $database = $firestore->database();
+        $userRef = $database->collection('police_accounts');
+        $civilianUsers = $userRef->documents();
+
+        $bucket = $storage->getBucket();
+
+
+        $uuid = 'Uifd9atZiKSddBOvevvUaKQCMTM2';
+        $brgyLogo = $bucket->object('police-accounts/'. $uuid .'/credentials/Police-Logo.png');
+        $brgyIDFront = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Front.png');
+        $brgyIDBack = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Back.png');
+
+        $urlLogo = $brgyLogo->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $urlIDFront = $brgyIDFront->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $urlIDBack = $brgyIDBack->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $civilianUsers = $database->collection('police_accounts')->document($uuid);
+
+        $civilianUsers->update([
+                    ['path' => 'policeLogo', 'value' => $urlLogo],
+                    ['path' => 'policeValidIDFront', 'value' => $urlIDFront],
+                    ['path' => 'policeValidIDBack', 'value' => $urlIDBack]
+                ]);
+
+        $civilianUsers = $userRef->where('policeUID', '=', $uuid);
+        $policeAcc = $civilianUsers->documents();
+        return view('pages.police_manageaccounts', [
+            'account' => $policeAcc,
+        ]);
     }
 
     /**
