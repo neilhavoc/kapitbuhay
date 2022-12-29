@@ -146,9 +146,16 @@ class VawAccountController extends Controller
 
         $civilianUsers = $database->collection('barangay_accounts')->document($id);
         $civilianUsers->update([
-                    ['path' => 'verification_status', 'value' => $request->input('verification')],
-                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-                ]);
+            ['path' => 'verification_status', 'value' => $request->input('verification')],
+            ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+        ]);
+
+        $snapshot = $civilianUsers->snapshot();
+        $message = 'Hello! The Barangay VAW Account of: ' . $snapshot['brgyName'] . ' with the email: ' . $snapshot['brgyEmail'] .
+                    ' is now ' . $request->input('verification') . ' and the status of the account is ' . $request->input('accountStatus');
+        //$message = wordwrap($message, )
+
+        mail('roasterearl@gmail.com','KapitBuhay Barangay VAW Account Verification', $message);
         return redirect('VawAcc');
     }
 
