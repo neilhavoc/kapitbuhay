@@ -36,8 +36,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="vaw_reports" >Incident Report</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="vaw_distressmessage" >Distress Message</a></li>
                     <li class="nav-item"><a class="nav-link"  href="vaw_monitoring" >Victim's Monitoring</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vaw_reports" >Incident Report</a></li>
                     <li class="nav-item"><a class="nav-link"  href="vaw_record" >Victim's Health Records</a></li>
                     <li class="nav-item"><a class="nav-link"  href="vaw_report" >Victim's Health Report</a></li>
                     <li class="nav-item"><a class="nav-link"  href="vaw_manageaccount" >Manage Account</a></li>

@@ -6,6 +6,10 @@
 <!-- Styles -->
 @section('styles')
 <style>
+    .profile{
+    height: 170x;
+    width: 200px;
+}
     .search {
     margin-top: 100px;
  }
