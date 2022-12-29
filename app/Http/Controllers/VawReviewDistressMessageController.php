@@ -13,8 +13,18 @@ class VawReviewDistressMessageController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_reviewdistressmessage');
+        $firestore = app('firebase.firestore');
+
+        $database = $firestore->database();
+        //$recordID = $database->collection('record_IDs')->document('distressViewID');
+        $viewdisID = session('viewDistressID');
+
+        $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
+        $messageRef = $recordIDs->snapshot();
+
+        return view('pages.vaw_reviewdistressmessage', [
+            'message' => $messageRef,
+        ]);
     }
 
     /**
@@ -46,7 +56,16 @@ class VawReviewDistressMessageController extends Controller
      */
     public function show($id)
     {
-        //
+        /*$firestore = app('firebase.firestore');
+
+        $database = $firestore->database();
+        $distressRef = $database->collection('sos-distress-message');
+        $idRef = $distressRef->where('sosID', '=', $id);
+        $messageRef = $idRef->documents();
+
+        return view('pages.vaw_reviewdistressmessage', [
+            'message' => $messageRef,
+        ]);*/
     }
 
     /**

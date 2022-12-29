@@ -134,9 +134,6 @@
 <!-- Scripts -->
 @section('scripts')
 <script>
-    //import { collection, query, where, getDocs } from "firebase/firestore";
-
-    //const q = query(collection(db, "sos-distress-message"), where("status", "==", 'unread'));
     const lat = document.getElementById('lat');
     const lng = document.getElementById('lng');
     var latitude = Number(lat.textContent);

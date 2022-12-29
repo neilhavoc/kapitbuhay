@@ -59,7 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <@if ($message == null)
+                    @if ($message == null)
                         <tr class="justify-contents-center ">
                             <td></td>
                             <td></td>
@@ -79,9 +79,16 @@
                                 <td>{{ $item['distressMessage'] }}</td>
                                 <td>{{ $item['status'] }}</td>
                                 <td>
-                                    <a role="button" class="btn btn-success"  href="vaw_reviewdistressmessage">View</a>
+
+
+                                        <form action="vaw_distressmessage" method="POST">
+                                        @csrf
+                                        <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
+                                        <button type="submit" class="btn btn-success"> View </button>
+                                        </form>
                                 </td>
                             </tr>
+
                         @endforeach
                     @endif
                 </tbody>
