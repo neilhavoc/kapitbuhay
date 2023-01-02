@@ -13,10 +13,13 @@ class VawReportController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_reports');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            return view('pages.vaw_reports');
+        }
     }
-
     /**
      * Show the form for creating a new resource.
      *

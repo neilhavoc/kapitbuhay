@@ -13,8 +13,19 @@ class PoliceDistressController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.police_distress');
+        if(!session()->has('userID') && !session()->has('policeName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+            $distressRef = $database->collection('sos-distress-message');
+            $messageRef = $distressRef->documents();
+
+            return view('pages.police_distress', [
+                'message' => $messageRef,
+            ]);
+        }
     }
 
     /**
@@ -35,7 +46,9 @@ class PoliceDistressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        session(['viewDistressID' => $request->input('distressID')]);
+
+        return redirect('police_reviewdistressmessage');
     }
 
     /**

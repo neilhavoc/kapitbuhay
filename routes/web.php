@@ -48,6 +48,14 @@ Route::get('/', function () {
     return view('pages.loginpage');
 });
 
+//VAW Review Distress Message
+Route::resource('/vaw_reviewdistressmessage', VawReviewDistressMessageController::class);
+Route::put('/vaw_reviewdistressmessage/distressStatus/{id}', [VawReviewDistressMessageController::class, 'distressStatus']);
+Route::put('/vaw_reviewdistressmessage/transferDistress/{id}', [VawReviewDistressMessageController::class, 'transferDistress']);
+//Police Review Distress Message
+Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
+Route::put('/police_reviewdistressmessage/poldistressStatus/{id}', [PoliceReviewDistressMessageController::class, 'poldistressStatus']);
+
 Route::resource('/loginpage', LoginController::class);
 Route::resource('/register', RegisterController::class);
 Route::resource('/article', ArticleController::class);
@@ -74,9 +82,8 @@ Route::resource('/vaw_record', VawRecordController::class);
 Route::resource('/vaw_manageaccount', VawManageAccountController::class);
 Route::resource('/police_unverified', PoliceUnverifiedController::class);
 Route::resource('/vaw_unverified', VawUnverifiedController::class);
-Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
 Route::resource('/manage_VawIncidentB', VawIncidentBController::class);
 Route::resource('/vaw_report', VawReportController::class);
 Route::resource('/vaw_distressmessage', VawDistressMessageController::class);
-Route::resource('/vaw_reviewdistressmessage', VawReviewDistressMessageController::class);
+
 

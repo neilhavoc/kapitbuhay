@@ -13,15 +13,21 @@ class VawDistressMessageController extends Controller
      */
     public function index()
     {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-        $distressRef = $database->collection('sos-distress-message');
-        $messageRef = $distressRef->documents();
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+            $distressRef = $database->collection('sos-distress-message');
+            $messageRef = $distressRef->documents();
 
-        return view('pages.vaw_distressmessage', [
-            'message' => $messageRef,
-        ]);
+            return view('pages.vaw_distressmessage', [
+                'message' => $messageRef
+            ]);
+        }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +47,6 @@ class VawDistressMessageController extends Controller
      */
     public function store(Request $request)
     {
-        //$request->session()->put('viewDistressID', 'distressID');
         session(['viewDistressID' => $request->input('distressID')]);
 
         return redirect('vaw_reviewdistressmessage');

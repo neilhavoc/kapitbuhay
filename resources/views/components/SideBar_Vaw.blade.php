@@ -23,9 +23,10 @@
                   </tr>
                 </thead>
                 <tbody id="tbody2">
-                </tbody>    
-                  
+                </tbody>
+
               </table>
+            <input type="hidden" id="barangay" value="{{session('barangay')}}">
         </div>
         {{-- scripts --}}
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -59,8 +60,9 @@ const db = getFirestore();
 
 async function GetAllDataRealtime(){
   const dbRef = collection(db,'sos-distress-message');
-  const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"), where("receiving_Brgy","==","Buaya"));
-  
+  const brgy = document.getElementById('barangay');
+  const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"), where("receiving_Brgy","==",brgy.value));
+
   onSnapshot(q,(querySnapshot)=>{
       var distress_notif = [];
       querySnapshot.forEach(doc => {
@@ -89,7 +91,7 @@ var tbody = document.getElementById('tbody2');
   }
 
   window.onload = GetAllDataRealtime();
-</script> 
+</script>
 </body>
 
 

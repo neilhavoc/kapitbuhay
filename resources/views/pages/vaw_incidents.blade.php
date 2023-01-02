@@ -50,98 +50,123 @@
                 <thead class="bill-header cs">
                     <tr>
                         <th id="trs-hd-1" class="col-lg-1">REF ID</th>
-                        <th id="trs-hd-2" class="col-lg-2">From</th>
-                        <th id="trs-hd-3" class="col-lg-2">Address</th>
-                        <th id="trs-hd-4" class="col-lg-2">Contact No.</th>
-                        <th id="trs-hd-5" class="col-lg-3">Distress Message</th>
-                        <th id="trs-hd-6" class="col-lg-3">Status</th>
-                        <th id="trs-hd-7" class="col-lg-2"></th>
+                        <th id="trs-hd-2" class="col-lg-3">Sender</th>
+                        <th id="trs-hd-3" class="col-lg-3">Record Date/Time</th>
+                        <th id="trs-hd-4" class="col-lg-3">Created By</th>
+                        <th id="trs-hd-5" class="col-lg-3">Status</th>
+                        <th id="trs-hd-6" class="col-lg-2"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="justify-contents-center ">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                View
-                            </button>
-                        </td>
-                    </tr>
+                    @if ($incident == null)
+                        <tr class="justify-contents-center ">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @else
+                        @foreach ($incident as $item)
+                            @if ($item['barangay'] == session('barangay'))
+                                <tr class="justify-contents-center ">
+                                    <td>{{ $item->id() }}</td>
+                                    <td>{{ $item['sender_FullName'] }}</td>
+                                    <td>{{ $item['reportTimeDate'] }}</td>
+                                    <td>{{ $item['reportCreator'] }}</td>
+                                    <td>{{ $item['report_status'] }}</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->id() }}">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
 </div>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          {{-- <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Review Distress Message</h3> --}}
-            </div>
-            <div class="modal-body">
-                <h3 class="text-center">View Incident Report</h3>
-                <div class="row mx-3 mt-4" >
-                    <div class="row ">
-                        <div class="col-md-3 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
-                        <div class="col-md-2 fw-bold ">Date:&nbsp;<label>sample</label></div>
-                        <div class="col-md-2 fw-bold ">Time:&nbsp;<label>sample</label></div>
+
+@if ($incident == null)
+@else
+    @foreach ($incident as $item)
+        <div class="modal fade" id="staticBackdrop{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                {{-- <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Review Distress Message</h3> --}}
                     </div>
-                    <div class="row mt-1">
-                        <div class="col-md-3 fw-bold ">From:&nbsp;<label>sample</label></div>
-                        <div class="col-md-3 fw-bold ">Location Link:&nbsp;<label>sample</label></div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-md-3 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
-                        <div class="col-md-3 fw-bold ">Status:&nbsp;<label>sample</label></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="row">
-                            <div class="col-md-3 fw-bold ">Message: </div>
-                        </div>
-                       <div class="row">
-                            <div class="col-md-6">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
-                       </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-md-8 fw-bold"> Report Details: <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" disabled="disabled"></textarea></div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="row">
-                                <div class="fw-bold ">Time/Date Created:</div>
+                    <div class="modal-body">
+                        <h3 class="text-center">View Incident Report</h3>
+                        <div class="row mx-3 mt-4" >
+                            <div class="row ">
+                                <div class="col-md-3 fw-bold " >Reference ID:&nbsp;<label>{{ $item->id() }}</label></div>
+                                <div class="col-md-6 fw-bold ">Date & Time:&nbsp;<label>{{ $item['sendDate'] }}</label></div>
                             </div>
-                            <div class="row">
-                                <label>sample</label>
+                            <div class="row mt-1">
+                                <div class="col-md-3 fw-bold ">From:&nbsp;<label>{{ $item['sender_FullName'] }}</label></div>
+                                <div class="col-md-3 fw-bold ">Location Link:&nbsp;<label><a href="{{ $item['sender_locLink'] }}">Google Maps</a></label></div>
                             </div>
-                            <div class="row">
-                                <div class="fw-bold ">Report Created By:</div>
+                            <div class="row mt-1">
+                                <div class="col-md-3 fw-bold ">Specific Location:&nbsp;<label>{{ $item['sender_location'] }}</label></div>
+                                <div class="col-md-3 fw-bold ">Status:&nbsp;<label>{{ $item['report_status'] }}</label></div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="row">
+                                    <div class="col-md-3 fw-bold ">Message: </div>
+                                </div>
                             <div class="row">
-                                <input type="text" class="form-control align-content-center w-75" disabled>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled">{{ $item['distressMessageContent'] }}
+                                        </textarea>
+                                    </div>
                             </div>
-                           <div class="row">
-                                <div class="fw-bold ">Position:</div>
-                            </div>
-                            <div class="row">
-                                <input type="text" class="form-control align-content-center w-75" disabled>
                             </div>
                         </div>
+                        <div class="row mt-5">
+                            <div class="col-md-8 fw-bold">
+                                Report Details:
+                                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" disabled="disabled">{{ $item['reportDetails'] }}
+                                </textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="fw-bold ">Time/Date Created:</div>
+                                    </div>
+                                    <div class="row">
+                                        <label>{{ $item['reportTimeDate'] }}</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="fw-bold ">Report Created By:</div>
+                                    </div>
+                                    <div class="row">
+                                        <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
+                                    </div>
+                                    <div class="row">
+                                        <div class="fw-bold ">Position:</div>
+                                    </div>
+                                    <div class="row">
+                                        <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportPosition'] }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-5">
+                            <button class="btn btn-success w-25" >
+                                Generate PDF
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-center mt-5">
-                    <button class="btn btn-success w-25" >
-                        Generate PDF
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    @endforeach
+@endif
 @stop
 
 <!-- Scripts -->

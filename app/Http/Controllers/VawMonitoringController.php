@@ -13,8 +13,12 @@ class VawMonitoringController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_monitoring');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            return view('pages.vaw_monitoring');
+        }
     }
 
     /**

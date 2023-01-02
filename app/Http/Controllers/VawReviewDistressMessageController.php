@@ -13,18 +13,35 @@ class VawReviewDistressMessageController extends Controller
      */
     public function index()
     {
-        $firestore = app('firebase.firestore');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
 
-        $database = $firestore->database();
-        //$recordID = $database->collection('record_IDs')->document('distressViewID');
-        $viewdisID = session('viewDistressID');
+            $database = $firestore->database();
+            $viewdisID = session('viewDistressID');
 
-        $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
-        $messageRef = $recordIDs->snapshot();
+            $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
+            $messageRef = $recordIDs->snapshot();
 
-        return view('pages.vaw_reviewdistressmessage', [
-            'message' => $messageRef,
-        ]);
+            $policeRef = $database->collection('police_accounts');
+            $polRef = $policeRef->documents();
+
+            if ($messageRef['status'] == 'Read' || $messageRef['status'] == 'Transferred')
+            {
+                $disable = 'disabled';
+            }
+            else
+            {
+                $disable = 'false';
+            }
+            return view('pages.vaw_reviewdistressmessage', [
+                'message' => $messageRef,
+                'disable' => $disable,
+                'police'  => $polRef
+            ]);
+        }
     }
 
     /**
@@ -37,6 +54,55 @@ class VawReviewDistressMessageController extends Controller
         //
     }
 
+    //A custom function to update the distress message
+    public function distressStatus(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $sosDistressRef = $database->collection('sos-distress-message')->document($id);;
+        $sosRefID = $sosDistressRef->snapshot();
+
+        date_default_timezone_set('Asia/Singapore');
+            $date = date('m/d/Y h:i:s a', time());
+
+        if ($request->input('disMesStatus') == 'Read')
+        {
+            $statUpdate = '<br><br>[' . $date . ']: Barangay ' . $sosRefID['receiving_Brgy'] .
+                            ' Authorities is on the way' . $sosRefID['status_update_1'];
+        }
+        elseif ($request->input('disMesStatus') == 'Transferred')
+        {
+            $statUpdate = '<br><br>[' . $date . ']: Barangay ' . $sosRefID['receiving_Brgy'] .
+                            ' Authorities has transferred the message to your nearest Police Station'  . $sosRefID['status_update_1'];
+        }
+        elseif ($request->input('disMesStatus') == 'Completed')
+        {
+            $statUpdate = '<br><br>[' . $date . ']: Barangay ' . $sosRefID['receiving_Brgy'] .
+                            ' Authorities has arrived and responded to the scene.'  . $sosRefID['status_update_1'];
+        }
+        $sosDistressRef = $database->collection('sos-distress-message')->document($id);
+        $sosDistressRef->update([
+            ['path' => 'status', 'value' => $request->input('disMesStatus')],
+            ['path' => 'status_update_1', 'value' => $statUpdate],
+            ['path' => 'updated_by', 'value' => 'Barangay ' . $sosRefID['receiving_Brgy']]
+        ]);
+
+        return redirect('vaw_distressmessage');
+    }
+
+    public function transferDistress(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+        $sosDistressRef = $database->collection('sos-distress-message')->document($id);
+
+        $sosDistressRef->update([
+            ['path' => 'transfered_from', 'value' => session('brgyName')],
+            ['path' => 'transfered_to', 'value' => $request->input('transferDistress')]
+        ]);
+
+        return redirect('vaw_distressmessage');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -56,16 +122,7 @@ class VawReviewDistressMessageController extends Controller
      */
     public function show($id)
     {
-        /*$firestore = app('firebase.firestore');
 
-        $database = $firestore->database();
-        $distressRef = $database->collection('sos-distress-message');
-        $idRef = $distressRef->where('sosID', '=', $id);
-        $messageRef = $idRef->documents();
-
-        return view('pages.vaw_reviewdistressmessage', [
-            'message' => $messageRef,
-        ]);*/
     }
 
     /**

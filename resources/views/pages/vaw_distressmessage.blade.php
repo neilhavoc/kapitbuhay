@@ -1,7 +1,7 @@
 @extends('layouts.Vaw')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'VAW Distress')
 
 <!-- Styles -->
 @section('styles')
@@ -20,12 +20,12 @@
 @section('content')
 <div class="container search">
     <div class="row g-1 mb-5">
-                <div class="col-md-5">
-                    <input class= "container-fluid h-100" type="text" placeholder="Search">
-                </div>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary">Search</button>
-                </div>
+        <div class="col-md-5">
+            <input class= "container-fluid h-100" type="text" placeholder="Search">
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary">Search</button>
+        </div>
     </div>
     <div class="col-md-6 mb-2">
       <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
@@ -71,114 +71,30 @@
                         </tr>
                     @else
                         @foreach ($message as $item)
-                            <tr class="justify-contents-center ">
-                                <td>{{ $item->id() }}</td>
-                                <td>{{ $item['sender_FullName'] }}</td>
-                                <td>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</td>
-                                <td>{{ $item['sender_phoneNo'] }}</td>
-                                <td>{{ $item['distressMessage'] }}</td>
-                                <td>{{ $item['status'] }}</td>
-                                <td>
-
-
-                                        <form action="vaw_distressmessage" method="POST">
-                                        @csrf
-                                        <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
-                                        <button type="submit" class="btn btn-success"> View </button>
-                                        </form>
-                                </td>
-                            </tr>
-
+                            @if($item['receiving_Brgy'] == session('barangay'))
+                                <tr class="justify-contents-center ">
+                                    <td>{{ $item->id() }}</td>
+                                    <td>{{ $item['sender_FullName'] }}</td>
+                                    <td>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</td>
+                                    <td>{{ $item['sender_phoneNo'] }}</td>
+                                    <td>{{ $item['distressMessage'] }}</td>
+                                    <td>{{ $item['status'] }}</td>
+                                    <td>
+                                            <form action="vaw_distressmessage" method="POST">
+                                            @csrf
+                                            <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
+                                            <button type="submit" class="btn btn-success"> View </button>
+                                            </form>
+                                    </td>
+                                </tr>
+                            @else
+                            @endif
                         @endforeach
                     @endif
                 </tbody>
             </table>
         </div>
 </div>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-          {{-- <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Review Distress Message</h3> --}}
-        </div>
-        <div class="modal-body">
-            <h3 class="text-center">Review Distress Message</h3>
-            <div class="row justify-content-end">
-                <div class="col-md-auto">
-                    <button type="button" class="btn btn-danger">Report this User</button>
-                </div>
-            </div>
-            <div class="row mx-3" style="height: 100vh;">
-                <div class="col-md-6">
-                    <div class="row mt-5">
-                        <div class="col-md-4 fw-bold " >Reference ID:&nbsp;<label>sample</label></div>
-                        <div class="col-md-4 fw-bold ">Date:&nbsp;<label>sample</label></div>
-                        <div class="col-md-4 fw-bold ">Time:&nbsp;<label>sample</label></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 fw-bold ">From:&nbsp;<label>sample</label></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 fw-bold ">Specific Location:&nbsp;<label>sample</label></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="row">
-                            <div class="col-md-3 fw-bold ">Distress Message: </div>
-                        </div>
-                       <div class="row">
-                            <div class="col-md-12">  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea></div>
-                       </div>
-                    </div>
-                    <div class="row mt-3 mx-5 mb-5 justify-content-between">
-                        <div class="col-md-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Unread</option>
-                                <option value="1">Help is on the Way</option>
-                              </select>
-                        </div>
-                        <div class="col-md-auto">
-                            <button type="button" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                    <div class="row mt-5 mx-5 justify-content-between">
-
-                        <div class="col-md-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected disabled>Select police station </option>
-                                <option value="1">police station 1</option>
-                                <option value="2">police station 2</option>
-                                <option value="3">police station 3</option>
-                            </select>
-                        </div>
-                        <div class="col-md-auto">
-                            <button type="button" class="btn btn-warning">Transfer to police</button>
-                        </div>
-                    </div>
-                    <div class="row mt-5 mx-5 justify-content-center">
-                        <div class="col-md-auto">
-                            <a role="button" class="btn btn-success"  href="vaw_createReports">Create Incident Report</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="row mt-3 ">
-                        <div class="col-md-6 fw-bold ">Location Link:</div>
-                    </div>
-                    <div class="row mt-3">
-                        Sample
-                    </div>
-                    <div class="row mt-3 mx-3">
-                        <div id="googleMap" style="width:100%;height:400px; " ></div>
-                    </div>
-                </div>
-            </div>
-
-          </div>
-
-              </div>
-            </div>
-          </div>
 @stop
 
 <!-- Scripts -->

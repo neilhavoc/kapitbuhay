@@ -13,8 +13,19 @@ class PoliceReportsController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.police_reports');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+            $incidentRefID = $database->collection('incident_reports');
+            $incidentRef = $incidentRefID->documents();
+
+            return view('pages.police_reports', [
+                'incident' => $incidentRef,
+            ]);
+        }
     }
 
     /**

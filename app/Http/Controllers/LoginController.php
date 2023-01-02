@@ -27,6 +27,7 @@ class LoginController extends Controller
 
     public function index()
     {
+        //session()->flush();
         return view('pages.loginpage');
     }
 
@@ -77,6 +78,9 @@ class LoginController extends Controller
                     {
                         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
 
+                        session(['userID' => $vawID['brgyUID']]);
+                        session(['brgyName' => $vawID['brgyName']]);
+                        session(['barangay' => $vawID['barangay']]);
                         return redirect('vaw_manageaccount');
                     } catch(invalidInput $e) {
                         return redirect('loginpage')->withSuccess('Invalid Email or Password!');
@@ -102,7 +106,9 @@ class LoginController extends Controller
                     try
                     {
                         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-
+                        session(['userID' => $polID['policeUID']]);
+                        session(['policeName' => $polID['policeName']]);
+                        session(['barangay' => $polID['barangay']]);
                         return redirect('police_manageaccount');
                     } catch(invalidInput $e) {
                         return redirect('loginpage')->withSuccess('Invalid Email or Password!');
@@ -124,7 +130,7 @@ class LoginController extends Controller
         try
         {
             $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-
+            session(['adminID' => $email]);
             return redirect('dashboard');
         } catch(invalidInput $e) {
             return redirect('loginpage')->withSuccess('Invalid Email or Password!');

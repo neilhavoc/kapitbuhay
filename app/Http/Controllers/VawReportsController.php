@@ -13,8 +13,19 @@ class VawReportsController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_incidents');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+            $incidentRefID = $database->collection('incident_reports');
+            $incidentRef = $incidentRefID->documents();
+
+            return view('pages.vaw_incidents', [
+                'incident' => $incidentRef,
+            ]);
+        }
     }
 
     /**

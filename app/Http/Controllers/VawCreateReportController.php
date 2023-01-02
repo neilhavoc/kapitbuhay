@@ -13,8 +13,33 @@ class VawCreateReportController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_createReports');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+
+            $database = $firestore->database();
+            $viewdisID = session('viewDistressID');
+
+            $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
+            $messageRef = $recordIDs->snapshot();
+
+            date_default_timezone_set('Asia/Singapore');
+            $date = date('m/d/Y h:i:s a', time());
+
+            if ($messageRef['status'] == 'Read')
+            {
+                return redirect('vaw_reviewdistressmessage');
+            }
+            else
+            {
+                return view('pages.vaw_createReports', [
+                    'message'   => $messageRef,
+                    'date'      => $date,
+                ]);
+            }
+        }
     }
 
     /**
@@ -35,7 +60,57 @@ class VawCreateReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $firestore = app('firebase.firestore');
+
+        //store user details in firestore
+        $database = $firestore->database();
+
+        $brgyID = session('userID');
+        $brgy = session('barangay');
+
+        $incidentReportRef = $database->collection('record_IDs')->document('incidentReport_ID');
+        $incidentRefID = $incidentReportRef->snapshot();
+
+        if ($incidentRefID->exists())
+        {
+            $newIncidentID = $incidentRefID['id'] + 1;
+
+            $incidentID_Records = $database->collection('record_IDs')->document('incidentReport_ID');
+            $incidentID_Records->update([
+                ['path' => 'id', 'value' => $newIncidentID]
+            ]);
+        }
+        else
+        {
+            $data = [
+                'id' => '100000',
+            ];
+            $newIncidentID = 100000;
+
+            $database->collection('record_IDs')->document('incidentReport_ID')->set($data);
+        }
+
+        $data = [
+            'distressMessageRefID'      => $request->input('sosRefID'),
+            'incidentReportID'          => $newIncidentID,
+            'sender_FullName'           => $request->input('sender_Name'),
+            'sendDate'                  => $request->input('sendDate'),
+            'sender_location'           => $request->input('sender_loc'),
+            'sender_locLink'            => $request->input('sender_locLink'),
+            'distressMessageContent'    => $request->input('distressMessageContent'),
+            'reportDetails'             => $request->input('reportDetails'),
+            'reportTimeDate'            => $request->input('incidentReportDate'),
+            'reportCreator'             => $request->input('reportCreator'),
+            'reportCreatorID'           => $brgyID,
+            'reportPosition'            => $request->input('position'),
+            'barangay'                  => $brgy,
+            'creatorType'               => 'barangay',
+            'report_status'             => 'Ongoing',
+        ];
+
+        $database->collection('incident_reports')->document($newIncidentID)->set($data);
+
+        return redirect('vaw_reports');
     }
 
     /**

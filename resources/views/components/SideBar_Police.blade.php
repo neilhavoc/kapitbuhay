@@ -11,6 +11,7 @@
 
 <body style="overflow-y: hidden;">
         <!-- Sidebar -->
+
         <div class="sidebar">
 
             {{-- Contents goes here --}}
@@ -24,7 +25,7 @@
                 </thead>
                 <tbody id="tbody2">
                 </tbody>
-
+                <input type="hidden" id="userID" value="{{session('userID')}}">
               </table>
         </div>
         {{-- scripts --}}
@@ -58,16 +59,17 @@
         const db = getFirestore();
 
         async function GetAllDataRealtime(){
-        const dbRef = collection(db,'sos-distress-message');
-        const q = query(collection(db,'sos-distress-message'), where("status","==","Unread"));
+            const dbRef = collection(db,'sos-distress-message');
+            const userid = document.getElementById('userID');
+            const q = query(collection(db,'sos-distress-message'), where("transfered_to","==",userid.value), where("status","==","Transferred"));
 
-        onSnapshot(q,(querySnapshot)=>{
-            var distress_notif = [];
-            querySnapshot.forEach(doc => {
-            distress_notif.push(doc.data());
-        });
-            AddAllItemsToTable(distress_notif);
-        });
+            onSnapshot(q,(querySnapshot)=>{
+                var distress_notif = [];
+                querySnapshot.forEach(doc => {
+                distress_notif.push(doc.data());
+            });
+                AddAllItemsToTable(distress_notif);
+            });
 
         }
 

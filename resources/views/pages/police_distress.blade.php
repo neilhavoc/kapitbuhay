@@ -1,7 +1,7 @@
 @extends('layouts.Police')
 
 <!-- Page Title -->
-@section('title', 'Title')
+@section('title', 'Police Distress')
 
 <!-- Styles -->
 @section('styles')
@@ -58,17 +58,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="justify-contents-center ">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a role="button" class="btn btn-warning"  href="police_reviewdistressmessage">View</a>
-                    </td>
-                </tr>
+                @if ($message == null)
+                        <tr class="justify-contents-center ">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                @else
+                    @foreach ($message as $item)
+                        @if ($item['transfered_to'] == session('userID'))
+                            <tr class="justify-contents-center ">
+                                <td>{{ $item->id() }}</td>
+                                <td>{{ $item['sender_FullName'] }}</td>
+                                <td>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</td>
+                                <td>{{ $item['sender_phoneNo'] }}</td>
+                                <td>{{ $item['distressMessage'] }}</td>
+                                <td>{{ $item['status'] }}</td>
+                                <td>
+                                    <form action="police_distress" method="POST">
+                                        @csrf
+                                        <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
+                                        <button type="submit" class="btn btn-success"> View </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
