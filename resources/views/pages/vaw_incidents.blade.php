@@ -145,8 +145,9 @@
                                         <div class="fw-bold ">Report Created By:</div>
                                     </div>
                                     <div class="row">
+                                        
                                         <div class="col-md-auto">
-                                            <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
+                                            <input type="text" id="report_creator" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
                                         </div>
 
                                     </div>
@@ -205,8 +206,7 @@ var incident_location = document.getElementById('incident_location').textContent
 var creation_date = document.getElementById('creation_date').textContent;
 var report_creator = document.getElementById('report_creator').value;
 var report_details = document.getElementById("exampleFormControlTextarea2").value;
-//var img = document.createElement('img');
-//img.src = this.logo_img;
+
 
 window.jsPDF = window.jspdf.jsPDF;
 
@@ -223,7 +223,7 @@ doc.text("City of Cebu", 105, 30,null,null,"center");
 doc.setFont("times", "bold");
 doc.text("BARANGAY " + barangay, 105, 35,null,null,"center");
 doc.text("-ooOoo-", 105, 40,null,null,"center");
-//doc.addImage(img, "JPEG", 10, 10,30,30);
+doc.addImage(logo_img, "JPEG", 10, 10,30,30);
 //doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
@@ -235,7 +235,7 @@ doc.autoTable({
     ['Exact Location of Incident', incident_location],
     ['Involved Person/Specific Identification', victim],
     ['Narrative Details of Incident', report_details],
-    ['Case Status', "Add Data Here"],
+    ['Action Taken', barangay],
     ['Report Creation Date:', creation_date],
     ['Report Created By:', report_creator],
 
@@ -243,6 +243,10 @@ doc.autoTable({
   ],
 })
 //doc.addPage();
+
+
+
+
 
 // Save the PDF
 doc.save('document.pdf');
