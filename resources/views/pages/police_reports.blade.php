@@ -101,6 +101,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">
+                        <div class="row justify-content-end">
+                            <button class="btn btn-warning col-md-auto" >
+                                Transfer to Barangay for monitoring
+                            </button>
+                        </div>
                         <div class="row mt-5">
                             <div class="col-md-5 fw-bold " >Reference ID:&nbsp;<label>{{ $item->id() }}</label></div>
                             <div class="col-md-3 fw-bold ">Date & Time:&nbsp;<label>{{ $item['sendDate'] }}</label></div>
@@ -147,6 +152,24 @@
                                         </div>
                                         <div class="row">
                                             <input type="text" class="form-control align-content-center w-100" disabled value="{{ $item['reportPosition'] }}">
+                                        </div>
+                                        <div class="row">
+                                            <div class="fw-bold ">Case Status:</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-auto">
+                                                <select class="form-select " name="CaseStatus" aria-label="Default select example">
+                                                    <option selected value="Ongoing">Ongoing</option>
+                                                    <option value="Closed">Closed</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-md-auto">
+                                                <button class="btn btn-primary " >
+                                                        Save
+                                                    </button>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
