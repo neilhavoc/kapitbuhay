@@ -186,6 +186,7 @@
                             </button>
                         </div>
                         <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
+                        <div class="col-md-4 fw-bold invisible" id="barangay" >{{ $item['barangay'] }}</div>
                     </div>
                 </div>
             </div>
