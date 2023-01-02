@@ -161,6 +161,7 @@
                                 Generate PDF
                             </button>
                         </div>
+                        <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
                     </div>
                 </div>
             </div>

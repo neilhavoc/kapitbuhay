@@ -13,58 +13,40 @@ class PoliceManageAccountController extends Controller
      */
     public function index()
     {
-        $firestore = app('firebase.firestore');
-        $storage = app('firebase.storage');
+        if(!session()->has('userID') && !session()->has('policeName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $storage = app('firebase.storage');
 
-        $database = $firestore->database();
-        $userRef = $database->collection('police_accounts');
-        $civilianUsers = $userRef->documents();
+            $database = $firestore->database();
+            $bucket = $storage->getBucket();
 
-        $bucket = $storage->getBucket();
+            $userid = session('userID');
+            $brgyLogo = $bucket->object('police-accounts/'. $userid .'/credentials/Police-Logo.png');
 
+            $urlLogo = $brgyLogo->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
 
-        $uuid = 'Uifd9atZiKSddBOvevvUaKQCMTM2';
-        $brgyLogo = $bucket->object('police-accounts/'. $uuid .'/credentials/Police-Logo.png');
-        $brgyIDFront = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Front.png');
-        $brgyIDBack = $bucket->object('police-accounts/'.$uuid.'/credentials/Police-Valid-ID-Back.png');
+            $brgyLogoRef = $database->collection('police_accounts')->document($userid);
 
-        $urlLogo = $brgyLogo->signedUrl(
-            # This URL is valid for 15 minutes
-            new \DateTime('15 min'),
-            [
-                'version' => 'v4',
-            ]
-        );
+            $brgyLogoRef->update([
+                ['path' => 'policeLogo', 'value' => $urlLogo]
+            ]);
 
-        $urlIDFront = $brgyIDFront->signedUrl(
-            # This URL is valid for 15 minutes
-            new \DateTime('15 min'),
-            [
-                'version' => 'v4',
-            ]
-        );
+            $brgyUserIDRef = $database->collection('police_accounts')->document($userid);
+            $brgyUser = $brgyUserIDRef->snapshot();
 
-        $urlIDBack = $brgyIDBack->signedUrl(
-            # This URL is valid for 15 minutes
-            new \DateTime('15 min'),
-            [
-                'version' => 'v4',
-            ]
-        );
-
-        $civilianUsers = $database->collection('police_accounts')->document($uuid);
-
-        $civilianUsers->update([
-                    ['path' => 'policeLogo', 'value' => $urlLogo],
-                    ['path' => 'policeValidIDFront', 'value' => $urlIDFront],
-                    ['path' => 'policeValidIDBack', 'value' => $urlIDBack]
-                ]);
-
-        $civilianUsers = $userRef->where('policeUID', '=', $uuid);
-        $policeAcc = $civilianUsers->documents();
-        return view('pages.police_manageaccounts', [
-            'account' => $policeAcc,
-        ]);
+            return view('pages.police_manageaccounts', [
+                'account'   => $brgyUser
+            ]);
+        }
     }
 
     /**

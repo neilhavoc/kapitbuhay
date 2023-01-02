@@ -22,7 +22,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
+<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
     <div style="text-align:center">
         <h1>
             Victims Health Status Monitoring
