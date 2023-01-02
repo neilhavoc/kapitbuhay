@@ -121,10 +121,6 @@ class LoginController extends Controller
 
                 }
             }
-            else
-            {
-                break;
-            }
         }
 
         try

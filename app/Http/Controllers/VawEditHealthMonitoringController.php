@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class VawManageAccountController extends Controller
+class VawEditHealthMonitoringController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,40 +13,8 @@ class VawManageAccountController extends Controller
      */
     public function index()
     {
-        if(!session()->has('userID') && !session()->has('brgyName')) {
-            return redirect('loginpage');
-        }
-        else {
-            $firestore = app('firebase.firestore');
-            $storage = app('firebase.storage');
-
-            $database = $firestore->database();
-            $bucket = $storage->getBucket();
-
-            $userid = session('userID');
-            $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
-
-            $urlLogo = $brgyLogo->signedUrl(
-                # This URL is valid for 15 minutes
-                new \DateTime('15 min'),
-                [
-                    'version' => 'v4',
-                ]
-            );
-
-            $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
-
-            $brgyLogoRef->update([
-                ['path' => 'brgyLogo', 'value' => $urlLogo]
-            ]);
-
-            $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
-            $brgyUser = $brgyUserIDRef->snapshot();
-
-            return view('pages.vaw_manageaccounts', [
-                'account'   => $brgyUser
-            ]);
-        }
+        //
+        return view('pages.vaw_EditHealthMonitoring');
     }
 
     /**
