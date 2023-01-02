@@ -145,9 +145,6 @@
                                         <div class="fw-bold ">Report Created By:</div>
                                     </div>
                                     <div class="row">
-
-                                        <input type="text" id="report_creator" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
-
                                         <div class="col-md-auto">
                                             <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
                                         </div>
@@ -186,7 +183,7 @@
                             </button>
                         </div>
                         <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
-                        <div class="col-md-4 fw-bold invisible" id="barangay" >{{ $item['barangay'] }}</div>
+                        <div class="col-md-4 fw-bold invisible" id="brgy" >{{ $item['barangay'] }}</div>
                     </div>
                 </div>
             </div>
@@ -200,19 +197,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://unpkg.com/jspdf-autotable@3.5.28/dist/jspdf.plugin.autotable.js"></script>
 <script>
-
+var logo_img = document.getElementById('brgylogo').textContent;
+var barangay = document.getElementById('brgy').textContent;
 var incident_date = document.getElementById('incident_date').textContent;
 var victim = document.getElementById('victim').textContent;
 var incident_location = document.getElementById('incident_location').textContent;
 var creation_date = document.getElementById('creation_date').textContent;
 var report_creator = document.getElementById('report_creator').value;
 var report_details = document.getElementById("exampleFormControlTextarea2").value;
+//var img = document.createElement('img');
+//img.src = this.logo_img;
 
 window.jsPDF = window.jspdf.jsPDF;
 
 // Convert HTML content to PDF
 function Convert_HTML_To_PDF() {
     var doc = new jsPDF();
+    
 doc.setFont("helvetica", "bold");
 doc.setFontSize(14);
 //doc.text("This is centred text.", 105, 80, null, null, "center");
@@ -220,10 +221,10 @@ doc.text("Republic of the Philippines", 105, 20,null,null,"center");
 doc.text("Province of Cebu", 105, 25,null,null,"center");
 doc.text("City of Cebu", 105, 30,null,null,"center");
 doc.setFont("times", "bold");
-doc.text("BARANGAY LAHUG", 105, 35,null,null,"center");
+doc.text("BARANGAY " + barangay, 105, 35,null,null,"center");
 doc.text("-ooOoo-", 105, 40,null,null,"center");
-doc.addImage("examples/images/Octonyan.jpg", "JPEG", 10, 10,30,30);
-doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
+//doc.addImage(img, "JPEG", 10, 10,30,30);
+//doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
   startY:50,
@@ -234,18 +235,14 @@ doc.autoTable({
     ['Exact Location of Incident', incident_location],
     ['Involved Person/Specific Identification', victim],
     ['Narrative Details of Incident', report_details],
-    ['Action Taken', 'Details here'],
+    ['Case Status', "Add Data Here"],
     ['Report Creation Date:', creation_date],
     ['Report Created By:', report_creator],
 
     // ...
   ],
 })
-doc.addPage();
-
-
-
-
+//doc.addPage();
 
 // Save the PDF
 doc.save('document.pdf');
