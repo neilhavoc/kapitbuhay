@@ -150,13 +150,18 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-5">
+                            <button class="btn btn-success w-25" >
+                                Generate PDF
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     @endforeach
 @endif
 @stop
