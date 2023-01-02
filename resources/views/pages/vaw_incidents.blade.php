@@ -145,13 +145,33 @@
                                         <div class="fw-bold ">Report Created By:</div>
                                     </div>
                                     <div class="row">
-                                        <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
+                                        <div class="col-md-auto">
+                                            <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="fw-bold ">Position:</div>
                                     </div>
                                     <div class="row">
-                                        <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportPosition'] }}">
+                                        <div class="col-md-auto">
+                                            <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportPosition'] }}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="fw-bold ">Case Status:</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto">
+                                            <select class="form-select " name="CaseStatus" aria-label="Default select example">
+                                                <option selected value="Ongoing">Ongoing</option>
+                                                <option value="Closed">Closed</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-auto">
+                                        <button class="btn btn-primary " >
+                                                Save
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
