@@ -81,9 +81,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Edit
-                                </button>
+                                <a href="vaw_edithealthmonitoring" class="btn btn-warning" role="button" aria-disabled="true">Edit</a>
                             </td>
                         </tr>
                     </tbody>
@@ -92,9 +90,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-danger">
-                    Create New Record
-                </button>
+                <a href="vaw_createhealthmonitoring" class="btn btn-warning" role="button" aria-disabled="true">Create New Record</a>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-success">

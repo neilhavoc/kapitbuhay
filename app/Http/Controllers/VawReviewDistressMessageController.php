@@ -28,7 +28,7 @@ class VawReviewDistressMessageController extends Controller
             $policeRef = $database->collection('police_accounts');
             $polRef = $policeRef->documents();
 
-            if ($messageRef['status'] == 'Read' || $messageRef['status'] == 'Transferred')
+            if ($messageRef['status'] == 'Unread' || $messageRef['status'] == 'Read' || $messageRef['status'] == 'Transferred')
             {
                 $disable = 'disabled';
             }

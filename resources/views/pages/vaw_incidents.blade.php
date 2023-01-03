@@ -145,13 +145,9 @@
                                         <div class="fw-bold ">Report Created By:</div>
                                     </div>
                                     <div class="row">
-
-                                        <input type="text" id="report_creator" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
-
                                         <div class="col-md-auto">
                                             <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportCreator'] }}">
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="fw-bold ">Position:</div>
@@ -164,19 +160,23 @@
                                     <div class="row">
                                         <div class="fw-bold ">Case Status:</div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-auto">
-                                            <select class="form-select " name="CaseStatus" aria-label="Default select example">
-                                                <option selected value="Ongoing">Ongoing</option>
-                                                <option value="Closed">Closed</option>
-                                            </select>
+                                    <form action="vaw_reports/{{ $item->id() }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <div class="col-md-auto">
+                                                <select class="form-select " name="CaseStatus" aria-label="Default select example">
+                                                    <option selected value="Ongoing">Ongoing</option>
+                                                    <option value="Closed">Closed</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-auto">
+                                            <button type="submit" class="btn btn-primary" >
+                                                    Save
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="col-md-auto">
-                                        <button class="btn btn-primary " >
-                                                Save
-                                            </button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             </button>
                         </div>
                         <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
-                        <div class="col-md-4 fw-bold invisible" id="barangay" >{{ $item['barangay'] }}</div>
+                        <div class="col-md-4 fw-bold invisible" id="brgy" >{{ $item['barangay'] }}</div>
                     </div>
                 </div>
             </div>
