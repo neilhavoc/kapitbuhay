@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Contract\Storage;
 use Kreait\Firebase\Contract\Firestore;
+use App\Mail\EmailSender;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class VictimAccountController extends Controller
 {
@@ -97,6 +100,21 @@ class VictimAccountController extends Controller
             ['path' => 'verification_status', 'value' => $request->input('verification')],
             ['path' => 'account_status', 'value' => $request->input('accountStatus')]
         ]);
+
+        $mailData = [
+          'subject' => 'KapitBuhat Test Email',
+          'body' => 'Email SAMPLE NI'
+
+        ];
+        
+        try{
+           Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
+           //return response()->json(['Great']);
+        }
+        catch(Exception $th){
+
+        }
+
         return redirect('VictimAcc');
     }
 
