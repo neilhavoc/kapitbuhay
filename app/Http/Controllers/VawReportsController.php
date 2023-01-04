@@ -105,7 +105,16 @@ class VawReportsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $brgyLogoRef = $database->collection('incident_reports')->document($id);
+
+            $brgyLogoRef->update([
+                ['path' => 'report_status', 'value' => $request->input('CaseStatus')]
+            ]);
+
+        return redirect('vaw_reports');
     }
 
     /**

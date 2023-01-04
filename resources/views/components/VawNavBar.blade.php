@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#"></a></li>
-                    <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:200px;" >Barangay VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
+                    <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:200px;" >Barangay {{session('barangay')}} VAW&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-danger fw-heavy" href="#">Log out</a></li>
                           </ul>

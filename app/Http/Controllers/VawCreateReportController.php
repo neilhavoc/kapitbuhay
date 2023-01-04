@@ -90,10 +90,14 @@ class VawCreateReportController extends Controller
             $database->collection('record_IDs')->document('incidentReport_ID')->set($data);
         }
 
+        $senderUIDRef = $database->collection('sos-distress-message')->document($request->input('sosRefID'));
+        $senderUID = $senderUIDRef->snapshot();
+
         $data = [
             'distressMessageRefID'      => $request->input('sosRefID'),
             'incidentReportID'          => $newIncidentID,
             'sender_FullName'           => $request->input('sender_Name'),
+            'sender_UID'                => $senderUID['sender_userID'],
             'sendDate'                  => $request->input('sendDate'),
             'sender_location'           => $request->input('sender_loc'),
             'sender_locLink'            => $request->input('sender_locLink'),

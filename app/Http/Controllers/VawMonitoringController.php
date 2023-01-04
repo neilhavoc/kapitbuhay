@@ -17,6 +17,11 @@ class VawMonitoringController extends Controller
             return redirect('loginpage');
         }
         else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+
+            $incidentRefID = $database->collection('incident_reports');
+            $incidentRef = $incidentRefID->documents();
             return view('pages.vaw_monitoring');
         }
     }
