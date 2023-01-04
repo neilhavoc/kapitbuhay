@@ -29,7 +29,7 @@
 <!-- Content -->
 @section('content')
 
-    <div class="container search" style="overflow: hidden; overflow-y: scroll;">
+    <div class="container search"  style="overflow: hidden; overflow-y: scroll;">
         <div class="row">
             <div class="col-md-5">
                 <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -62,11 +62,14 @@
                                 <td>{{ $item['policeContactNum1'] }}</td>
                                 <td>
                                     <!-- Modal trigger button -->
-                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewPolice{{ $item->id() }}">
+                                    <form action="manage_PoliceAccounts" method="POST">
+                                    @csrf
+                                    <input type="text" hidden="true" name="policeID" class="col-md-3" value="{{ $item->id() }}">
+                                    <button class="btn btn-warning" type="submit">
                                         View
                                     </button>
+                                    </form>
                                 </td>
-
                             </tr>
                         @endforeach
                     @endif
@@ -74,10 +77,7 @@
             </table>
         </div>
         {{-- view modal --}}
-        @if ($account == null)
-        @else
-            @foreach ($account as $item)
-            <form action="policeAcc/{{ $item->id() }}" method="POST">
+            {{-- <form action="policeAcc/{{ $item->id() }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal fade" id="viewPolice{{ $item->id() }}" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -202,9 +202,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
-            @endforeach
-        @endif
+            </form>         --}}
     </div>
 
 @stop

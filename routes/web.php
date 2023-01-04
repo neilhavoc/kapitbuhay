@@ -35,6 +35,8 @@ use App\Http\Controllers\VawReviewDistressMessageController;
 use App\Http\Controllers\VawUpdateHealthMonitoringController;
 use App\Http\Controllers\VawCreateHealthMonitoringController;
 use App\Http\Controllers\VawEditHealthMonitoringController;
+use App\Http\Controllers\ManageAccountsPoliceProfileViewController;
+use App\Http\Controllers\VawIncidentReportViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,5 +93,5 @@ Route::resource('/vaw_distressmessage', VawDistressMessageController::class);
 Route::resource('/vaw_updatehealthmonitoring', VawUpdateHealthMonitoringController::class);
 Route::resource('/vaw_createhealthmonitoring', VawCreateHealthMonitoringController::class);
 Route::resource('/vaw_edithealthmonitoring', VawEditHealthMonitoringController::class);
-
-
+Route::resource('/manage_accountspoliceprofileview', ManageAccountsPoliceProfileViewController::class);
+Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
