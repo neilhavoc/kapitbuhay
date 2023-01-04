@@ -28,9 +28,26 @@ class ManageAccountsVawProfileViewController extends Controller
             $vawIDRef = $database->collection('barangay_accounts')->document($viewdisID);
             $vawRef = $vawIDRef->snapshot();
 
-        return view('pages.manage_AccountsViewVawProfile',[
-            'vaw' => $vawRef,
-        ]);
+            if ($vawRef['verification_status'] != 'Verified')
+            {
+                $accountdisable = 'disabled';
+                $verifydisable = 'false';
+            }
+            elseif ($vawRef['verification_status'] == 'Verified')
+            {
+                $accountdisable = 'false';
+                $verifydisable = 'disabled';
+            }
+            else
+            {
+                $verifydisable = 'false';
+            }
+
+            return view('pages.manage_AccountsViewVawProfile',[
+                'vaw' => $vawRef,
+                'disable' => $accountdisable,
+                'verifydisable' => $verifydisable,
+            ]);
         }
     }
 
@@ -89,24 +106,24 @@ class ManageAccountsVawProfileViewController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
 
-        $civilianUsers = $database->collection('barangay_accounts')->document($id);
+        $vawUsers = $database->collection('barangay_accounts')->document($id);
 
         if ($request->input('verification') != null)
         {
-            $civilianUsers->update([
+            $vawUsers->update([
                 ['path' => 'verification_status', 'value' => $request->input('verification')]
             ]);
 
             if ($request->input('accountStatus') != null)
             {
-                $civilianUsers->update([
+                $vawUsers->update([
                     ['path' => 'account_status', 'value' => $request->input('accountStatus')]
                 ]);
             }
         }
         elseif ($request->input('accountStatus') != null)
         {
-            $civilianUsers->update([
+            $vawUsers->update([
                 ['path' => 'account_status', 'value' => $request->input('accountStatus')]
             ]);
         }
@@ -124,7 +141,53 @@ class ManageAccountsVawProfileViewController extends Controller
          catch(Exception $th){
 
          }
-        return redirect('VawAcc');
+        return redirect('policeAcc');
+    }
+
+    public function updateAccStatus(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $vawUsers = $database->collection('police_accounts')->document($id);
+        $vawRef = $vawUsers->snapshot();
+
+
+        if ($request->input('AccountStatus') != null)
+        {
+            $vawUsers->update([
+                ['path' => 'account_status', 'value' => $request->input('AccountStatus')]
+            ]);
+
+            if($request->input('AccountStatus') == 'Not Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been unbanned you can now use again your account. Thank you.'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been banned for misusage of the mobile application'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Warning'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been warned for misusage of the mobile application. Please use the mobile application wisely.'
+                ];
+            }
+        }
+
+        try{
+            Mail::to($vawRef['brgyEmail'])->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
+        }
+            catch(Exception $th){
+
+        }
+
+        return redirect('policeAcc');
     }
 
     /**

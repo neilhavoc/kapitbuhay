@@ -16,7 +16,7 @@ class ManageAccountsVictimProfileViewController extends Controller
      */
     public function index()
     {
-        if(!session()->has('userID') && !session()->has('policeName')) {
+        if(!session()->has('adminID')) {
             return redirect('loginpage');
         }
         else {
@@ -28,8 +28,25 @@ class ManageAccountsVictimProfileViewController extends Controller
             $victimIDRef = $database->collection('civilian-users')->document($viewdisID);
             $victimRef = $victimIDRef->snapshot();
 
+            if ($victimRef['verification_status'] != 'Verified')
+            {
+                $accountdisable = 'disabled';
+                $verifydisable = 'false';
+            }
+            elseif ($victimRef['verification_status'] == 'Verified')
+            {
+                $accountdisable = 'false';
+                $verifydisable = 'disabled';
+            }
+            else
+            {
+                $verifydisable = 'false';
+            }
+
             return view('pages.manage_AccountsViewVictimProfile',[
                 'victim' => $victimRef,
+                'disable' => $accountdisable,
+                'verifydisable' => $verifydisable,
             ]);
         }
     }
@@ -90,38 +107,80 @@ class ManageAccountsVictimProfileViewController extends Controller
         $database = $firestore->database();
 
         $civilianUsers = $database->collection('civilian-users')->document($id);
+        $victimRef = $civilianUsers->snapshot();
 
         if ($request->input('verification') != null)
         {
-            $civilianUsers->update([
-                ['path' => 'verification_status', 'value' => $request->input('verification')]
-            ]);
+            $mailData = [
+                'subject' => 'Account Verification Update!',
+                'body' => 'Hello your Account failed the Verification Process Please re-register again and supply the correct information and requirements.'
+            ];
 
-            if ($request->input('accountStatus') != null)
+            if($request->input('verification') == 'Verified')
             {
                 $civilianUsers->update([
-                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+                    ['path' => 'verification_status', 'value' => $request->input('verification')]
+                ]);
+            }
+            elseif ($request->input('verification') == 'Verification Failed')
+            {
+                $civilianUsers->update([
+                    ['path' => 'verification_status', 'value' => $request->input('verification')]
                 ]);
             }
         }
-        elseif ($request->input('accountStatus') != null)
-        {
-            $civilianUsers->update([
-                ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-            ]);
-        }
-
-        $mailData = [
-          'subject' => 'KapitBuhat Test Email',
-          'body' => 'Email SAMPLE NI'
-
-        ];
 
         try{
-           Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
-           //return response()->json(['Great']);
+            Mail::to($victimRef['email'])->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
         }
-        catch(Exception $th){
+            catch(Exception $th){
+
+        }
+
+        return redirect('VictimAcc');
+    }
+
+    public function updateAccStatus(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $civilianUsers = $database->collection('civilian-users')->document($id);
+        $victimRef = $civilianUsers->snapshot();
+
+
+        if ($request->input('AccountStatus') != null)
+        {
+            $civilianUsers->update([
+                ['path' => 'account_status', 'value' => $request->input('AccountStatus')]
+            ]);
+
+            if($request->input('AccountStatus') == 'Not Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been unbanned you can now use again your account. Thank you.'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been banned for misusage of the mobile application'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Warning'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been warned for misusage of the mobile application. Please use the mobile application wisely.'
+                ];
+            }
+        }
+
+        try{
+            Mail::to($victimRef['email'])->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
+        }
+            catch(Exception $th){
 
         }
 

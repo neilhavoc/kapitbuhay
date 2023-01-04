@@ -28,9 +28,6 @@
 
 <!-- Content -->
 @section('content')
-<form action="manage_accountsvictimprofileview/{{ $victim->id() }}" method="POST">
-    @csrf
-    @method('PUT')
     <div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
         <div style="text-align:center">
             <h1>
@@ -103,36 +100,73 @@
             </div>
             <div class="row row3 mt-5">
                 <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h5>
-                                Verification Status:
-                            </h5>
+                    <form action="manage_accountsvictimprofileview/{{ $victim->id() }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <h5>
+                                    Verification Status:
+                                </h5>
+                            </div>
+                            @if($verifydisable == 'disabled')
+                            <div class="col-md-5">
+                                <select class="form-select" name="verification" aria-label="verification selection" disabled>
+                                    <option value="{{ $victim['verification_status'] }}">{{ $victim['verification_status'] }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-info" disabled>Update Verification</button>
+                            </div>
+                            @else
+                            <div class="col-md-5">
+                                <select class="form-select" name="verification" aria-label="verification selection">
+                                    <option value="{{ $victim['verification_status'] }}">{{ $victim['verification_status'] }}</option>
+                                    <option value="Verified">Verified</option>
+                                    <option value="To Verify">To Verify</option>
+                                    <option value="Verification Failed">Verification Failed</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-info">Update Verification</button>
+                            </div>
+                            @endif
                         </div>
-                        <div class="col-md-5">
-                            <select class="form-select" name="verification" aria-label="verification selection">
-                                <option value="{{ $victim['verification_status'] }}">{{ $victim['verification_status'] }}</option>
-                                <option value="Verified">Verified</option>
-                                <option value="To Verify">To Verify</option>
-                                <option value="Verification Failed">Verification Failed</option>
-                            </select>
-                        </div>
-                        </div>
+                    </form>
+                    <form action="manage_accountsvictimprofileview/updateAccStatus/{{ $victim->id() }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="row mt-3">
-                        <div class="col-md-2">
-                            <h5>
-                                Account Status:
-                            </h5>
+                            <div class="col-md-2">
+                                <h5>
+                                    Account Status:
+                                </h5>
+                            </div>
+                            @if($disable == 'disabled')
+                            <div class="col-md-5">
+                                <select class="form-select" name="AccountStatus" id="AccountStatus" aria-label="verification selection" disabled>
+                                    <option selected disabled>{{ $victim['account_status'] }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-info" disabled>Update Account Status</button>
+                            </div>
+                            @else
+                            <div class="col-md-5">
+                                <select class="form-select" name="AccountStatus" id="AccountStatus" aria-label="verification selection">
+                                    <option selected disabled>{{ $victim['account_status'] }}</option>
+                                    <option value="Not Banned">Not Banned</option>
+                                    <option value="Banned">Banned</option>
+                                    <option value="Warning">Warning</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-info">Update Account Status</button>
+                            </div>
+                            @endif
                         </div>
-                        <div class="col-md-5">
-                            <select class="form-select" id="AccountStatus" aria-label="verification selection">
-                                <option selected disabled>{{ $victim['account_status'] }}</option>
-                                <option value="Not Banned">Not Banned</option>
-                                <option value="Banned">Banned</option>
-                                <option value="warning">Warning</option>
-                            </select>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-md-4">
                     <div class="row">
@@ -149,13 +183,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer-text-center">
-                <hr class="fw-heavy">
-                <button type="submit" class="btn btn-success">Update</button>
-            </div>
         </div>
     </div>
-</form>
 @stop
 
 <!-- Scripts -->

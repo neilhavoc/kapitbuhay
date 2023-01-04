@@ -29,8 +29,25 @@ class ManageAccountsPoliceProfileViewController extends Controller
             $policeRef = $database->collection('police_accounts')->document($viewdisID);
             $polRef = $policeRef->snapshot();
 
+            if ($polRef['verification_status'] != 'Verified')
+            {
+                $accountdisable = 'disabled';
+                $verifydisable = 'false';
+            }
+            elseif ($polRef['verification_status'] == 'Verified')
+            {
+                $accountdisable = 'false';
+                $verifydisable = 'disabled';
+            }
+            else
+            {
+                $verifydisable = 'false';
+            }
+
             return view('pages.manage_AccountsViewPoliceProfile',[
                 'police' => $polRef,
+                'disable' => $accountdisable,
+                'verifydisable' => $verifydisable,
             ]);
         }
     }
@@ -90,25 +107,25 @@ class ManageAccountsPoliceProfileViewController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
 
-        $civilianUsers = $database->collection('police_accounts')->document($id);
+        $policeUsers = $database->collection('police_accounts')->document($id);
 
         if ($request->input('verification') != null)
         {
-            $civilianUsers->update([
+            $policeUsers->update([
                 ['path' => 'verification_status', 'value' => $request->input('verification')]
             ]);
 
             if ($request->input('accountStatus') != null)
             {
-                $civilianUsers->update([
+                $policeUsers->update([
                     ['path' => 'account_status', 'value' => $request->input('accountStatus')]
                 ]);
             }
         }
         elseif ($request->input('accountStatus') != null)
         {
-            $civilianUsers->update([
-                ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+            $policeUsers->update([
+                ['policeUsers' => 'account_status', 'value' => $request->input('accountStatus')]
             ]);
         }
 
@@ -125,6 +142,52 @@ class ManageAccountsPoliceProfileViewController extends Controller
          catch(Exception $th){
 
          }
+        return redirect('policeAcc');
+    }
+
+    public function updateAccStatus(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $policeUsers = $database->collection('police_accounts')->document($id);
+        $policeRef = $policeUsers->snapshot();
+
+
+        if ($request->input('AccountStatus') != null)
+        {
+            $policeUsers->update([
+                ['path' => 'account_status', 'value' => $request->input('AccountStatus')]
+            ]);
+
+            if($request->input('AccountStatus') == 'Not Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been unbanned you can now use again your account. Thank you.'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Banned'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been banned for misusage of the mobile application'
+                ];
+            }
+            elseif ($request->input('AccountStatus') == 'Warning'){
+                $mailData = [
+                    'subject' => 'Account Status Update!',
+                    'body' => 'Hello your account has been warned for misusage of the mobile application. Please use the mobile application wisely.'
+                ];
+            }
+        }
+
+        try{
+            Mail::to($policeRef['policeEmail'])->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
+        }
+            catch(Exception $th){
+
+        }
+
         return redirect('policeAcc');
     }
 

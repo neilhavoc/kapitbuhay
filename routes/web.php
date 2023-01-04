@@ -59,9 +59,21 @@ Route::get('/', function () {
 Route::resource('/vaw_reviewdistressmessage', VawReviewDistressMessageController::class);
 Route::put('/vaw_reviewdistressmessage/distressStatus/{id}', [VawReviewDistressMessageController::class, 'distressStatus']);
 Route::put('/vaw_reviewdistressmessage/transferDistress/{id}', [VawReviewDistressMessageController::class, 'transferDistress']);
+
 //Police Review Distress Message
 Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
 Route::put('/police_reviewdistressmessage/poldistressStatus/{id}', [PoliceReviewDistressMessageController::class, 'poldistressStatus']);
+
+//Manage Accounts Victim Profile View
+Route::resource('/manage_accountsvictimprofileview', ManageAccountsVictimProfileViewController::class);
+Route::put('/manage_accountsvictimprofileview/updateAccStatus/{id}', [ManageAccountsVictimProfileViewController::class, 'updateAccStatus']);
+
+//Manage Accounts Police Profile View
+Route::resource('/manage_accountspoliceprofileview', ManageAccountsPoliceProfileViewController::class);
+Route::put('/manage_accountspoliceprofileview/updateAccStatus/{id}', [ManageAccountsPoliceProfileViewController::class, 'updateAccStatus']);
+//Manage Accounts VAW Profile View
+Route::resource('/manage_accountsvawprofileview', ManageAccountsVawProfileViewController::class);
+Route::put('/manage_accountsvawprofileview/updateAccStatus/{id}', [ManageAccountsVawProfileViewController::class, 'updateAccStatus']);
 
 Route::resource('/loginpage', LoginController::class);
 Route::resource('/register', RegisterController::class);
@@ -95,7 +107,4 @@ Route::resource('/vaw_distressmessage', VawDistressMessageController::class);
 Route::resource('/vaw_updatehealthmonitoring', VawUpdateHealthMonitoringController::class);
 Route::resource('/vaw_createhealthmonitoring', VawCreateHealthMonitoringController::class);
 Route::resource('/vaw_edithealthmonitoring', VawEditHealthMonitoringController::class);
-Route::resource('/manage_accountspoliceprofileview', ManageAccountsPoliceProfileViewController::class);
-Route::resource('/manage_accountsvawprofileview', ManageAccountsVawProfileViewController::class);
-Route::resource('/manage_accountsvictimprofileview', ManageAccountsVictimProfileViewController::class);
 Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
