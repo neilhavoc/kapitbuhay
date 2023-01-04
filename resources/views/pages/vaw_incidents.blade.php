@@ -77,9 +77,13 @@
                                     <td>{{ $item['reportCreator'] }}</td>
                                     <td>{{ $item['report_status'] }}</td>
                                     <td>
-                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->id() }}">
-                                            View
-                                        </button>
+                                        <form action="vaw_reports" method="POST">
+                                            @csrf
+                                            <input type="text" hidden="true" name="incidentID" class="col-md-3" value="{{ $item->id() }}">
+                                            <button class="btn btn-warning" type="submit">
+                                                View
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endif
@@ -90,7 +94,7 @@
         </div>
 </div>
 
-@if ($incident == null)
+{{-- @if ($incident == null)
 @else
     @foreach ($incident as $item)
         <div class="modal fade" id="staticBackdrop{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -98,7 +102,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                {{-- <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Review Distress Message</h3> --}}
+                <h3 class="modal-title position-absolute top-25 start-50 translate-middle" id="staticBackdropLabel">Review Distress Message</h3>
                     </div>
                     <div class="modal-body">
                         <h3 class="text-center">View Incident Report</h3>
@@ -193,7 +197,7 @@
             </div>
         </div>
     @endforeach
-@endif
+@endif --}}
 @stop
 
 <!-- Scripts -->

@@ -48,7 +48,7 @@ class VawReportsController extends Controller
 
             return view('pages.vaw_incidents', [
                 'incident' => $incidentRef,
-                'brgyLogo' => $brgyUser
+                'brgy' => $brgyUser
             ]);
         }
     }
@@ -72,10 +72,13 @@ class VawReportsController extends Controller
     public function store(Request $request)
     {
         //
+        session(['viewIncidentID' => $request->input('incidentID')]);
+
+        return redirect('vaw_incidentreportview');
     }
 
     /**
-     * Display the specified resource.
+     * DisplabrgyLogoy the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
