@@ -10,8 +10,8 @@
     height: 170x;
     width: 200px;
 }
-    .search {
-    margin-top: 100px;
+.search {
+    margin-top: 1%;
  }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);

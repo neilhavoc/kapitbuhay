@@ -6,8 +6,8 @@
 <!-- Styles -->
 @section('styles')
 <style>
-    .search {
-    margin-top: 100px;
+  .search {
+    margin-top: 1%;
  }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
@@ -158,6 +158,7 @@
                                             <input type="text" class="form-control align-content-center w-75" disabled value="{{ $item['reportPosition'] }}">
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="fw-bold ">Case Status:</div>
                                     </div>
@@ -186,6 +187,7 @@
                                 Generate PDF
                             </button>
                         </div>
+                        <div class="col-md-4 fw-bold invisible" id="select_status" >{{ $item['report_status'] }}</div>
                         <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
                         <div class="col-md-4 fw-bold invisible" id="brgy" >{{ $item['barangay'] }}</div>
                     </div>
@@ -209,6 +211,7 @@ var incident_location = document.getElementById('incident_location').textContent
 var creation_date = document.getElementById('creation_date').textContent;
 var report_creator = document.getElementById('report_creator').value;
 var report_details = document.getElementById("exampleFormControlTextarea2").value;
+var text = document.getElementById("select_status").textContent;
 
 
 window.jsPDF = window.jspdf.jsPDF;
@@ -227,18 +230,19 @@ doc.setFont("times", "bold");
 doc.text("BARANGAY " + barangay, 105, 35,null,null,"center");
 doc.text("-ooOoo-", 105, 40,null,null,"center");
 doc.addImage(logo_img, "JPEG", 10, 10,30,30);
-//doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
+doc.addImage(logo_img, "JPEG", 170, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
   startY:50,
   columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
   margin: { top: 10 },
+  theme: 'grid',
   body: [
     ['Inclusive Dates and Time of Incident', incident_date],
     ['Exact Location of Incident', incident_location],
     ['Involved Person/Specific Identification', victim],
     ['Narrative Details of Incident', report_details],
-    ['Case Status', barangay],
+    ['Case Status', text],
 
 
     // ...
@@ -248,12 +252,13 @@ doc.autoTable({
 
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
-  startY:200,
+  startY:240,
+  theme: 'grid',
   //columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
   //margin: { top: 10 },
   body: [
-    ['Report Creation Date:', creation_date],
-    [{content: 'Report Created By:', styles: {minCellHeight: 30,cellWidth: 40,fontStyle:'bold'}}, report_creator],
+    [{content: 'Report Creation Date:', styles: {minCellHeight: 15,cellWidth: 40,fontStyle:'bold'}}, creation_date],
+    [{content: 'Report Created By:', styles: {minCellHeight: 15,cellWidth: 40,fontStyle:'bold'}}, report_creator],
 
     // ...
   ],
