@@ -130,7 +130,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">
+<div class="container search" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
     <div class="row g-1">
         <div class="col-md-5">
             <input class= "container-fluid h-100" type="text" placeholder="Search">

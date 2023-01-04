@@ -14,7 +14,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container text-center">
+<div class="container text-center" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
   <div class="row gy-5 my-5 mx-5">
     <div class="col-6">
       <div class="p-3 border border-dark fw-bold" id="floatingInput">Total Users: {{ $account['total-accounts'] }} <label for="floatingInput"></label></div>

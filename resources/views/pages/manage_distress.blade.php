@@ -22,7 +22,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
     <h1>List of Distress Message</h1>
     <div class="form-group mt-5">
             <table class="table table-hover table-bordered text-center">
