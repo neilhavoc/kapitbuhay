@@ -93,7 +93,7 @@ var tbody = document.getElementById('tbody2');
   let permission = Notification.permission;
 
 if(permission === "granted"){
-   showNotification();
+   //showNotification();
 } else if(permission === "default"){
    requestAndShowPermission();
 } else {
