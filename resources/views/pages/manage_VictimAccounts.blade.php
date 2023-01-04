@@ -107,7 +107,7 @@
                                                     </div>
                                                     <div class="row mt-1 mx-3">
                                                         <h5 class="col-md-4">Email:</h5>
-                                                        <input type="text" disabled ="true" class="col-md-4" value="{{ $item['email'] }}">
+                                                        <input type="text" name="victim_email" disabled ="true" class="col-md-4" value="{{ $item['email'] }}">
                                                     </div>
                                                 </div>
                                             </div>
