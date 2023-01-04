@@ -13,7 +13,7 @@
             Victim Health Status Record
         </h1>
     </div>
-                        <div class="container border-secondary" style="height:400px; margin-top:10%; margin-bottom:0%;">
+                        <div class="container border-secondary" style="height:400px; margin-top:10%; margin-bottom:0%; overflow-y: scroll; overflow-x: hidden;">
                             <div class="row mb-3 row1">
                                 <div class="col-md-2 mx-5">
                                     <img src="ball.jpg" alt="Ball" class="profile">
@@ -67,7 +67,7 @@
                                 </table>
                             </div>
                         </div>
-             
+
 
         <div class="modal fade" id="viewVAW" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">

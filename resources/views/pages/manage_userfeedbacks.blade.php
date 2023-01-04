@@ -31,7 +31,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search">
+<div class="container search" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
     <div class="row g-1">
     <div class="input-group mb-3">
   <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>

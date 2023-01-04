@@ -12,7 +12,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
     <form action="police_createReports" method="POST">
         @csrf
         <div style="text-align:center">
