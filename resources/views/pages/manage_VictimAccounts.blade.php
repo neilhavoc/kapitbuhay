@@ -61,10 +61,13 @@
                             <td>{{ $item['phonenumber'] }}</td>
                             <td>{{ $item['verification_status'] }}</td>
                             <td>
-                                <!-- Modal trigger button -->
-                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#viewVictim{{ $item->id() }}">
-                                    View
-                                </button>
+                                <form action="VictimAcc" method="POST">
+                                    @csrf
+                                    <input type="text" hidden="true" name="victimID" class="col-md-3" value="{{ $item->id() }}">
+                                    <button class="btn btn-warning" type="submit">
+                                        View
+                                    </button>
+                                </form>
                             </td>
 
                             </tr>

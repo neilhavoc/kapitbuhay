@@ -50,7 +50,9 @@ class VictimAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        session(['viewVictimID' => $request->input('victimID')]);
+
+        return redirect('manage_accountsvictimprofileview');
     }
 
     /**
