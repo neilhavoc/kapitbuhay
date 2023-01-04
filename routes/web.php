@@ -40,6 +40,7 @@ use App\Http\Controllers\ManageAccountsVawProfileViewController;
 use App\Http\Controllers\ManageAccountsVictimProfileViewController;
 use App\Http\Controllers\VawIncidentReportViewController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -99,3 +100,4 @@ Route::resource('/manage_accountspoliceprofileview', ManageAccountsPoliceProfile
 Route::resource('/manage_accountsvawprofileview', ManageAccountsVawProfileViewController::class);
 Route::resource('/manage_accountsvictimprofileview', ManageAccountsVictimProfileViewController::class);
 Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
+

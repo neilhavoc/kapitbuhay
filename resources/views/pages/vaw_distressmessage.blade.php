@@ -7,7 +7,7 @@
 @section('styles')
 <style>
     .search {
-    margin-top: 100px;
+    margin-top: 1%;
  }
  .bill-header.cs {
   background-color: rgba(37,71,106,0.56);
