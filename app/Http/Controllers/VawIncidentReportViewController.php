@@ -18,6 +18,9 @@ class VawIncidentReportViewController extends Controller
             return redirect('loginpage');
         }
         else {
+            $firestore = app('firebase.firestore');
+            $database = $firestore->database();
+
             $storage = app('firebase.storage');
             $bucket = $storage->getBucket();
             $userid = session('userID');
@@ -38,7 +41,6 @@ class VawIncidentReportViewController extends Controller
 
             $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
             $brgyUser = $brgyUserIDRef->snapshot();
-            $firestore = app('firebase.firestore');
 
             $database = $firestore->database();
             $viewdisID = session('viewIncidentID');

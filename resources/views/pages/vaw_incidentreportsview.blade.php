@@ -117,8 +117,8 @@
                                 Generate PDF
                             </button>
                         </div>
-                        {{-- <div class="col-md-4 fw-bold invisible" id="brgylogo" >{{ $brgy['brgyLogo'] }}</div>
-                        <div class="col-md-4 fw-bold invisible" id="brgy" >{{ $brgy['barangay'] }}</div> --}}
+                        <div style="display: none" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
+                        <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>{{--  --}}
     </div>
 </form>
 
