@@ -76,9 +76,13 @@
                                 <td>{{ $item['reportPosition'] }} {{ $item['reportCreator'] }}</td>
                                 <td>{{ $item['report_status'] }}</td>
                                 <td>
-                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewReport{{ $item->id() }}">
-                                        View
-                                    </button>
+                                    <form action="police_report" method="POST">
+                                        @csrf
+                                        <input type="text" hidden="true" name="incidentID" class="col-md-3" value="{{ $item->id() }}">
+                                        <button class="btn btn-warning" type="submit">
+                                            View
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endif
@@ -89,7 +93,7 @@
     </div>
 </div>
 
-@if ($incident == null)
+{{-- @if ($incident == null)
 @else
     @foreach ($incident as $item)
     <div class="modal fade" id="viewReport{{ $item->id() }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -186,7 +190,7 @@
     </div>
 </div>
     @endforeach
-@endif
+@endif --}}
 @stop
 
 <!-- Scripts -->
