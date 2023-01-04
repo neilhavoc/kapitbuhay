@@ -98,6 +98,9 @@ class PoliceAccountController extends Controller
     public function store(Request $request)
     {
         //
+        session(['viewPoliceID' => $request->input('policeID')]);
+
+        return redirect('manage_accountspoliceprofileview');
     }
 
     /**
