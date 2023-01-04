@@ -238,15 +238,27 @@ doc.autoTable({
     ['Exact Location of Incident', incident_location],
     ['Involved Person/Specific Identification', victim],
     ['Narrative Details of Incident', report_details],
-    ['Action Taken', barangay],
+    ['Case Status', barangay],
+
+
+    // ...
+  ],
+})
+
+
+doc.autoTable({
+  //styles: { fillColor: [255, 0, 0] },
+  startY:200,
+  //columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
+  //margin: { top: 10 },
+  body: [
     ['Report Creation Date:', creation_date],
-    ['Report Created By:', report_creator],
+    [{content: 'Report Created By:', styles: {minCellHeight: 30,cellWidth: 40,fontStyle:'bold'}}, report_creator],
 
     // ...
   ],
 })
 //doc.addPage();
-
 
 
 

@@ -28,7 +28,7 @@ class EmailSender extends Mailable
      * @return \Illuminate\Mail\Mailables\this
      */
     public function build(){
-        return $this->from('admnenzs@gmail.com', 'Test Email')
+        return $this->from('wearekapitbuhay@gmail.com', 'KapitBuhay')
         ->subject($this->mailData['subject'])->view('email.testemail')->with('mailData', $this->mailData);
     }
     

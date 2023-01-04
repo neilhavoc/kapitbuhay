@@ -102,6 +102,9 @@ class VawAccountController extends Controller
     public function store(Request $request)
     {
         //
+        session(['viewVawID' => $request->input('vawID')]);
+
+        return redirect('manage_accountsvawprofileview');
     }
 
     /**
@@ -144,45 +147,7 @@ class VawAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
 
-        $civilianUsers = $database->collection('barangay_accounts')->document($id);
-
-        if ($request->input('verification') != null)
-        {
-            $civilianUsers->update([
-                ['path' => 'verification_status', 'value' => $request->input('verification')]
-            ]);
-
-            if ($request->input('accountStatus') != null)
-            {
-                $civilianUsers->update([
-                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-                ]);
-            }
-        }
-        elseif ($request->input('accountStatus') != null)
-        {
-            $civilianUsers->update([
-                ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-            ]);
-        }
-
-        $mailData = [
-            'subject' => 'KapitBuhat Test Email',
-            'body' => 'Email SAMPLE NI'
-
-          ];
-
-        try{
-            Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
-            //return response()->json(['Great']);
-         }
-         catch(Exception $th){
-
-         }
-        return redirect('VawAcc');
     }
 
     /**
