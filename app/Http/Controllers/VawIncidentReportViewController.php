@@ -14,7 +14,45 @@ class VawIncidentReportViewController extends Controller
     public function index()
     {
         //
-        return view('pages.vaw_incidentreportsview');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $storage = app('firebase.storage');
+            $bucket = $storage->getBucket();
+            $userid = session('userID');
+            $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
+
+            $urlLogo = $brgyLogo->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+            $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
+
+            $brgyLogoRef->update([
+                ['path' => 'brgyLogo', 'value' => $urlLogo]
+            ]);
+
+            $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
+            $brgyUser = $brgyUserIDRef->snapshot();
+            $firestore = app('firebase.firestore');
+
+            $database = $firestore->database();
+            $viewdisID = session('viewIncidentID');
+
+
+            $incidentRef = $database->collection('incident_reports')->document($viewdisID);
+            $incRef = $incidentRef->snapshot();
+
+            return view('pages.vaw_incidentreportsview', [
+                'incident' => $incRef,
+                'brgyLogo' => $brgyUser,
+            ]);
+        }
+
     }
 
     /**

@@ -9,7 +9,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
-<body>
+<body style="overflow-y: hidden;">
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"> <img src="{{ asset('Kapit_Buhay_Icon.png') }}"/>&nbsp; KapitBuhay</a>
