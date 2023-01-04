@@ -11,6 +11,9 @@ use Kreait\Firebase\Contract\Firestore;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use App\Http\Helpers\FirebaseHelper;
+use App\Mail\EmailSender;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class PoliceAccountController extends Controller
 {
@@ -132,10 +135,40 @@ class PoliceAccountController extends Controller
         $database = $firestore->database();
 
         $civilianUsers = $database->collection('police_accounts')->document($id);
-        $civilianUsers->update([
-                    ['path' => 'verification_status', 'value' => $request->input('verification')],
+
+        if ($request->input('verification') != null)
+        {
+            $civilianUsers->update([
+                ['path' => 'verification_status', 'value' => $request->input('verification')]
+            ]);
+
+            if ($request->input('accountStatus') != null)
+            {
+                $civilianUsers->update([
                     ['path' => 'account_status', 'value' => $request->input('accountStatus')]
                 ]);
+            }
+        }
+        elseif ($request->input('accountStatus') != null)
+        {
+            $civilianUsers->update([
+                ['path' => 'account_status', 'value' => $request->input('accountStatus')]
+            ]);
+        }
+
+        $mailData = [
+            'subject' => 'KapitBuhat Test Email',
+            'body' => 'Email SAMPLE NI'
+
+          ];
+
+        try{
+            Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
+         }
+         catch(Exception $th){
+
+         }
         return redirect('policeAcc');
     }
 

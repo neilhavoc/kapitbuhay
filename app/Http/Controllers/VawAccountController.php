@@ -14,6 +14,9 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 use Kreait\Firebase\Value\Uid;
+use App\Mail\EmailSender;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class VawAccountController extends Controller
 {
@@ -166,13 +169,19 @@ class VawAccountController extends Controller
             ]);
         }
 
+        $mailData = [
+            'subject' => 'KapitBuhat Test Email',
+            'body' => 'Email SAMPLE NI'
 
-        /*$snapshot = $civilianUsers->snapshot();
-        $message = 'Hello! The Barangay VAW Account of: ' . $snapshot['brgyName'] . ' with the email: ' . $snapshot['brgyEmail'] .
-                    ' is now ' . $request->input('verification') . ' and the status of the account is ' . $request->input('accountStatus');
-        //$message = wordwrap($message, )
+          ];
 
-        mail('roasterearl@gmail.com','KapitBuhay Barangay VAW Account Verification', $message);*/
+        try{
+            Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
+            //return response()->json(['Great']);
+         }
+         catch(Exception $th){
+
+         }
         return redirect('VawAcc');
     }
 

@@ -13,8 +13,41 @@ class VawUpdateHealthMonitoringController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.vaw_UpdateHealthMonitoring');
+        if(!session()->has('userID') && !session()->has('brgyName')) {
+            return redirect('loginpage');
+        }
+        else {
+            $firestore = app('firebase.firestore');
+            $storage = app('firebase.storage');
+
+            $database = $firestore->database();
+            $bucket = $storage->getBucket();
+
+            $viewMonitoringReportID = session('viewMonitoringReport');
+
+            $victimImage = $bucket->object('civilian-users/'. $viewMonitoringReportID .'/profile_picture/profile.jpg');
+
+            $urlLogo = $victimImage->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+
+            $civilianUsers = $database->collection('monitoring_reports')->document($viewMonitoringReportID);
+
+            $civilianUsers->update([
+                ['path' => 'victim_image', 'value' => $urlLogo],
+            ]);
+
+            $recordIDs = $database->collection('monitoring_reports')->document($viewMonitoringReportID);
+            $monitorData = $recordIDs->snapshot();
+
+            return view('pages.vaw_UpdateHealthMonitoring', [
+                'monitor' => $monitorData,
+            ]);
+        }
     }
 
     /**

@@ -81,9 +81,9 @@
                                     <td>{{ $item['status'] }}</td>
                                     <td>
                                             <form action="vaw_distressmessage" method="POST">
-                                            @csrf
-                                            <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
-                                            <button type="submit" class="btn btn-success"> View </button>
+                                                @csrf
+                                                <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
+                                                <button type="submit" class="btn btn-success"> View </button>
                                             </form>
                                     </td>
                                 </tr>

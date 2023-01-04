@@ -49,27 +49,43 @@
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
-                        <th id="trs-hd-1" class="col-lg-1">User ID</th>
+                        <th id="trs-hd-1" class="col-lg-2">User ID</th>
                         <th id="trs-hd-2" class="col-lg-2">Name</th>
-                        <th id="trs-hd-3" class="col-lg-2">Address</th>
-                        <th id="trs-hd-4" class="col-lg-2">Email</th>
-                        <th id="trs-hd-5" class="col-lg-3">Contact No.</th>
-                        <th id="trs-hd-6" class="col-lg-3">Monitoring Status</th>
-                        <th id="trs-hd-7" class="col-lg-2"></th>
+                        <th id="trs-hd-3" class="col-lg-4">Address</th>
+                        <th id="trs-hd-5" class="col-lg-2">Contact No.</th>
+                        <th id="trs-hd-6" class="col-lg-2">Monitoring Status</th>
+                        <th id="trs-hd-7" class="col-lg-1"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="justify-contents-center ">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a class="btn btn-warning" href="vaw_updatehealthmonitoring" role="button">Update</a>
-                        </td>
-                    </tr>
+                    @if ($reports == null)
+                        <tr class="justify-contents-center ">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @else
+                        @foreach ($reports as $item)
+                        <tr class="justify-contents-center ">
+                            <td>{{ $item->id() }}</td>
+                            <td>{{ $item['victimFullName'] }}</td>
+                            <td>{{ $item['victimAddress'] }}</td>
+                            <td>{{ $item['victimPhoneNum'] }}</td>
+                            <td>{{ $item['monitoring_status'] }}</td>
+                            <td>
+                                <form action="vaw_monitoring" method="POST">
+                                    @csrf
+                                    <input type="text" hidden="true" name="monitoringID" class="col-md-3" value="{{ $item->id() }}">
+                                    <button type="submit" class="btn btn-warning"> Update </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

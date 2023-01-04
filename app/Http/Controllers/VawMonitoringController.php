@@ -20,9 +20,13 @@ class VawMonitoringController extends Controller
             $firestore = app('firebase.firestore');
             $database = $firestore->database();
 
-            $incidentRefID = $database->collection('incident_reports');
-            $incidentRef = $incidentRefID->documents();
-            return view('pages.vaw_monitoring');
+
+            $monitoringIDRef = $database->collection('monitoring_reports');
+            $monitoringRef = $monitoringIDRef->documents();
+
+            return view('pages.vaw_monitoring', [
+                'reports' => $monitoringRef,
+            ]);
         }
     }
 
@@ -44,7 +48,9 @@ class VawMonitoringController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        session(['viewMonitoringReport' => $request->input('monitoringID')]);
+
+        return redirect('vaw_updatehealthmonitoring');
     }
 
     /**

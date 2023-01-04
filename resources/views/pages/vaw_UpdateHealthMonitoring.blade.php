@@ -31,30 +31,26 @@
     <div class="row mx-3" style="height: 100vh;">
         <div class="row mb-3">
             <div class="col-md-2 mx-5">
-                <img src="#" alt="Ball" class="profile">
+                <img src="{{ $monitor['victim_image'] }}" alt="Ball" class="profile">
 
 
             </div>
             <div class="col-md-8">
                 <div class="row">
                     <h5 class="col-md-2">User ID: </h5>
-                    <h5 id="userID" class="col-md-4"></h5>
+                    <h5 id="userID" class="col-md-4">{{ $monitor['victimUserID'] }}</h5>
                 </div>
                 <div class="row mt-1">
-                    <h5 class="col-md-4">Victim Name:</h5>
-                    <input type="text" disabled ="true" class="col-md-4" value="">
+                    <h5 class="col-md-2">Victim Name:</h5>
+                    <input type="text" disabled ="true" class="col-md-4" value="{{ $monitor['victimFullName'] }}">
                 </div>
                 <div class="row mt-1">
-                    <h5 class="col-md-4">Address:</h5>
-                    <input type="text" disabled ="true" class="col-md-4" value="">
+                    <h5 class="col-md-2">Address:</h5>
+                    <input type="text" disabled ="true" class="col-md-4" value="{{ $monitor['victimAddress'] }}">
                 </div>
                 <div class="row mt-1">
-                    <h5 class="col-md-4">Location Link:</h5>
-                    <input type="text" disabled ="true" class="col-md-4" value="">
-                </div>
-                <div class="row mt-1">
-                    <h5 class="col-md-4">Phone Number:</h5>
-                    <input type="text" disabled ="true" class="col-md-4" value="">
+                    <h5 class="col-md-2">Phone Number:</h5>
+                    <input type="text" disabled ="true" class="col-md-4" value="{{ $monitor['victimPhoneNum'] }}">
                 </div>
             </div>
         </div>
