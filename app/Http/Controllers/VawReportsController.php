@@ -48,7 +48,7 @@ class VawReportsController extends Controller
 
             return view('pages.vaw_incidents', [
                 'incident' => $incidentRef,
-                'brgy' => $brgyUser
+                'brgyLogo' => $brgyUser
             ]);
         }
     }
