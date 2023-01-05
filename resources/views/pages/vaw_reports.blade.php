@@ -17,13 +17,10 @@
 <div class="container text-center" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
     <div class="row mt-5" >
         <div class="row justify-content-center mt-2">
-            <div class="rounded-circle bg-danger text-light h1" style="height: 50px; width: 50px;">
-                4
-            </div>
         </div>
         <div class="row justify-content-center ">
             <div class="col-auto text-dark h4">
-                Total Open Cases
+                Incident Statistics Report
             </div>
         </div>
     </div>
@@ -169,7 +166,7 @@ new Chart("totalcases", {
   }
 });
 
-//window.onload = getotalcases();
+//window.onload = getotalcases;
 
 </script>
 @stop
