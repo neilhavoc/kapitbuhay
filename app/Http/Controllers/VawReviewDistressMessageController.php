@@ -36,10 +36,15 @@ class VawReviewDistressMessageController extends Controller
             {
                 $disable = 'false';
             }
+
+            $victimRef = $database->collection('civilian-users')->document($messageRef['sender_userID']);
+            $userRef = $victimRef->snapshot();
+
             return view('pages.vaw_reviewdistressmessage', [
                 'message' => $messageRef,
                 'disable' => $disable,
-                'police'  => $polRef
+                'police'  => $polRef,
+                'victim'  => $userRef
             ]);
         }
     }
@@ -103,6 +108,36 @@ class VawReviewDistressMessageController extends Controller
 
         return redirect('vaw_distressmessage');
     }
+
+    public function reportAcc(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $victimUserRef = $database->collection('civilian-users')->document($id);
+
+        $strike = 0;
+
+        if ($request->input('strike1') != null)
+        {
+            $strike = 1;
+        }
+        elseif ($request->input('strike2') != null)
+        {
+            $strike = 2;
+        }
+        elseif ($request->input('strike3') != null)
+        {
+            $strike = 3;
+        }
+
+        $victimUserRef->update([
+            ['path' => 'strike', 'value' => $strike],
+        ]);
+
+        return redirect('police_reviewdistressmessage');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

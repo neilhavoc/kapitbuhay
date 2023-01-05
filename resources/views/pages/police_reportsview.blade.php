@@ -102,7 +102,7 @@
                 Generate PDF
             </button>
             <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $incident['reportCreatorID'] }}">
-            <input type="text" name="position" hidden="true" class="form-control align-content-center w-75" value="{{ $incident['policePosition'] }}">
+            <input type="text" name="position" hidden="true" class="form-control align-content-center w-75" value="{{ $incident['reportPosition'] }}">
         </div>
     </div>
 

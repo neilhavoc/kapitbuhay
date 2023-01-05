@@ -61,11 +61,11 @@ Route::get('/', function () {
 Route::resource('/vaw_reviewdistressmessage', VawReviewDistressMessageController::class);
 Route::put('/vaw_reviewdistressmessage/distressStatus/{id}', [VawReviewDistressMessageController::class, 'distressStatus']);
 Route::put('/vaw_reviewdistressmessage/transferDistress/{id}', [VawReviewDistressMessageController::class, 'transferDistress']);
-
+Route::put('/vaw_reviewdistressmessage/reportAcc/{id}', [VawReviewDistressMessageController::class, 'reportAcc']);
 //Police Review Distress Message
 Route::resource('/police_reviewdistressmessage', PoliceReviewDistressMessageController::class);
 Route::put('/police_reviewdistressmessage/poldistressStatus/{id}', [PoliceReviewDistressMessageController::class, 'poldistressStatus']);
-
+Route::put('/police_reviewdistressmessage/reportAcc/{id}', [PoliceReviewDistressMessageController::class, 'reportAcc']);
 //Manage Accounts Victim Profile View
 Route::resource('/manage_accountsvictimprofileview', ManageAccountsVictimProfileViewController::class);
 Route::put('/manage_accountsvictimprofileview/updateAccStatus/{id}', [ManageAccountsVictimProfileViewController::class, 'updateAccStatus']);
@@ -73,6 +73,7 @@ Route::put('/manage_accountsvictimprofileview/updateAccStatus/{id}', [ManageAcco
 //Manage Accounts Police Profile View
 Route::resource('/manage_accountspoliceprofileview', ManageAccountsPoliceProfileViewController::class);
 Route::put('/manage_accountspoliceprofileview/updateAccStatus/{id}', [ManageAccountsPoliceProfileViewController::class, 'updateAccStatus']);
+
 //Manage Accounts VAW Profile View
 Route::resource('/manage_accountsvawprofileview', ManageAccountsVawProfileViewController::class);
 Route::put('/manage_accountsvawprofileview/updateAccStatus/{id}', [ManageAccountsVawProfileViewController::class, 'updateAccStatus']);

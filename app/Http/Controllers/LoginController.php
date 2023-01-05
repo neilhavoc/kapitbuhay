@@ -38,7 +38,8 @@ class LoginController extends Controller
      */
     public function create()
     {
-        //
+        //session()->flush();
+        return redirect('loginpage');
     }
 
     public function invalidEmailorPassword($isInvalid)

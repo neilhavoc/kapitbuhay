@@ -61,16 +61,29 @@
                         @csrf
                         @method('PUT')
                         <div class="row mt-3 mx-5 mb-5 justify-content-between">
-                            <div class="col-md-6">
-                                <select class="form-select" name="disMesStatus" aria-label="Default select example">
-                                    <option selected value="Unread">Unread</option>
-                                    <option value="Read">Police is on the Way</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                            </div>
-                            <div class="col-md-auto">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                            @if ($message['status'] == 'Unread' || $message['status'] == 'Read')
+                                <div class="col-md-6">
+                                    <select class="form-select" name="disMesStatus" aria-label="Default select example">
+                                        <option selected value="Unread">Unread</option>
+                                        <option value="Read">Help is on the Way</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-auto">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    <select class="form-select" name="disMesStatus" aria-label="Default select example" disabled>
+                                        <option selected value="Unread">Unread</option>
+                                        <option value="Read">Help is on the Way</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-auto">
+                                    <button type="submit" class="btn btn-primary" disabled>Save</button>
+                                </div>
+                            @endif
                         </div>
                     </form>
                     <div class="row mt-5 mx-5 justify-content-center">
@@ -99,49 +112,73 @@
         </div>
 </div>
 
-<div class="modal fade" id="reportUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
-            <!-- <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Report User</h3> -->
-            </div>
-            <div class="modal-body">
-                <h3 class="text-center">Report User</h3>
-                <div class="row mt-3 mx-5 mb-5 justify-content-between">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Violation 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Violation 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Violation 1
-                        </label>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="row">
-                            <div class="col-md-3 fw-bold ">Additional: </div>
+<form action="police_reviewdistressmessage/reportAcc/{{ $message['sender_userID']}}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="reportUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+                <!-- <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Report User</h3> -->
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">Report User</h3>
+                    <div class="row mt-3 mx-5 mb-5 justify-content-between">
+                        <div class="form-check">
+                            @if ($victim['strike'] >= 1)
+                                <input class="form-check-input" name="strike1" type="checkbox" value="1" id="flexCheckDefault" disabled>
+                            @else
+                                <input class="form-check-input" name="strike1" type="checkbox" value="1" id="flexCheckDefault">
+                            @endif
+
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Violation 1
+                            </label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled"></textarea>
+                        <div class="form-check">
+                            @if ($victim['strike'] >= 2)
+                                <input class="form-check-input" name="strike2" type="checkbox" value="2" id="flexCheckDefault" disabled>
+                            @else
+                                <input class="form-check-input" name="strike2" type="checkbox" value="2" id="flexCheckDefault">
+                            @endif
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Violation 2
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            @if ($victim['strike'] == 3)
+                                <input class="form-check-input" name="strike3" type="checkbox" value="3" id="flexCheckDefault" disabled>
+                            @else
+                                <input class="form-check-input" name="strike3" type="checkbox" value="3" id="flexCheckDefault">
+                            @endif
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Violation 3
+                            </label>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="row">
+                                <div class="col-md-3 fw-bold ">Additional: </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="disabled">{{$victim['strike']}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            @if ($victim['strike'] == 3)
+                                <button type="submit" class="btn btn-danger disabled">Report</button>
+                            @else
+                                <button type="submit" class="btn btn-danger">Report</button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 @stop
 
 <!-- Scripts -->

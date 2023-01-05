@@ -21,8 +21,15 @@
                     <li class="nav-item"><a class="nav-link" href="#"></a></li>
                     <li class="nav-item dropdown"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" style="color: gray;font-size: large;font-weight: 500; width:150px;" >Police&nbsp;<i class="far fa-user-circle" style="font-size: 25px;" ></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-danger fw-heavy" href="#">Log out</a></li>
-                          </ul>
+                            <form action="loginpage/create" method="GET">
+                                @csrf
+                                <li>
+                                    <button class="btn btn-warning w-500" >
+                                        Logout
+                                    </button>
+                                </li>
+                            </form>
+                        </ul>
                     </li>
                 </ul>
             </div>

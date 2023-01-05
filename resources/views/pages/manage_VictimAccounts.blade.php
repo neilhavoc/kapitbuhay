@@ -42,6 +42,8 @@
                         <th id="trs-hd-3" class="col-lg-3">Address</th>
                         <th id="trs-hd-4" class="col-lg-3">Email</th>
                         <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                        <th id="trs-hd-4" class="col-lg-2">Strike Status</th>
+                        <th id="trs-hd-4" class="col-lg-2">Account Status</th>
                         <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2"></th>
                     </tr>
@@ -59,6 +61,8 @@
                             <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
                             <td>{{ $item['email'] }}</td>
                             <td>{{ $item['phonenumber'] }}</td>
+                            <td>{{ $item['strike'] }}</td>
+                            <td>{{ $item['account_status'] }}</td>
                             <td>{{ $item['verification_status'] }}</td>
                             <td>
                                 <form action="VictimAcc" method="POST">

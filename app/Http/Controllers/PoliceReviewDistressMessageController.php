@@ -25,7 +25,7 @@ class PoliceReviewDistressMessageController extends Controller
             $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
             $messageRef = $recordIDs->snapshot();
 
-            if ($messageRef['status'] == 'Read' || $messageRef['status'] == 'Transferred')
+            if ($messageRef['status'] == 'Read' || $messageRef['status'] == 'Transferred' || $messageRef['status'] == 'Unread')
             {
                 $disable = 'disabled';
             }
@@ -33,9 +33,14 @@ class PoliceReviewDistressMessageController extends Controller
             {
                 $disable = 'false';
             }
+
+            $victimRef = $database->collection('civilian-users')->document($messageRef['sender_userID']);
+            $userRef = $victimRef->snapshot();
+
             return view('pages.police_reviewdistressmessage', [
                 'message' => $messageRef,
-                'disable' => $disable
+                'disable' => $disable,
+                'victim'  => $userRef
             ]);
         }
     }
@@ -81,6 +86,36 @@ class PoliceReviewDistressMessageController extends Controller
         ]);
 
         return redirect('police_distress');
+    }
+
+    public function reportAcc(Request $request, $id)
+    {
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $victimUserRef = $database->collection('civilian-users')->document($id);
+
+
+        $strike = 0;
+
+        if ($request->input('strike1') != null)
+        {
+            $strike = 1;
+        }
+        elseif ($request->input('strike2') != null)
+        {
+            $strike = 2;
+        }
+        elseif ($request->input('strike3') != null)
+        {
+            $strike = 3;
+        }
+
+        $victimUserRef->update([
+            ['path' => 'strike', 'value' => $strike],
+        ]);
+
+        return redirect('police_reviewdistressmessage');
     }
 
     /**
