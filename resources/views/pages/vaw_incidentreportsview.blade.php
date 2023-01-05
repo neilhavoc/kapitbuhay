@@ -117,6 +117,7 @@
                                 Generate PDF
                             </button>
                         </div>
+                        <div style="display: none" id="report_status" >{{ $incident['report_status'] }}</div>
                         <div style="display: none" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
                         <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>{{--  --}}
     </div>
@@ -135,6 +136,7 @@ var incident_date = document.getElementById('incident_date').textContent;
 var victim = document.getElementById('victim').textContent;
 var incident_location = document.getElementById('incident_location').textContent;
 var creation_date = document.getElementById('creation_date').textContent;
+var report_status = document.getElementById('report_status').textContent;
 var report_creator = document.getElementById('report_creator').value;
 var report_details = document.getElementById("exampleFormControlTextarea2").value;
 
@@ -159,6 +161,7 @@ doc.addImage(logo_img, "JPEG", 10, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
   startY:50,
+  theme: 'grid',
   columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
   margin: { top: 10 },
   body: [
@@ -166,10 +169,7 @@ doc.autoTable({
     ['Exact Location of Incident', incident_location],
     ['Involved Person/Specific Identification', victim],
     ['Narrative Details of Incident', report_details],
-    ['Case Status', barangay],
-
-
-    // ...
+    ['Case Status', report_status],
   ],
 })
 
@@ -177,6 +177,7 @@ doc.autoTable({
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
   startY:200,
+  theme: 'grid',
   //columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
   //margin: { top: 10 },
   body: [
@@ -187,12 +188,11 @@ doc.autoTable({
   ],
 })
 //doc.addPage();
-
-
-
-
 // Save the PDF
 doc.save('document.pdf');
+//window.location.href = "/vaw_incidentreportview";
 }
+
+
 </script>
 @stop

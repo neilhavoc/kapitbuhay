@@ -102,7 +102,7 @@
                 </div>
         </div>
         <div class="row justify-content-center mt-5 mb-5">
-            <button class="btn btn-success w-25" >
+            <button onclick="Convert_HTML_To_PDF();" class="btn btn-success w-25" >
                 Generate PDF
             </button>
         </div>
@@ -141,7 +141,7 @@ doc.text("City of Cebu", 105, 30,null,null,"center");
 doc.setFont("times", "bold");
 doc.text("BARANGAY " + barangay, 105, 35,null,null,"center");
 doc.text("-ooOoo-", 105, 40,null,null,"center");
-doc.addImage(logo_img, "JPEG", 10, 10,30,30);
+doc.addImage("https://scontent.fceb3-1.fna.fbcdn.net/v/t1.18169-9/296518_100871556693083_555695883_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cdbe9c&_nc_eui2=AeGDbn8ebqoTFTPulmER9wucQtzs_W0mIbxC3Oz9bSYhvMVSz2Phg9rAbA3CdLfxGtq_UlRKZPRFYY2F-waLosMS&_nc_ohc=av4LFlRFCdoAX8tG8mC&tn=CZXNbGnBrPo31WJo&_nc_ht=scontent.fceb3-1.fna&oh=00_AfD4bph3SY9PliO2qaT_mPDoJVpnnJDgdq_ISGAFqjg1UQ&oe=63DDEE0A", "JPEG", 10, 10,30,30);
 //doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
