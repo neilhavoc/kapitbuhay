@@ -20,18 +20,13 @@
 <!-- Content -->
 @section('content')
     <div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
-        <form action="police_reportsview/" {{ $incident->id() }}" method="POST">
+        <form action="police_reportsview/{{ $incident->id() }}" method="POST">
             @csrf
             @method('PUT')
             <div style="text-align:center">
                 <h1>
                     Viewing Incident Report
                 </h1>
-            </div>
-            <div class="row justify-content-end">
-                <button class="btn btn-warning col-md-auto" >
-                    Transfer to Barangay for monitoring
-                </button>
             </div>
             <div class="row mt-5">
                 <div class="col-md-5 fw-bold " >Reference ID:&nbsp;<label>{{ $incident->id() }}</label></div>

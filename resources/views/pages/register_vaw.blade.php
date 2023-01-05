@@ -112,9 +112,12 @@
                             <input name="password" id="password" type="password" class="form-control align-content-center w-100" aria-describedby="passwordHelpInline" required>
                             @if ($password == 'true')
                                 <span id="passwordHelpInline" class="form-text" style="color:red">
-                                Password does not match
+                                    Password does not match
                                 </span>
-                            @else
+                            @elseif ($notStrong == 'true')
+                                <span id="passwordHelpInline" class="form-text" style="color:red">
+                                    Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
+                                </span>
                             @endif
                         </div>
                         <div class="col-auto">
@@ -129,12 +132,15 @@
                             <label for="conpassword" class="col-form-label">Confirm Password:</label>
                         </div>
                         <div class="col-md-3">
-                            <input name="conpassword" id="conpassword" type="password" class="form-control align-content-center w-100" value="{{ $input['brgyName'] }}" required>
+                            <input name="conpassword" id="conpassword" type="password" class="form-control align-content-center w-100" required>
                             @if ($password == 'true')
                                 <span id="passwordHelpInline" class="form-text" style="color:red">
-                                Password does not match
+                                    Password does not match
                                 </span>
-                            @else
+                            @elseif ($notStrong == 'true')
+                                <span id="passwordHelpInline" class="form-text" style="color:red">
+                                    Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
+                                </span>
                             @endif
                         </div>
                     </div>
