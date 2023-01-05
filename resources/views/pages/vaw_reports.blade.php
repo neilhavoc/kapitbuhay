@@ -70,7 +70,7 @@
    async function getotalcases(){
       const coll = collection(db, "incident_reports");
       for (let i = 0; i < 12; i++) {
-      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1));
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1));
       const querySnapshot = await getDocs(query_1);
         querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
@@ -87,7 +87,7 @@
     const coll = collection(db, "incident_reports");
     for (let i = 0; i < 12; i++) {
       
-      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Ongoing'));
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Ongoing'));
       const querySnapshot = await getDocs(query_1);
         querySnapshot.forEach((doc) => {
         count2++;
@@ -103,7 +103,7 @@
    async function getotalclosedcases(){
       const coll = collection(db, "incident_reports");
       for (let i = 0; i < 12; i++) {
-      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Closed'));
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Closed'));
       const querySnapshot = await getDocs(query_1);
         querySnapshot.forEach((doc) => {
         count3++;
@@ -132,15 +132,22 @@
 
     ];
 
-new Chart("totalopencases", {
+new Chart("totalcases", {
   type: "bar",
   data: {
     labels: xValues,
     datasets: [{
-        label: 'Total Open Cases',
+        label: 'TotalCases',
         backgroundColor: barColors,
-        data: yValues3
+        data: yValues1
     }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Cases"
+    }
   }
 });
 new Chart("totalclosedcased", {
@@ -150,20 +157,37 @@ new Chart("totalclosedcased", {
     datasets: [{
         label: 'Total Closed Cases',
         backgroundColor: barColors,
-        data: yValues2
+        data: yValues3
     }]
   }
+  ,
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Closed Cases"
+    }
+  }
+  
 });
-new Chart("totalcases", {
+new Chart("totalopencases", {
   type: "bar",
   data: {
     labels: xValues,
     datasets: [{
         label: 'Total Cases',
         backgroundColor: barColors,
-        data: yValues1
+        data: yValues2
     }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Open Cases"
+    }
   }
+
 });
 
 //window.onload = getotalcases;
