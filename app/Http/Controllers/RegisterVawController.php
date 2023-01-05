@@ -26,9 +26,11 @@ class RegisterVawController extends Controller
     {
         $notEqual = 'false';
         $password = 'false';
+        $notStrong = 'false';
         return view('pages.register_vaw', [
             'notEqual' => $notEqual,
-            'password' => $password
+            'password' => $password,
+            'notStrong' => $notStrong
         ]);
     }
 
@@ -62,8 +64,25 @@ class RegisterVawController extends Controller
             'brgyEmail'             => $request->input('email'),
         ];
 
-        if ($request->input('password') == $request->input('conpassword'))
-        {
+        $inputpass = $request->input('password');
+        $uppercase = preg_match('@[A-Z]@', $inputpass);
+        $lowercase = preg_match('@[a-z]@', $inputpass);
+        $number    = preg_match('@[0-9]@', $inputpass);
+        $specialChars = preg_match('@[^\w]@', $inputpass);
+
+
+        if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($inputpass) < 8) {
+            $notStrong  = 'true';
+            $password   = 'false';
+            $notEqual   = 'true';
+            return view('pages.register_vaw', [
+                'input'     => $input,
+                'notEqual'  => $notEqual,
+                'password'  => $password,
+                'notStrong' => $notStrong
+            ]);
+        }
+        elseif ($request->input('password') == $request->input('conpassword')) {
             //initialize firebase
             $storage = app('firebase.storage');
             $auth = app('firebase.auth');
@@ -171,10 +190,12 @@ class RegisterVawController extends Controller
         {
             $notEqual = 'true';
             $password = 'true';
+            $notStrong  = 'false';
             return view('pages.register_vaw', [
                 'input'     => $input,
                 'notEqual'  => $notEqual,
-                'password'  => $password
+                'password'  => $password,
+                'notStrong' => $notStrong
             ]);
         }
 
