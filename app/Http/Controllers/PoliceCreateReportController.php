@@ -25,6 +25,9 @@ class PoliceCreateReportController extends Controller
             $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
             $messageRef = $recordIDs->snapshot();
 
+            session(['monthSOSDM' => $messageRef['month_sent']]);
+            session(['yearSOSDM' => $messageRef['year_sent']]);
+
             date_default_timezone_set('Asia/Singapore');
             $date = date('m/d/Y h:i:s a', time());
 

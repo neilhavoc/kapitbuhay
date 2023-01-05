@@ -29,6 +29,10 @@ class VawCreateReportController extends Controller
             $brgyUserIDRef = $database->collection('barangay_accounts')->document($brgyUser);
             $userRef = $brgyUserIDRef->snapshot();
 
+
+            session(['monthSOSDM' => $messageRef['month_sent']]);
+            session(['yearSOSDM' => $messageRef['year_sent']]);
+
             date_default_timezone_set('Asia/Singapore');
             $date = date('m/d/Y h:i:s a', time());
 
