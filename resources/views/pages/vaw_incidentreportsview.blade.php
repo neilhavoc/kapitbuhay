@@ -126,7 +126,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://unpkg.com/jspdf-autotable@3.5.28/dist/jspdf.plugin.autotable.js"></script>
 <script>
-var logo_img = document.getElementById('brgylogo').textContent;
+//var logo_img = document.getElementById('brgylogo').textContent;
 var barangay = document.getElementById('brgy').textContent;
 var incident_date = document.getElementById('incident_date').textContent;
 var victim = document.getElementById('victim').textContent;
@@ -136,7 +136,7 @@ var report_status = document.getElementById('report_status').textContent;
 var report_creator = document.getElementById('report_creator').value;
 var report_details = document.getElementById("exampleFormControlTextarea2").value;
 
-
+var logo_img = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t1.18169-9/268568_10150219891722775_3261354_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=cdbe9c&_nc_eui2=AeF6gBxbZ-zxX4XJXRHq2xK9zF0e0KXGMaDMXR7QpcYxoOkE0__b2FkYF1ipK8-_Qjk7BQXCexwPWTNu9BO_AC7T&_nc_ohc=CHNnI5TzS0gAX-OeCjz&_nc_ht=scontent.fceb3-1.fna&oh=00_AfA6UiRxOeuwlCjbJ1BNiTAUZbjv9hrPANyZyWdcFiK9OQ&oe=63DE225E'
 window.jsPDF = window.jspdf.jsPDF;
 
 // Convert HTML content to PDF
@@ -177,7 +177,7 @@ doc.autoTable({
   //columnStyles: { 0: {cellWidth: 40, fontStyle:'bold'} }, // Cells in first column centered and green
   //margin: { top: 10 },
   body: [
-    ['Report Creation Date:', creation_date],
+    [{content:'Report Creation Date:', styles: {minCellHeight: 30,cellWidth: 40,fontStyle:'bold'}}, creation_date],
     [{content: 'Report Created By:', styles: {minCellHeight: 30,cellWidth: 40,fontStyle:'bold'}}, report_creator],
 
     // ...
@@ -188,7 +188,5 @@ doc.autoTable({
 doc.save('document.pdf');
 //window.location.href = "/vaw_incidentreportview";
 }
-
-
 </script>
 @stop
