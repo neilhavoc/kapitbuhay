@@ -28,12 +28,18 @@ class PoliceCreateReportController extends Controller
             session(['monthSOSDM' => $messageRef['month_sent']]);
             session(['yearSOSDM' => $messageRef['year_sent']]);
 
+            $userid = session('userID');
+
+            $policeUser = $database->collection('police_accounts')->document($userid);
+            $policeID = $policeUser->snapshot();
+
             date_default_timezone_set('Asia/Singapore');
             $date = date('m/d/Y h:i:s a', time());
 
             return view('pages.police_createReports', [
                 'message'   => $messageRef,
                 'date'      => $date,
+                'police'    => $policeID
             ]);
         }
     }

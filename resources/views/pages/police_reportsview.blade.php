@@ -67,13 +67,13 @@
                                 <div class="fw-bold ">Report Created By:</div>
                             </div>
                             <div class="row">
-                                <input type="text" id="report_creator" class="form-control align-content-center w-100" disabled value="{{ $incident['reportCreator'] }}">
+                                <input type="text" name="reportCreator" id="report_creator" class="form-control align-content-center w-100" disabled value="{{ $incident['reportCreator'] }}">
                             </div>
                             <div class="row">
                                 <div class="fw-bold ">Position:</div>
                             </div>
                             <div class="row">
-                                <input type="text" id="report_creator_position" class="form-control align-content-center w-100" disabled value="{{ $incident['reportPosition'] }}">
+                                <input type="text" name="position" id="report_creator_position" class="form-control align-content-center w-100" disabled value="{{ $incident['reportPosition'] }}">
                             </div>
                             <div class="row">
                                 <div class="fw-bold ">Case Status:</div>
@@ -102,6 +102,7 @@
                 Generate PDF
             </button>
             <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $incident['reportCreatorID'] }}">
+            <input type="text" name="position" hidden="true" class="form-control align-content-center w-75" value="{{ $incident['policePosition'] }}">
         </div>
     </div>
 

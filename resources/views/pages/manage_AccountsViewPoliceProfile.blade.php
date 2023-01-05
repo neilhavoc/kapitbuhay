@@ -50,11 +50,23 @@
                         <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeName'] }}">
                     </div>
                     <div class="row mt-1">
-                        <h5 class="col-md-3">Contact No:</h5>
-                        <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeContactNum1'] }}">
+                        <h5 class="col-md-3">Police Station Jurisdiction:</h5>
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeJurisdiction'] }}">
                     </div>
                     <div class="row mt-1">
-                        <h5 class="col-md-3">Email:</h5>
+                        <h5 class="col-md-3">Police Officer Name:</h5>
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeOfficerName'] }}">
+                    </div>
+                    <div class="row mt-1">
+                        <h5 class="col-md-3">Police Position:</h5>
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policePosition'] }}">
+                    </div>
+                    <div class="row mt-1">
+                        <h5 class="col-md-3">Police Officer Contact:</h5>
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeContact'] }}">
+                    </div>
+                    <div class="row mt-1">
+                        <h5 class="col-md-3">Email Address:</h5>
                         <input type="text" disabled ="true" class="col-md-4" value="{{ $police['policeEmail'] }}">
                     </div>
                 </div>
@@ -91,6 +103,12 @@
                             City:
                         </h5>
                         <input type="text" disabled ="true" class="col-md-3" value="{{ $police['policecity'] }}">
+                    </div>
+                    <div class="row mt-2">
+                        <h5 class="col-md-2">
+                            Zipcode:
+                        </h5>
+                        <input type="text" disabled ="true" class="col-md-3" value="{{ $police['policeZipCode'] }}">
                     </div>
                 </div>
                 <div class="col-md-3">

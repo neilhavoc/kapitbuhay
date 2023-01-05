@@ -79,11 +79,13 @@ class RegisterVawController extends Controller
             $notStrong  = 'true';
             $password   = 'false';
             $notEqual   = 'true';
+            $namefound  = 'false';
             return view('pages.register_vaw', [
                 'input'     => $input,
                 'notEqual'  => $notEqual,
                 'password'  => $password,
-                'notStrong' => $notStrong
+                'notStrong' => $notStrong,
+                'namefound' => $namefound
             ]);
         }
         elseif ($request->input('password') == $request->input('conpassword')) {
@@ -119,9 +121,6 @@ class RegisterVawController extends Controller
                     'displayName' => $request->input('staffFullName'),
                     'disabled' => false,
                 ];
-
-                //send email to created user
-
 
                 //create user
                 $createdUser = $auth->createUser($userProperties);

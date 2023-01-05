@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-auto">
                             <input type="text" name="staffFullName" id="cn1" class="form-control" value="{{ $input['brgyStaffFullName'] }}" required>
-                            @if ($namefound == true)
+                            @if ($namefound == 'true')
                                 <span id="passwordHelpInline" class="form-text" style="color:red">
                                     Name is already in the Database
                                 </span>

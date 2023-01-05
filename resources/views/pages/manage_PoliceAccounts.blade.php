@@ -58,9 +58,11 @@
                             <tr>
                                 <td>{{ $item->id() }}</td>
                                 <td>{{ $item['policeName'] }}</td>
-                                <td>{{ $item['policeStreet'] }} {{ $item['barangay'] }} {{ $item['policecity'] }}</td>
+                                <td>{{ $item['policeOfficerName'] }}</td>
                                 <td>{{ $item['policeEmail'] }}</td>
-                                <td>{{ $item['policeContactNum1'] }}</td>
+                                <td>{{ $item['policeContact'] }}</td>
+                                <td>{{ $item['account_status'] }}</td>
+                                <td>{{ $item['verification_status'] }}</td>
                                 <td>
                                     <form action="policeAcc" method="POST">
                                         @csrf

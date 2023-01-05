@@ -38,8 +38,20 @@
             <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeName'] }}">
         </div>
         <div class="row mt-2">
-            <h5 class="col-md-2">Contact No:</h5>
-            <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeContactNum1'] }}">
+            <h5 class="col-md-2">Police Station Jurisdiction:</h5>
+            <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeJurisdiction'] }}">
+        </div>
+        <div class="row mt-2">
+            <h5 class="col-md-2">Police Officer Name:</h5>
+            <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeOfficerName'] }}">
+        </div>
+        <div class="row mt-2">
+            <h5 class="col-md-2">Police Position:</h5>
+            <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policePosition'] }}">
+        </div>
+        <div class="row mt-2">
+            <h5 class="col-md-2">Police Officer Contact:</h5>
+            <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeContact'] }}">
         </div>
         <div class="row mt-2">
             <h5 class="col-md-2">Address:</h5>

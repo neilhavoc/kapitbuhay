@@ -97,7 +97,7 @@ class LoginController extends Controller
                         return redirect('loginpage')->withSuccess('Account is banned!');
                     }
                     elseif ($vawID['verification_status'] == 'Verification Failed') {
-
+                        return redirect('loginpage')->withSuccess('Account has Failed its Verification');
                     }
                 }
                 else
@@ -112,26 +112,36 @@ class LoginController extends Controller
         {
             if ($polID['policeEmail'] == $email)
             {
-                if ($polID['verification_status'] == 'To Verify' && $polID['account_status'] == 'Not Banned') {
-                    return redirect('loginpage')->withSuccess('Account is not yet Verified!');
-                }
-                elseif ($polID['verification_status'] == 'Verified' && $polID['account_status'] == 'Not Banned') {
-                    try
-                    {
-                        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-                        session(['userID' => $polID['policeUID']]);
-                        session(['policeName' => $polID['policeName']]);
-                        session(['barangay' => $polID['barangay']]);
-                        return redirect('police_manageaccount');
-                    } catch(invalidInput $e) {
-                        return redirect('loginpage')->withSuccess('Invalid Email or Password!');
-                    };
-                }
-                elseif ($polID['account_status'] == 'Banned') {
-                    return redirect('loginpage')->withSuccess('Account is banned!');
-                }
-                elseif ($polID['verification_status'] == 'Verification Failed') {
+                $user = $auth->getUser($polID['policeUID']);
+                $verify = $user->emailVerified;
 
+                if ($verify == 1)
+                {
+                    if ($polID['verification_status'] == 'To Verify' && $polID['account_status'] == 'Not Banned') {
+                        return redirect('loginpage')->withSuccess('Account is not yet Verified!');
+                    }
+                    elseif ($polID['verification_status'] == 'Verified' && $polID['account_status'] == 'Not Banned') {
+                        try
+                        {
+                            $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+                            session(['userID' => $polID['policeUID']]);
+                            session(['policeName' => $polID['policeName']]);
+                            session(['barangay' => $polID['policeJurisdiction']]);
+                            return redirect('police_manageaccount');
+                        } catch(invalidInput $e) {
+                            return redirect('loginpage')->withSuccess('Invalid Email or Password!');
+                        };
+                    }
+                    elseif ($polID['account_status'] == 'Banned') {
+                        return redirect('loginpage')->withSuccess('Account is banned!');
+                    }
+                    elseif ($polID['verification_status'] == 'Verification Failed') {
+                        return redirect('loginpage')->withSuccess('Account has Failed its Verification');
+                    }
+                }
+                else
+                {
+                    return redirect('loginpage')->withSuccess('Account is not yet verified! Please check email');
                 }
             }
         }

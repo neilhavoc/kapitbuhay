@@ -75,7 +75,7 @@
                                 <select class="form-select" name="transferDistress" aria-label="Default select example">
                                     <option selected disabled>Select police station </option>
                                     @foreach ($police as $row)
-                                        @if ($row['barangay'] == session('barangay'))
+                                        @if ($row['policeJurisdiction'] == session('barangay'))
                                             <option value="{{$row['policeUID']}}">{{$row['policeName']}}</option>
                                         @endif
                                     @endforeach

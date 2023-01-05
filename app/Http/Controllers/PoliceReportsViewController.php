@@ -44,13 +44,17 @@ class PoliceReportsViewController extends Controller
             $brgyUser = $brgyUserIDRef->snapshot();
             */
             $viewdisID = session('viewIncidentID');
-
-
             $incidentRef = $database->collection('incident_reports')->document($viewdisID);
             $incRef = $incidentRef->snapshot();
 
+            $userid = session('userID');
+            $policeRef = $database->collection('police_accounts')->document($userid);
+            $policeID = $policeRef->snapshot();
+
+
             return view('pages.police_reportsview', [
                 'incident' => $incRef,
+                'police'   => $policeID
             ]);
         }
     }

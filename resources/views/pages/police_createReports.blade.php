@@ -70,13 +70,15 @@
                         <div class="fw-bold ">Report Created By:</div>
                     </div>
                     <div class="row">
-                        <input type="text" name="reportCreator" class="form-control align-content-center w-75" required>
+                        <label>{{$police['policeOfficerName']}}</label>
+                        <input type="text" name="reportCreator" hidden="true" class="form-control align-content-center w-75" value="{{ $police['policeOfficerName'] }}">
                     </div>
                     <div class="row">
                         <div class="fw-bold ">Position:</div>
                     </div>
                     <div class="row">
-                        <input type="text" name="position" class="form-control align-content-center w-75" required>
+                        <label>{{$police['policePosition']}}</label>
+                        <input type="text" name="position" hidden="true" class="form-control align-content-center w-75" value="{{ $police['policePosition'] }}">
                     </div>
                 </div>
             </div>
