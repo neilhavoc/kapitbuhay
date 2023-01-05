@@ -31,10 +31,10 @@
                     </div>
                     <div class="row g-3 align-items-center mb-2">
                         <div class="col-auto">
-                        <label for="cn1" class="col-form-label">Barangay Contact Num:</label>
+                            <label for="cn1" class="col-form-label">Barangay Contact Num:</label>
                         </div>
                         <div class="col-auto">
-                        <input type="number" name="brgyConNum" id="cn1" class="form-control" value="{{ $input['brgyContactNum'] }}" required>
+                            <input type="number" name="brgyConNum" id="cn1" class="form-control" value="{{ $input['brgyContactNum'] }}" required>
                         </div>
                         <div class="col-auto">
                             <span id="barangaynameHelpLine" class="form-text">
@@ -44,16 +44,23 @@
                     </div>
                     <div class="row g-3 align-items-center mb-5">
                         <div class="col-auto">
-                        <label for="cn1" class="col-form-label">Barangay VAW Staff Full Name:</label>
+                            <label for="cn1" class="col-form-label">Barangay VAW Staff Full Name:</label>
                         </div>
                         <div class="col-auto">
-                        <input type="text" name="staffFullName" id="cn1" class="form-control" value="{{ $input['brgyStaffFullName'] }}" required>
+                            <input type="text" name="staffFullName" id="cn1" class="form-control" value="{{ $input['brgyStaffFullName'] }}" required>
+                            @if ($namefound == true)
+                                <span id="passwordHelpInline" class="form-text" style="color:red">
+                                    Name is already in the Database
+                                </span>
+                            @else
+                            @endif
                         </div>
                         <div class="col-auto">
                             <span id="barangaynameHelpLine" class="form-text">
                             First Name, Middle Initial, Last Name example: (Juan E. Dela Cruz)
                             </span>
                         </div>
+
                     </div>
                     <div class="row g-3 align-items-center mb-5">
                         <div class="col-auto">
@@ -102,6 +109,14 @@
                         </div>
                         <div class="col-md-auto">
                             <input name="street" id="street" type="text" class="form-control align-content-center w-100" value="{{ $input['brgyStreet'] }}" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 ">
+                        <div class="col-auto">
+                            <label for="purok" class="col-form-label">Zipcode:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input name="zipcode" id="zipcode" type="number" class="form-control align-content-center w-100" value="{{ $input['brgyZipCode'] }}" required>
                         </div>
                     </div>
                     <div class="row mt-2 ">
@@ -270,6 +285,14 @@
                         </div>
                         <div class="col-md-auto">
                             <input name="street" id="street" type="text" class="form-control align-content-center w-100" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2 ">
+                        <div class="col-auto">
+                            <label for="purok" class="col-form-label">Zipcode:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input name="zipcode" id="zipcode" type="number" class="form-control align-content-center w-100" required>
                         </div>
                     </div>
                     <div class="row mt-2 ">

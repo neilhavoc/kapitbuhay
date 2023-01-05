@@ -25,6 +25,9 @@ class VawReviewDistressMessageController extends Controller
             $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
             $messageRef = $recordIDs->snapshot();
 
+            session(['monthSOSDM' => $messageRef['month_sent']]);
+            session(['yearSOSDM' => $messageRef['year_sent']]);
+
             $policeRef = $database->collection('police_accounts');
             $polRef = $policeRef->documents();
 

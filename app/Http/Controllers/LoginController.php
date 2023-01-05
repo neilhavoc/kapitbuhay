@@ -86,6 +86,7 @@ class LoginController extends Controller
                             session(['userID' => $vawID['brgyUID']]);
                             session(['brgyName' => $vawID['brgyName']]);
                             session(['barangay' => $vawID['barangay']]);
+                            session(['vawstaffname' => $vawID['brgyStaffFullName']]);
 
                             return redirect('vaw_manageaccount');
                         } catch(invalidInput $e) {

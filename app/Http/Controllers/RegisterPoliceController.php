@@ -13,8 +13,14 @@ class RegisterPoliceController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.register_police');
+        $notEqual = 'false';
+        $password = 'false';
+        $notStrong = 'false';
+        return view('pages.register_police', [
+            'notEqual' => $notEqual,
+            'password' => $password,
+            'notStrong' => $notStrong
+        ]);
     }
 
     /**
