@@ -17,13 +17,10 @@
 <div class="container text-center" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
     <div class="row mt-5" >
         <div class="row justify-content-center mt-2">
-            <div class="rounded-circle bg-danger text-light h1" style="height: 50px; width: 50px;">
-                4
-            </div>
         </div>
         <div class="row justify-content-center ">
             <div class="col-auto text-dark h4">
-                Total Open Cases
+                Incident Statistics Report
             </div>
         </div>
     </div>
@@ -34,6 +31,9 @@
       <div class="col-6">
         <canvas id="totalclosedcased" style="width:50%;max-width:600px;"></canvas>
       </div>
+      <div class="col-6">
+        <canvas id="totalopencases" style="width:50%;max-width:600px;"></canvas>
+      </div>
     </div>
 
 
@@ -43,26 +43,103 @@
 <!-- Scripts -->
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script>
-    var xValues = ["January", "February", "March", "April", "May", "July"];
-var yValues = [10, 5, 3, 4, 8, 12];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145",
-  "#2f7965"
-];
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  import {
+        getFirestore, doc, getDoc, getDocs, onSnapshot, collection, query, where, getCountFromServer
+  } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+  const firebaseConfig = {
+            apiKey: "AIzaSyCoTsZLj3mdmt-knoDXPBiAM6XDSo34fO0",
+            authDomain: "projectkapitbuhay.firebaseapp.com",
+            projectId: "projectkapitbuhay",
+            storageBucket: "projectkapitbuhay.appspot.com",
+            messagingSenderId: "383943948579",
+            appId: "1:383943948579:web:532296ffdafb3a6e3db496",
+            measurementId: "G-9DKK3YCYTL"
+        };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore();
+  var yValues1 = [];
+  var yValues2 = [];
+  var yValues3 = [];
+  var yValues = [1,2,3,4,5,6,7,8,9,10,11,12];
+  var count1 = 0;
+  var count2 = 0;
+  var count3 = 0;
+  getotalcases();
+   async function getotalcases(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+        count1++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      yValues1.push(count1);
+      count1 = 0;
+      }
+    }
+    getotalongoingcases();
 
-new Chart("totalcases", {
+   async function getotalongoingcases(){
+    const coll = collection(db, "incident_reports");
+    for (let i = 0; i < 12; i++) {
+      
+      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Ongoing'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count2++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      yValues2.push(count2);
+      count2 = 0;
+    }
+
+      
+  }
+  getotalclosedcases();
+   async function getotalclosedcases(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll, where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Closed'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count3++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      yValues3.push(count3);
+      count3 = 0;
+    }
+  }  
+
+
+    var xValues = ["January", "February", "March", "April", "May", "June", "July", "August","September", "October", "November","December"];
+    var barColors = [
+      "#b91d47",
+      "#00aba9",
+      "#2b5797",
+      "#e8c3b9",
+      "#1e7145",
+      "#2f7965",
+      "#FFB26B",
+      "#7B2869",
+      "#FFB100",
+      "#FF78F0",
+      "#FCFFE7",
+      "#EB6440"
+
+    ];
+
+new Chart("totalopencases", {
   type: "bar",
   data: {
     labels: xValues,
     datasets: [{
-        label: 'Total Closed Cases',
+        label: 'Total Open Cases',
         backgroundColor: barColors,
-        data: yValues
+        data: yValues3
     }]
   }
 });
@@ -71,11 +148,25 @@ new Chart("totalclosedcased", {
   data: {
     labels: xValues,
     datasets: [{
-        label: 'Total Cases',
+        label: 'Total Closed Cases',
         backgroundColor: barColors,
-        data: yValues
+        data: yValues2
     }]
   }
 });
+new Chart("totalcases", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        label: 'Total Cases',
+        backgroundColor: barColors,
+        data: yValues1
+    }]
+  }
+});
+
+//window.onload = getotalcases;
+
 </script>
 @stop
