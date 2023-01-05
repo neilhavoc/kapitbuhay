@@ -40,9 +40,10 @@
                 <tr>
                     <th id="trs-hd-1" class="col-lg-1">ID</th>
                     <th id="trs-hd-2" class="col-lg-3">VAW Station Name</th>
-                    <th id="trs-hd-3" class="col-lg-3">Address</th>
-                    <th id="trs-hd-4" class="col-lg-3">Email</th>
-                    <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                    <th id="trs-hd-3" class="col-lg-3">VAW Staff Name</th>
+                    <th id="trs-hd-3" class="col-lg-3">Email</th>
+                    <th id="trs-hd-2" class="col-lg-2">Contact</th>
+                    <th id="trs-hd-2" class="col-lg-2">Account Status</th>
                     <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                     <th id="trs-hd-4" class="col-lg-2"></th>
                 </tr>
@@ -57,9 +58,10 @@
                     <tr>
                         <td>{{ $item->id() }}</td>
                         <td>{{ $item['brgyName'] }}</td>
-                        <td>{{ $item['barangay'] }} {{ $item['brgycity'] }} {{ $item['brgyProvince'] }}</td>
+                        <td>{{ $item['brgyStaffFullName'] }}</td>
                         <td>{{ $item['brgyEmail'] }}</td>
-                        <td>{{ $item['brgyContactNum1'] }}</td>
+                        <td>{{ $item['brgyContactNum'] }}</td>
+                        <td>{{ $item['account_status'] }}</td>
                         <td>{{ $item['verification_status'] }}</td>
                         <td>
                             <form action="VawAcc" method="POST">

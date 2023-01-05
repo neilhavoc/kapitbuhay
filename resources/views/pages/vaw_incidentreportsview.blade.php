@@ -28,9 +28,6 @@
 
 <!-- Content -->
 @section('content')
-<form action="vaw_incidentreportview/{{ $incident->id() }}" method="POST">
-    @csrf
-    @method('PUT')
     <div class="container-fluid" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
         <div style="text-align:center">
             <h1>
@@ -92,7 +89,7 @@
                         <div class="row">
                             <div class="fw-bold ">Case Status:</div>
                         </div>
-                        <form action="vaw_reports/{{ $incident->id() }}" method="POST">
+                        <form action="vaw_incidentreportview/{{ $incident->id() }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -119,9 +116,8 @@
                         </div>
                         <div style="display: none" id="report_status" >{{ $incident['report_status'] }}</div>
                         <div style="display: none" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
-                        <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>{{--  --}}
+                        <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>
     </div>
-</form>
 
 @stop
 

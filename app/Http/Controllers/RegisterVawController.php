@@ -56,6 +56,7 @@ class RegisterVawController extends Controller
             'brgyName'              => $request->input('brgyName'),
             'brgyContactNum'        => $request->input('brgyConNum'),
             'brgyStaffFullName'     => $request->input('staffFullName'),
+            'brgyStaffPosition'     => $request->input('staffPosition'),
             'brgyProvince'          => $request->input('province'),
             'brgycity'              => $request->input('city'),
             'barangay'              => $request->input('barangay'),
@@ -92,11 +93,14 @@ class RegisterVawController extends Controller
             $userProperties = [
                 'email' => $request->input('email'),
                 'emailVerified' => false,
-                'phoneNumber' => sprintf('+63%s', $request->input('brgyConNum1')),
+                'phoneNumber' => sprintf('+63%s', $request->input('brgyConNum')),
                 'password' => $request->input('password'),
-                'displayName' => $request->input('brgyName'),
+                'displayName' => $request->input('staffFullName'),
                 'disabled' => false,
             ];
+
+            //send email to created user
+
 
             //create user
             $createdUser = $auth->createUser($userProperties);
@@ -169,6 +173,7 @@ class RegisterVawController extends Controller
                 'brgyName'              => $request->input('brgyName'),
                 'brgyContactNum'        => $request->input('brgyConNum'),
                 'brgyStaffFullName'     => $request->input('staffFullName'),
+                'brgyStaffPosition'     => $request->input('staffPosition'),
                 'brgyLogo'              => 'empty',
                 'brgyValidIDFront'      => 'empty',
                 'brgyValidIDBack'       => 'empty',
@@ -185,6 +190,8 @@ class RegisterVawController extends Controller
             ];
 
             $database->collection('barangay_accounts')->document($loginuid)->set($data);
+
+            $auth->sendEmailVerificationLink($request->input('email'));
         }
         else
         {

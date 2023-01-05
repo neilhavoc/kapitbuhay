@@ -109,7 +109,38 @@ class VawIncidentReportViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $database = $firestore->database();
+
+        $incidentRef = $database->collection('incident_reports')->document($id);
+
+        $incidentRef->update([
+            ['path' => 'report_status', 'value' => $request->input('CaseStatus')]
+        ]);
+
+        if ($request->input('CaseStatus')  == "Closed")
+        {
+            $incidentReportRef = $database->collection('incident_reports')->document($id);
+            $userIDRef = $incidentReportRef->snapshot();
+
+            $victimUsersRef = $database->collection('civilian-users')->document($userIDRef['sender_UID']);
+            $userRef = $victimUsersRef->snapshot();
+
+            $data = [
+                'victimUserID'      => $userIDRef['sender_UID'],
+                'victimFullName'    => $userRef['fName'] . ' ' . $userRef['midName'] . ' ' . $userRef['lName'],
+                'victimAddress'     => $userRef['street'] . ', ' . $userRef['barangay'] . ', ' . $userRef['city'],
+                'victimPhoneNum'    => '0' . $userRef['phonenumber'],
+                'monitoring_status' => 'Not Yet Monitored',
+                'victim_image'      => 'empty'
+            ];
+
+            $monitoringRef = $database->collection('monitoring_reports')->document($userIDRef['sender_UID'])->set($data);
+
+
+        }
+
+        return redirect('vaw_reports');
     }
 
     /**

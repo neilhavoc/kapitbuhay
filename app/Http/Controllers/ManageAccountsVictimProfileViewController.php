@@ -111,22 +111,23 @@ class ManageAccountsVictimProfileViewController extends Controller
 
         if ($request->input('verification') != null)
         {
-            $mailData = [
-                'subject' => 'Account Verification Update!',
-                'body' => 'Hello your Account failed the Verification Process Please re-register again and supply the correct information and requirements.'
-            ];
+            $civilianUsers->update([
+                ['path' => 'verification_status', 'value' => $request->input('verification')]
+            ]);
 
             if($request->input('verification') == 'Verified')
             {
-                $civilianUsers->update([
-                    ['path' => 'verification_status', 'value' => $request->input('verification')]
-                ]);
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account is now verified! You can now use your account in our website!'
+                ];
             }
             elseif ($request->input('verification') == 'Verification Failed')
             {
-                $civilianUsers->update([
-                    ['path' => 'verification_status', 'value' => $request->input('verification')]
-                ]);
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account failed the Verification Process Please re-register again and supply the correct information and requirements.'
+                ];
             }
         }
 

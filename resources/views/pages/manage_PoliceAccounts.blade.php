@@ -40,9 +40,11 @@
                     <tr>
                         <th id="trs-hd-1" class="col-lg-1">ID</th>
                         <th id="trs-hd-2" class="col-lg-3">Police Station Name</th>
-                        <th id="trs-hd-3" class="col-lg-3">Address</th>
-                        <th id="trs-hd-4" class="col-lg-3">Email</th>
-                        <th id="trs-hd-4" class="col-lg-2">Contact</th>
+                        <th id="trs-hd-3" class="col-lg-3">Police Officer FullName</th>
+                        <th id="trs-hd-3" class="col-lg-3">Email</th>
+                        <th id="trs-hd-2" class="col-lg-2">Contact</th>
+                        <th id="trs-hd-2" class="col-lg-2">Account Status</th>
+                        <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2"></th>
                     </tr>
                 </thead>

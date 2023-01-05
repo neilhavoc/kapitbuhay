@@ -108,6 +108,7 @@ class ManageAccountsPoliceProfileViewController extends Controller
         $database = $firestore->database();
 
         $policeUsers = $database->collection('police_accounts')->document($id);
+        $polUsers = $policeUsers->snapshot();
 
         if ($request->input('verification') != null)
         {
@@ -115,28 +116,24 @@ class ManageAccountsPoliceProfileViewController extends Controller
                 ['path' => 'verification_status', 'value' => $request->input('verification')]
             ]);
 
-            if ($request->input('accountStatus') != null)
+            if($request->input('verification') == 'Verified')
             {
-                $policeUsers->update([
-                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-                ]);
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account is now verified! You can now use your account in our website!'
+                ];
+            }
+            elseif ($request->input('verification') == 'Verification Failed')
+            {
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account failed the Verification Process Please re-register again and supply the correct information and requirements.'
+                ];
             }
         }
-        elseif ($request->input('accountStatus') != null)
-        {
-            $policeUsers->update([
-                ['policeUsers' => 'account_status', 'value' => $request->input('accountStatus')]
-            ]);
-        }
-
-        $mailData = [
-            'subject' => 'KapitBuhat Test Email',
-            'body' => 'Email SAMPLE NI'
-
-          ];
 
         try{
-            Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
+            Mail::to($polUsers['policeEmail'])->send(new EmailSender($mailData));
             //return response()->json(['Great']);
          }
          catch(Exception $th){
@@ -152,7 +149,6 @@ class ManageAccountsPoliceProfileViewController extends Controller
 
         $policeUsers = $database->collection('police_accounts')->document($id);
         $policeRef = $policeUsers->snapshot();
-
 
         if ($request->input('AccountStatus') != null)
         {

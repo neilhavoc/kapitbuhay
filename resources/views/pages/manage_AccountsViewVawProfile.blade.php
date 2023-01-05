@@ -50,8 +50,12 @@
                         <input type="text" disabled ="true" class="col-md-4" value="{{ $vaw['brgyName'] }}">
                     </div>
                     <div class="row mt-1 ms-3">
+                        <h5 class="col-md-2">Barangay VAW Staff Name:</h5>
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $vaw['brgyStaffFullName'] }}">
+                    </div>
+                    <div class="row mt-1 ms-3">
                         <h5 class="col-md-2">Contact No:</h5>
-                        <input type="text" disabled ="true" class="col-md-4" value="{{ $vaw['brgyContactNum1'] }}">
+                        <input type="text" disabled ="true" class="col-md-4" value="{{ $vaw['brgyContactNum'] }}">
                     </div>
                     <div class="row mt-1 ms-3">
                         <h5 class="col-md-2">Email:</h5>
@@ -135,7 +139,7 @@
                         @endif
                     </div>
                 </form>
-                <form action="manage_accountspoliceprofileview/updateAccStatus/{{ $vaw->id() }}" method="POST">
+                <form action="manage_accountsvawprofileview/updateAccStatus/{{ $vaw->id() }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row mt-3">

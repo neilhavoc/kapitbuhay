@@ -107,6 +107,7 @@ class ManageAccountsVawProfileViewController extends Controller
         $database = $firestore->database();
 
         $vawUsers = $database->collection('barangay_accounts')->document($id);
+        $vawRef = $vawUsers->snapshot();
 
         if ($request->input('verification') != null)
         {
@@ -114,34 +115,30 @@ class ManageAccountsVawProfileViewController extends Controller
                 ['path' => 'verification_status', 'value' => $request->input('verification')]
             ]);
 
-            if ($request->input('accountStatus') != null)
+            if($request->input('verification') == 'Verified')
             {
-                $vawUsers->update([
-                    ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-                ]);
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account is now verified! You can now use your account in our website!'
+                ];
+            }
+            elseif ($request->input('verification') == 'Verification Failed')
+            {
+                $mailData = [
+                    'subject' => 'Account Verification Update!',
+                    'body' => 'Hello your Account failed the Verification Process Please re-register again and supply the correct information and requirements.'
+                ];
             }
         }
-        elseif ($request->input('accountStatus') != null)
-        {
-            $vawUsers->update([
-                ['path' => 'account_status', 'value' => $request->input('accountStatus')]
-            ]);
-        }
-
-        $mailData = [
-            'subject' => 'KapitBuhat Test Email',
-            'body' => 'Email SAMPLE NI'
-
-          ];
 
         try{
-            Mail::to('admiralnenzsmc@gmail.com')->send(new EmailSender($mailData));
+            Mail::to($vawRef['brgyEmail'])->send(new EmailSender($mailData));
             //return response()->json(['Great']);
          }
          catch(Exception $th){
 
          }
-        return redirect('policeAcc');
+        return redirect('VawAcc');
     }
 
     public function updateAccStatus(Request $request, $id)
@@ -149,7 +146,7 @@ class ManageAccountsVawProfileViewController extends Controller
         $firestore = app('firebase.firestore');
         $database = $firestore->database();
 
-        $vawUsers = $database->collection('police_accounts')->document($id);
+        $vawUsers = $database->collection('barangay_accounts')->document($id);
         $vawRef = $vawUsers->snapshot();
 
 
@@ -187,7 +184,7 @@ class ManageAccountsVawProfileViewController extends Controller
 
         }
 
-        return redirect('policeAcc');
+        return redirect('VawAcc');
     }
 
     /**

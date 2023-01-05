@@ -21,9 +21,13 @@ class VawCreateReportController extends Controller
 
             $database = $firestore->database();
             $viewdisID = session('viewDistressID');
+            $brgyUser = session('userID');
 
             $recordIDs = $database->collection('sos-distress-message')->document($viewdisID);
             $messageRef = $recordIDs->snapshot();
+
+            $brgyUserIDRef = $database->collection('barangay_accounts')->document($brgyUser);
+            $userRef = $brgyUserIDRef->snapshot();
 
             date_default_timezone_set('Asia/Singapore');
             $date = date('m/d/Y h:i:s a', time());
@@ -37,6 +41,7 @@ class VawCreateReportController extends Controller
                 return view('pages.vaw_createReports', [
                     'message'   => $messageRef,
                     'date'      => $date,
+                    'brgyUser'  => $userRef
                 ]);
             }
         }

@@ -67,31 +67,43 @@ class LoginController extends Controller
         $policeUsers = $database->collection('police_accounts');
         $idRefPolice = $policeUsers->documents();
 
-        foreach ($idRefVAW as $vawID) {
+        foreach ($idRefVAW as $vawID)
+        {
             if ($vawID['brgyEmail'] == $email)
             {
-                if ($vawID['verification_status'] == 'To Verify' && $vawID['account_status'] == 'Not Banned') {
-                    return redirect('loginpage')->withSuccess('Account is not yet Verified!');
-                }
-                elseif ($vawID['verification_status'] == 'Verified' && $vawID['account_status'] == 'Not Banned') {
-                    try
-                    {
-                        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+                $user = $auth->getUser($vawID['brgyUID']);
+                $verify = $user->emailVerified;
 
-                        session(['userID' => $vawID['brgyUID']]);
-                        session(['brgyName' => $vawID['brgyName']]);
-                        session(['barangay' => $vawID['barangay']]);
-                        return redirect('vaw_manageaccount');
-                    } catch(invalidInput $e) {
-                        return redirect('loginpage')->withSuccess('Invalid Email or Password!');
-                    };
-                }
-                elseif ($vawID['account_status'] == 'Banned') {
-                    return redirect('loginpage')->withSuccess('Account is banned!');
-                }
-                elseif ($vawID['verification_status'] == 'Verification Failed') {
+                if ($verify == 1)
+                {
+                    if ($vawID['verification_status'] == 'To Verify' && $vawID['account_status'] == 'Not Banned') {
+                        return redirect('loginpage')->withSuccess('Account is not yet Verified!');
+                    }
+                    elseif ($vawID['verification_status'] == 'Verified' && $vawID['account_status'] == 'Not Banned') {
+                        try
+                        {
+                            $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+                            session(['userID' => $vawID['brgyUID']]);
+                            session(['brgyName' => $vawID['brgyName']]);
+                            session(['barangay' => $vawID['barangay']]);
 
+                            return redirect('vaw_manageaccount');
+                        } catch(invalidInput $e) {
+                            return redirect('loginpage')->withSuccess('Invalid Email or Password!');
+                        };
+                    }
+                    elseif ($vawID['account_status'] == 'Banned') {
+                        return redirect('loginpage')->withSuccess('Account is banned!');
+                    }
+                    elseif ($vawID['verification_status'] == 'Verification Failed') {
+
+                    }
                 }
+                else
+                {
+                    return redirect('loginpage')->withSuccess('Account is not yet verified! Please check email');
+                }
+
             }
         }
 

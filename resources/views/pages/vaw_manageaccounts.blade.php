@@ -32,12 +32,20 @@
             <h5 id="userID" class="col-md-4">{{ $account->id() }}</h5>
         </div>
         <div class="row mt-2">
-            <h5 class="col-md-2">Name:</h5>
+            <h5 class="col-md-2">Barangay Name:</h5>
             <input type="text" class="col-md-5" value="{{ $account['brgyName'] }}" disabled>
         </div>
         <div class="row mt-2">
+            <h5 class="col-md-2">VAW Staff Name:</h5>
+            <input type="text" class="col-md-5" value="{{ $account['brgyStaffFullName'] }}" disabled>
+        </div>
+        <div class="row mt-2">
+            <h5 class="col-md-2">VAW Staff Position:</h5>
+            <input type="text" class="col-md-5" value="{{ $account['brgyStaffPosition'] }}" disabled>
+        </div>
+        <div class="row mt-2">
             <h5 class="col-md-2">Contact No:</h5>
-            <input type="text" class="col-md-5" value="{{ $account['brgyContactNum1'] }}" disabled>
+            <input type="text" class="col-md-5" value="{{ $account['brgyContactNum'] }}" disabled>
         </div>
         <div class="row mt-2">
             <h5 class="col-md-2">Street:</h5>

@@ -31,10 +31,15 @@
                     </div>
                     <div class="row g-3 align-items-center mb-2">
                         <div class="col-auto">
-                        <label for="cn1" class="col-form-label">Barangay Contact Name:</label>
+                        <label for="cn1" class="col-form-label">Barangay Contact Num:</label>
                         </div>
                         <div class="col-auto">
                         <input type="number" name="brgyConNum" id="cn1" class="form-control" value="{{ $input['brgyContactNum'] }}" required>
+                        </div>
+                        <div class="col-auto">
+                            <span id="barangaynameHelpLine" class="form-text">
+                            Do not include first number '0'
+                            </span>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-5">
@@ -46,8 +51,16 @@
                         </div>
                         <div class="col-auto">
                             <span id="barangaynameHelpLine" class="form-text">
-                            First Name, Middle Initial, Last Name
+                            First Name, Middle Initial, Last Name example: (Juan E. Dela Cruz)
                             </span>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mb-5">
+                        <div class="col-auto">
+                        <label for="cn1" class="col-form-label">Barangay VAW Staff Position:</label>
+                        </div>
+                        <div class="col-auto">
+                        <input type="text" name="staffPosition" id="cn1" class="form-control" value="{{ $input['brgyStaffPosition'] }}" required>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center ">
@@ -186,23 +199,36 @@
                     </div>
                     <div class="row g-3 align-items-center mb-2">
                         <div class="col-auto">
-                        <label for="cn1" class="col-form-label">Barangay Contact Name:</label>
+                        <label for="cn1" class="col-form-label">Barangay Contact Num:</label>
                         </div>
                         <div class="col-auto">
                         <input type="number" name="brgyConNum" id="cn1" class="form-control" required>
                         </div>
-                    </div>
-                    <div class="row g-3 align-items-center mb-5">
                         <div class="col-auto">
-                        <label for="cn1" class="col-form-label">Barangay VAW Staff Full Name:</label>
+                            <span id="barangaynameHelpLine" class="form-text">
+                            Do not include first number '0'
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mb-2">
+                        <div class="col-auto">
+                            <label for="cn1" class="col-form-label">Barangay VAW Staff Full Name:</label>
                         </div>
                         <div class="col-auto">
-                        <input type="text" name="staffFullName" id="cn1" class="form-control" required>
+                            <input type="text" name="staffFullName" id="cn1" class="form-control" required>
                         </div>
                         <div class="col-auto">
                             <span id="barangaynameHelpLine" class="form-text">
-                            First Name, Middle Initial, Last Name
+                            First Name, Middle Initial, Last Name example: (Juan E. Dela Cruz)
                             </span>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mb-5">
+                        <div class="col-auto">
+                            <label for="cn1" class="col-form-label">Barangay VAW Staff Position:</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" name="staffPosition" id="cn1" class="form-control" required>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center ">
