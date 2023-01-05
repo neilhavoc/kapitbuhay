@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PoliceReportsController extends Controller
+class PoliceReportsViewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,44 @@ class PoliceReportsController extends Controller
      */
     public function index()
     {
+        //
         if(!session()->has('userID') && !session()->has('brgyName')) {
             return redirect('loginpage');
         }
         else {
             $firestore = app('firebase.firestore');
             $database = $firestore->database();
-            $incidentRefID = $database->collection('incident_reports');
-            $incidentRef = $incidentRefID->documents();
 
-            return view('pages.police_reports', [
-                'incident' => $incidentRef,
+            // $storage = app('firebase.storage');
+            // $bucket = $storage->getBucket();
+            // $userid = session('userID');
+            // $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
+
+            // $urlLogo = $brgyLogo->signedUrl(
+            //     # This URL is valid for 15 minutes
+            //     new \DateTime('15 min'),
+            //     [
+            //         'version' => 'v4',
+            //     ]
+            // );
+            // $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
+
+            // $brgyLogoRef->update([
+            //     ['path' => 'brgyLogo', 'value' => $urlLogo]
+            // ]);
+
+            // $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
+            // $brgyUser = $brgyUserIDRef->snapshot();
+
+            $viewdisID = session('viewIncidentID');
+
+
+            $incidentRef = $database->collection('incident_reports')->document($viewdisID);
+            $incRef = $incidentRef->snapshot();
+
+            return view('pages.police_reportsview', [
+                'incident' => $incRef,
+
             ]);
         }
     }
@@ -47,9 +74,6 @@ class PoliceReportsController extends Controller
     public function store(Request $request)
     {
         //
-        session(['viewIncidentID' => $request->input('incidentID')]);
-
-        return redirect('police_reportsview');
     }
 
     /**
