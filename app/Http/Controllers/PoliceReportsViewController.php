@@ -21,27 +21,28 @@ class PoliceReportsViewController extends Controller
             $firestore = app('firebase.firestore');
             $database = $firestore->database();
 
-            // $storage = app('firebase.storage');
-            // $bucket = $storage->getBucket();
-            // $userid = session('userID');
-            // $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
+            /*
+            $storage = app('firebase.storage');
+            $bucket = $storage->getBucket();
+            $userid = session('userID');
+            $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
 
-            // $urlLogo = $brgyLogo->signedUrl(
-            //     # This URL is valid for 15 minutes
-            //     new \DateTime('15 min'),
-            //     [
-            //         'version' => 'v4',
-            //     ]
-            // );
-            // $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
+            $urlLogo = $brgyLogo->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+            $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
 
-            // $brgyLogoRef->update([
-            //     ['path' => 'brgyLogo', 'value' => $urlLogo]
-            // ]);
+            $brgyLogoRef->update([
+                ['path' => 'brgyLogo', 'value' => $urlLogo]
+            ]);
 
-            // $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
-            // $brgyUser = $brgyUserIDRef->snapshot();
-
+            $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
+            $brgyUser = $brgyUserIDRef->snapshot();
+            */
             $viewdisID = session('viewIncidentID');
 
 
@@ -50,7 +51,6 @@ class PoliceReportsViewController extends Controller
 
             return view('pages.police_reportsview', [
                 'incident' => $incRef,
-
             ]);
         }
     }
