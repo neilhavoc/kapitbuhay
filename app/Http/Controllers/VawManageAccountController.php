@@ -43,8 +43,12 @@ class VawManageAccountController extends Controller
             $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
             $brgyUser = $brgyUserIDRef->snapshot();
 
+            $password = 'false';
+            $notStrong = 'false';
             return view('pages.vaw_manageaccounts', [
-                'account'   => $brgyUser
+                'account'   => $brgyUser,
+                'password'  => $password,
+                'notStrong' => $notStrong
             ]);
         }
     }
@@ -67,7 +71,48 @@ class VawManageAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $firestore = app('firebase.firestore');
+        $auth = app('firebase.auth');
+
+        $database = $firestore->database();
+        $userid = session('userID');
+
+        $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
+        $brgyUser = $brgyUserIDRef->snapshot();
+
+        $inputpass = $request->input('password');
+        $uppercase = preg_match('@[A-Z]@', $inputpass);
+        $lowercase = preg_match('@[a-z]@', $inputpass);
+        $number    = preg_match('@[0-9]@', $inputpass);
+        $specialChars = preg_match('@[^\w]@', $inputpass);
+
+
+        if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($inputpass) < 8) {
+            $notStrong  = 'true';
+            $password   = 'false';
+            return view('pages.vaw_manageaccounts', [
+                'account'   => $brgyUser,
+                'password'  => $password,
+                'notStrong' => $notStrong
+            ]);
+        }
+        elseif ($request->input('password') == $request->input('conpassword'))
+        {
+            $updatedUser = $auth->changeUserPassword($userid, $request->input('password'));
+            $brgyUserIDRef->update([['path' => 'brgyPassword', 'value' => $request->input('password')]]);
+
+            return redirect('vaw_manageaccount');
+        }
+        else
+        {
+            $password = 'true';
+            $notStrong  = 'false';
+            return view('pages.vaw_manageaccounts', [
+                'account'   => $brgyUser,
+                'password'  => $password,
+                'notStrong' => $notStrong
+            ]);
+        }
     }
 
     /**
@@ -101,7 +146,7 @@ class VawManageAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

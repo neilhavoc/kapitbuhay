@@ -61,18 +61,35 @@
             <h5 class="col-md-2">Email:</h5>
             <input type="text" disabled ="true" class="col-md-4" value="{{ $account['policeEmail'] }}">
         </div>
-        <div class="row mt-2">
-            <h5 class="col-md-2">Password:</h5>
-            <input type="password" class="col-md-4">
-        </div>
-        <div class="row mt-2 mb-3">
-            <h5 class="col-md-2">Confirm Password:</h5>
-            <input type="password" class="col-md-4">
-        </div>
-
-        <div class="footer">
-            <button type="button" class="btn btn-primary">Save</button>
-        </div>
+        <form action="police_manageaccount" method="POST">
+            @csrf
+            <div class="row mt-2">
+                <h5 class="col-md-2">Password:</h5>
+                <input type="password" name="password" class="col-md-4">
+                @if ($password == 'true')
+                    <span id="passwordHelpInline" class="form-text" style="color:red">
+                        Password does not match
+                    </span>
+                @elseif ($notStrong == 'true')
+                    <span id="passwordHelpInline" class="form-text" style="color:red">
+                        Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
+                    </span>
+                @endif
+            </div>
+            <div class="row mt-2 mb-3">
+                <h5 class="col-md-2">Confirm password:</h5>
+                <input type="password" name="conpassword" class="col-md-4">
+                @if ($password == 'true')
+                    <span id="passwordHelpInline" class="form-text" style="color:red">
+                        Password does not match
+                    </span>
+                @else
+                @endif
+            </div>
+            <div class="footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
     </div>
 </div>
 @stop
