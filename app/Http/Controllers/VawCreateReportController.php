@@ -69,6 +69,8 @@ class VawCreateReportController extends Controller
      */
     public function store(Request $request)
     {
+        $month_sent_var = session('monthSOSDM');
+        $year_sent_var = session('yearSOSDM');
         $firestore = app('firebase.firestore');
 
         //store user details in firestore
@@ -119,6 +121,8 @@ class VawCreateReportController extends Controller
             'barangay'                  => $brgy,
             'creatorType'               => 'barangay',
             'report_status'             => 'Ongoing',
+            'month_sent'                => $month_sent_var,
+            'year_sent'                =>  $year_sent_var,
         ];
 
         $database->collection('incident_reports')->document($newIncidentID)->set($data);
