@@ -18,7 +18,7 @@
 
 <!-- Content -->
 @section('content')
-<div class="container search" style="overflow-y: scroll; overflow-x: hidden; height:600px;">
+<div class="container search mb-2" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
     <div class="row g-1 mb-5">
         <div class="col-md-5">
             <input class= "container-fluid h-100" type="text" placeholder="Search">
@@ -45,7 +45,7 @@
                 <button class="btn btn-primary h-100" type="button">List of Distress Message</button>
             </div>
         </div>
-        <div class="form-group mt-0" style="overflow: hidden; overflow-y: scroll;">
+        <div class="form-group mt-0 mb-5" style="overflow: hidden; overflow-y: scroll;">
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
