@@ -50,10 +50,15 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-10 fw-bold">
-                    Report Details:
-                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" disabled="disabled">{{ $incident['reportDetails'] }}
-                    </textarea>
+            <div class="col-md-8 fw-bold">
+                    Narrative Incident Report Details:
+                    <textarea class="form-control" name="reportDetails" id="exampleFormControlTextarea2" disabled="disabled">{{ $incident['reportDetails'] }}</textarea>
+                    Person's Involve in the Incident:
+                    <textarea class="form-control" name="reportDetails2" id="exampleFormControlTextarea3" disabled="disabled">{{ $incident['reportDetails2'] }}</textarea>
+                    Exact time and Location of the Incident(Time, Road, Zone, Barangay):
+                    <textarea class="form-control" name="reportDetails3" id="exampleFormControlTextarea4" disabled="disabled">{{ $incident['reportDetails3'] }}</textarea>
+                    Type of Incident:
+                    <textarea class="form-control" name="reportDetails4" id="exampleFormControlTextarea5" disabled="disabled">{{ $incident['type_of_incident'] }}</textarea>
                 </div>
                     <div class="col-md-2">
                         <div class="row">
