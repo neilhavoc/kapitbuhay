@@ -21,6 +21,7 @@ use App\Http\Controllers\PoliceUnverifiedController;
 use App\Http\Controllers\DistressController;
 use App\Http\Controllers\RegisterPoliceController;
 use App\Http\Controllers\RegisterVawController;
+use App\Http\Controllers\RegisterPurokLeaderController;
 use App\Http\Controllers\VawReportsController;
 use App\Http\Controllers\VawUnverifiedController;
 use App\Http\Controllers\VawCreateReportController;
@@ -112,4 +113,5 @@ Route::resource('/vaw_createhealthmonitoring', VawCreateHealthMonitoringControll
 Route::resource('/vaw_edithealthmonitoring', VawEditHealthMonitoringController::class);
 Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
 Route::resource('/police_reportsview', PoliceReportsViewController::class);
+Route::resource('/register_PurokLeader', RegisterPurokLeaderController::class);
 
