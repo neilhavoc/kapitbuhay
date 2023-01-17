@@ -70,7 +70,7 @@
                         </tr>
                 @else
                     @foreach ($message as $item)
-                        @if ($item['transfered_to'] == session('userID'))
+                        @if ($item['receiving_Brgy'] == session('barangay'))
                             <tr class="justify-contents-center ">
                                 <td>{{ $item->id() }}</td>
                                 <td>{{ $item['sender_FullName'] }}</td>
