@@ -44,9 +44,15 @@ class VawUpdateHealthMonitoringController extends Controller
             $recordIDs = $database->collection('monitoring_reports')->document($viewMonitoringReportID);
             $monitorData = $recordIDs->snapshot();
 
+            $victimMonitoringRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring');
+            $victimMonitoring = $victimMonitoringRef->documents();
+
             return view('pages.vaw_UpdateHealthMonitoring', [
                 'monitor' => $monitorData,
+                'report'  => $victimMonitoring
             ]);
+
+
         }
     }
 
@@ -68,7 +74,8 @@ class VawUpdateHealthMonitoringController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        session(['monitoringID' => $request->input('phyMonID')]);
+        return redirect('vaw_edithealthmonitoring');
     }
 
     /**
@@ -102,7 +109,17 @@ class VawUpdateHealthMonitoringController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $firestore = app('firebase.firestore');
+
+        $database = $firestore->database();
+
+        $recordIDs = $database->collection('monitoring_reports')->document($id);
+        $recordIDs->update([
+            ['path' => 'mentalhealth_form', 'value' => 'send'],
+            ['path' => 'phyMon_ID', 'value' => $request->input('phyMonID')],
+        ]);
+
+        return redirect('vaw_updatehealthmonitoring');
     }
 
     /**

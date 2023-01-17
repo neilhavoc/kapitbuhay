@@ -29,72 +29,66 @@
         </div>
         <div class="col-md-auto">
             <h1>
-                Victims Health Status Monitoring Day (x)
+                Victims Health Status Monitoring Day {{$day}}
             </h1>
         </div>
     </div>
-    <div class="row mt-3 mx-5">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="physical-tab" data-bs-toggle="tab" data-bs-target="#physical" type="button" role="tab" aria-controls="physical" aria-selected="true">Physical Health</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="mental-tab" data-bs-toggle="tab" data-bs-target="#mental" type="button" role="tab" aria-controls="mental" aria-selected="false">Mental Health</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">THIS IS Physical Tab</div>
-            <div class="tab-pane fade" id="mental" role="tabpanel" aria-labelledby="mental-tab">THIS IS Mental tab</div>
-          </div>
-    </div>
-    <div class="row mt-5 mx-2 justify-content-between">
-        <div class="col-md-auto">
+    <form action="vaw_createhealthmonitoring" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row mt-3 mx-5">
             <div class="row">
                 <div class="col-md-auto">
-                    Remarks:
+                    Physical Health Monitoring Details:
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-auto">
-                    <input name="remarks" id="remarks" type="text" class="form-control align-content-center">
+                <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">
+                    <textarea class="form-control" name="physicalmonitoring" id="physicalmonitoring" rows="3" required></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-md-auto">
-            <div class="row">
-                <div class="col-md-auto">
-                    Monitoring Status:
+        <div class="row mt-5 mx-2 justify-content-between">
+            <div class="col-md-auto">
+                <div class="row">
+                    <div class="col-md-auto">
+                        Upload Images of Victim's injury:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <input name="filephysicalmonitoring1" id="filephysicalmonitoring1" type="file" class="form-control align-content-center w-100" required>
+                    </div>
+                </div>
+                <div class="row-md-auto">
+                    <div class="col-md-auto">
+                        <input name="filephysicalmonitoring2" id="filephysicalmonitoring2" type="file" class="form-control align-content-center w-100" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <input name="filephysicalmonitoring3" id="filephysicalmonitoring3" type="file" class="form-control align-content-center w-100" required>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-auto">
-                    <select class="form-select" name="monstatus" id="monstatus" aria-label="Monitoring selection">
-                        <option selected disabled>Ongoing</option>
-                        <option value="Closed">Closed</option>
-                      </select>
+            <div class="col-md-auto">
+                <div class="row">
+                    <div class="col-md-auto">
+                        Monitored By:
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-auto">
-                    Monitored By:
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-auto">
-                    <input name="remarks" id="remarks" type="text" class="form-control align-content-center">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <input name="remarks" id="remarks" type="text" class="form-control align-content-center" value="{{session('vawstaffname')}}" disabled>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-auto">
-            <button type="submit" class="btn btn-warning">Send Mental Health Monitoring Form</button>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-danger">Save</button>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-auto">
-            <button type="submit" class="btn btn-danger">Save</button>
-        </div>
-    </div>
-
+    </form>
 </div>
 @stop
 

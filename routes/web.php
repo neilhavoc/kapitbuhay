@@ -40,7 +40,7 @@ use App\Http\Controllers\ManageAccountsVawProfileViewController;
 use App\Http\Controllers\ManageAccountsVictimProfileViewController;
 use App\Http\Controllers\VawIncidentReportViewController;
 use App\Http\Controllers\PoliceReportsViewController;
-
+use App\Http\Controllers\ControllerName;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,4 +112,4 @@ Route::resource('/vaw_createhealthmonitoring', VawCreateHealthMonitoringControll
 Route::resource('/vaw_edithealthmonitoring', VawEditHealthMonitoringController::class);
 Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
 Route::resource('/police_reportsview', PoliceReportsViewController::class);
-
+Route::resource('/controller_name', ControllerName::class);

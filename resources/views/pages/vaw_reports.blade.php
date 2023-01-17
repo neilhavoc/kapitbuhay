@@ -86,7 +86,7 @@
    async function getotalongoingcases(){
     const coll = collection(db, "incident_reports");
     for (let i = 0; i < 12; i++) {
-      
+
       const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Ongoing'));
       const querySnapshot = await getDocs(query_1);
         querySnapshot.forEach((doc) => {
@@ -97,7 +97,7 @@
       count2 = 0;
     }
 
-      
+
   }
   getotalclosedcases();
    async function getotalclosedcases(){
@@ -112,7 +112,7 @@
       yValues3.push(count3);
       count3 = 0;
     }
-  }  
+  }
 
 
     var xValues = ["January", "February", "March", "April", "May", "June", "July", "August","September", "October", "November","December"];
@@ -168,7 +168,7 @@ new Chart("totalclosedcased", {
       text: "Total Closed Cases"
     }
   }
-  
+
 });
 new Chart("totalopencases", {
   type: "bar",

@@ -198,14 +198,13 @@ class ArticleController extends Controller
 
         foreach($articleID as $article_ID)
         {
-
             if($request->file('articleimage') == null)
             {
                 if($article_ID['article_title'] == $request->input('updateArticleTitle'))
                 {
                     $articleRef = $database->collection('articles')->document($article_ID['article_id']);
                     $articleRef->update([
-                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')]
+                        ['path' => 'article_content', 'value' => $request->input('updateArticleContent')],
                     ]);
                     break;
                 }
@@ -213,10 +212,10 @@ class ArticleController extends Controller
                 {
                     $articleRecordID = $articleIDsnapshot['id'] + 1;
 
-                    $ArticleID_Records = $database->collection('record_IDs')->document('article_ID');
-                    $ArticleID_Records->update([
-                        ['path' => 'id', 'value' => $articleRecordID]
-                    ]);
+                        $ArticleID_Records = $database->collection('record_IDs')->document('article_ID');
+                        $ArticleID_Records->update([
+                            ['path' => 'id', 'value' => $articleRecordID]
+                        ]);
 
                     $recordIdsArticle = $database->collection('record_IDs')->document('article_ID');
                     $newarticleIDsnapshot = $recordIdsArticle->snapshot();

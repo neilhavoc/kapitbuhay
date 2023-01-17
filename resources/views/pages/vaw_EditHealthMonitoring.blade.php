@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-auto">
             <h1>
-                Victims Health Status Monitoring Day (x)
+                Victims Health Status Monitoring Day {{$day}}
             </h1>
         </div>
     </div>
@@ -43,12 +43,14 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">THIS IS Physical Tab</div>
+            <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">
+                <textarea class="form-control" name="physicalmonitoring" id="physicalmonitoring" rows="3" disabled>{{$report['physicalmon_details']}}</textarea>
+            </div>
             <div class="tab-pane fade" id="mental" role="tabpanel" aria-labelledby="mental-tab">THIS IS Mental tab</div>
           </div>
     </div>
-    <div class="row mt-5 mx-2 justify-content-evenly">
-        <div class="col-md-auto">
+    <div class="row mt-5 mx-1 justify-content-evenly">
+        <!-- <div class="col-md-auto">
             <div class="row">
                 <div class="col-md-auto">
                     Remarks:
@@ -56,12 +58,12 @@
             </div>
             <div class="row">
                 <div class="col-md-auto">
-                    <input name="remarks" id="remarks" type="text" class="form-control align-content-center">
+                    <textarea class="form-control" name="remarks" id="remarks" rows="3" required></textarea>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="col-md-auto">
-            <div class="row">
+           <!-- <div class="row">
                 <div class="col-md-auto">
                     Monitoring Status:
                 </div>
@@ -73,7 +75,7 @@
                         <option value="Closed">Closed</option>
                       </select>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-md-auto">
                     Monitored By:
@@ -81,7 +83,7 @@
             </div>
             <div class="row">
                 <div class="col-md-auto">
-                    <input name="remarks" id="remarks" type="text" class="form-control align-content-center">
+                    <input name="remarks" id="remarks" type="text" class="form-control align-content-center" value="{{$report['physicalmon_monitoredby']}}" disabled>
                 </div>
             </div>
         </div>
