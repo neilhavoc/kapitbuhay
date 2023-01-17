@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-auto">
             <h1>
-                Victims Health Status Monitoring Day {{$day}}
+                Victims Health Status Monitoring Day {{$report['monitoring_day']}}
             </h1>
         </div>
     </div>
@@ -46,7 +46,74 @@
             <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">
                 <textarea class="form-control" name="physicalmonitoring" id="physicalmonitoring" rows="3" disabled>{{$report['physicalmon_details']}}</textarea>
             </div>
-            <div class="tab-pane fade" id="mental" role="tabpanel" aria-labelledby="mental-tab">THIS IS Mental tab</div>
+            <div class="tab-pane fade" id="mental" role="tabpanel" aria-labelledby="mental-tab">
+                <table class="table table-hover table-bordered">
+                    <thead class="bill-header cs text-center">
+                        <tr>
+                            <th id="trs-hd-1" class="col-lg-1">Questions</th>
+                            <th id="trs-hd-2" class="col-lg-1">Answers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($questions == null)
+
+                        @else
+                            <tr>
+                                <td>1. {{ $questions['question2']}}</td>
+                                <td>1. {{ $answers['answer_1']}}</td>
+                            </tr>
+                            <tr>
+                                <td>2. {{ $questions['question3']}}</td>
+                                <td>2. {{ $answers['answer_2']}}</td>
+                            </tr>
+                            <tr>
+                                <td>3. {{ $questions['question4']}}</td>
+                                <td>3. {{ $answers['answer_3']}}</td>
+                            </tr>
+                            <tr>
+                                <td>4. {{ $questions['question5']}}</td>
+                                <td>4. {{ $answers['answer_4']}}</td>
+                            </tr>
+                            <tr>
+                                <td>5. {{ $questions['question6']}}</td>
+                                <td>5. {{ $answers['answer_5']}}</td>
+                            </tr>
+                            <tr>
+                                <td>6. {{ $questions['question7']}}</td>
+                                <td>6. {{ $answers['answer_6']}}</td>
+                            </tr>
+                            <tr>
+                                <td>7. {{ $questions['question8']}}</td>
+                                <td>7. {{ $answers['answer_7']}}</td>
+                            </tr>
+                            <tr>
+                                <td>8. {{ $questions['question9']}}</td>
+                                <td>8. {{ $answers['answer_8']}}</td>
+                            </tr>
+                            <tr>
+                                <td>9. {{ $questions['question10']}}</td>
+                                <td>9. {{ $answers['answer_9']}}</td>
+                            </tr>
+                            <tr>
+                                <td>10. {{ $questions['question11']}}</td>
+                                <td>10. {{ $answers['answer_10']}}</td>
+                            </tr>
+                            <tr>
+                                <td>11. {{ $questions['question12']}}</td>
+                                <td>11. {{ $answers['answer_11']}}</td>
+                            </tr>
+                            <tr>
+                                <td>12. {{ $questions['question13']}}</td>
+                                <td>12. {{ $answers['answer_12']}}</td>
+                            </tr>
+                            <tr>
+                                <td>13. {{ $questions['question14']}}</td>
+                                <td>13. {{ $answers['answer_13']}}</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
           </div>
     </div>
     <div class="row mt-5 mx-1 justify-content-evenly">
@@ -88,11 +155,11 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-5">
+    <!--<div class="row justify-content-center mt-5">
         <div class="col-md-auto">
             <button type="submit" class="btn btn-danger">Save</button>
         </div>
-    </div>
+    </div>-->
 
 </div>
 @stop

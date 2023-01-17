@@ -21,26 +21,20 @@ class VawEditHealthMonitoringController extends Controller
 
         $viewMonitoringReportID = session('viewMonitoringReport');
 
-        //getting number of days
-        $phymonRef = $database->collection('record_IDs')->document($victimUID . 'physicalReport_IDs');
-        $physicalmonitoringID = $phymonRef->snapshot();
-
-        if ($physicalmonitoringID->exists())
-        {
-            $day = $physicalmonitoringID['day'] + 1;
-        }
-        else
-        {
-            $day = 1;
-        }
-
         $phyMonID = session('monitoringID');
         $victimMonitoringRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring')->document($phyMonID);
         $victimMonitoring = $victimMonitoringRef->snapshot();
 
+        $questionsRef = $database->collection('monitoring_questions')->document('questions');
+        $questions = $questionsRef->snapshot();
+
+        $answersRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('mentalhealth_answers')->document($victimMonitoring['mentalhealth_id']);
+        $answers = $answersRef->snapshot();
+
         return view('pages.vaw_EditHealthMonitoring', [
-            'day'    => $day,
-            'report' => $victimMonitoring
+            'report'    => $victimMonitoring,
+            'questions' => $questions,
+            'answers'   => $answers
         ]);
     }
 

@@ -84,7 +84,11 @@
                                             @csrf
                                             @method ('PUT')
                                             <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
-                                            <button type="submit" class="btn btn-primary">Send Mental Health Form</button>
+                                            @if ($data['mentalhealth_id'] == '' && $monitor['mentalhealth_form'] != 'send')
+                                                <button type="submit" class="btn btn-primary">Send Mental Health Form</button>
+                                            @else
+                                                <button type="submit" class="btn btn-primary" disabled>Send Mental Health Form</button>
+                                            @endif
                                         </form>
                                     </td>
                                     <td>

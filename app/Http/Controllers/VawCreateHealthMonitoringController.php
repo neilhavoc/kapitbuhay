@@ -20,7 +20,7 @@ class VawCreateHealthMonitoringController extends Controller
         $victimUID = session('viewMonitoringReport');
 
         //getting number of days
-        $phymonRef = $database->collection('record_IDs')->document($victimUID . 'physicalReport_IDs');
+        $phymonRef = $database->collection('record_IDs')->document($victimUID . '_physicalReport_IDs');
         $physicalmonitoringID = $phymonRef->snapshot();
 
         if ($physicalmonitoringID->exists())
