@@ -29,7 +29,7 @@
         <div class="col-md-7" style="text-align:center">
             <img src="{{ $account['policeLogo'] }}" alt="Ball" class="profile">
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2 invisible">
             <h5 class="col-md-2">User ID: </h5>
             <h5 id="userID" class="col-md-4">{{ $account->id() }}</h5>
         </div>

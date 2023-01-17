@@ -123,6 +123,9 @@ class VawCreateReportController extends Controller
             'report_status'             => 'Ongoing',
             'month_sent'                => $month_sent_var,
             'year_sent'                =>  $year_sent_var,
+            'reportDetails2'            => $request->input('reportDetails2'),
+            'reportDetails3'            => $request->input('reportDetails3'),
+            'type_of_incident'            => $request->input('incident_type'),
         ];
 
         $database->collection('incident_reports')->document($newIncidentID)->set($data);
