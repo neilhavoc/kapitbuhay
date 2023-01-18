@@ -50,10 +50,15 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-10 fw-bold">
-                    Report Details:
-                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" disabled="disabled">{{ $incident['reportDetails'] }}
-                    </textarea>
+            <div class="col-md-8 fw-bold">
+                    Narrative Incident Report Details:
+                    <textarea class="form-control" name="reportDetails" id="exampleFormControlTextarea2" disabled="disabled">{{ $incident['reportDetails'] }}</textarea>
+                    Person's Involve in the Incident:
+                    <textarea class="form-control" name="reportDetails2" id="exampleFormControlTextarea3" disabled="disabled">{{ $incident['reportDetails2'] }}</textarea>
+                    Exact time and Location of the Incident(Time, Road, Zone, Barangay):
+                    <textarea class="form-control" name="reportDetails3" id="exampleFormControlTextarea4" disabled="disabled">{{ $incident['reportDetails3'] }}</textarea>
+                    Type of Incident:
+                    <textarea class="form-control" name="reportDetails4" id="exampleFormControlTextarea5" disabled="disabled">{{ $incident['type_of_incident'] }}</textarea>
                 </div>
                     <div class="col-md-2">
                         <div class="row">
@@ -135,7 +140,7 @@ doc.text("Republic of the Philippines", 105, 20,null,null,"center");
 doc.text("NATIONAL POLICE COMMISSION", 105, 25,null,null,"center");
 doc.text("PHILLIPINE NATIONAL POLICE", 105, 30,null,null,"center");
 doc.setFont("helvetica", "bold");
-doc.text("MABOLO POLICE STATION ", 105, 35,null,null,"center");
+doc.text("POLICE STATION ", 105, 35,null,null,"center");
 doc.setFont("helvetica","normal");
 doc.text("CEBU CITY ", 105, 40,null,null,"center");
 doc.addImage("https://scontent.fceb3-1.fna.fbcdn.net/v/t1.18169-9/296518_100871556693083_555695883_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cdbe9c&_nc_eui2=AeGDbn8ebqoTFTPulmER9wucQtzs_W0mIbxC3Oz9bSYhvMVSz2Phg9rAbA3CdLfxGtq_UlRKZPRFYY2F-waLosMS&_nc_ohc=av4LFlRFCdoAX8tG8mC&tn=CZXNbGnBrPo31WJo&_nc_ht=scontent.fceb3-1.fna&oh=00_AfD4bph3SY9PliO2qaT_mPDoJVpnnJDgdq_ISGAFqjg1UQ&oe=63DDEE0A", "JPEG", 10, 12,30,30);

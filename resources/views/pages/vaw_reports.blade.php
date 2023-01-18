@@ -34,6 +34,24 @@
       <div class="col-6">
         <canvas id="totalopencases" style="width:50%;max-width:600px;"></canvas>
       </div>
+
+      <div class="col-6">
+        <canvas id="totalphysicalabuse" style="width:50%;max-width:600px;"></canvas>
+      </div>
+
+      <div class="col-6">
+        <canvas id="totalsexualviolence" style="width:50%;max-width:600px;"></canvas>
+      </div>
+
+      <div class="col-6">
+        <canvas id="totalemotionalAbuse" style="width:50%;max-width:600px;"></canvas>
+      </div>
+
+      <div class="col-6">
+        <canvas id="totalChildAbuse" style="width:50%;max-width:600px;"></canvas>
+      </div>
+
+
     </div>
 
 
@@ -62,10 +80,15 @@
   var yValues1 = [];
   var yValues2 = [];
   var yValues3 = [];
+
+  var physicalAbuse = [];
+
   var yValues = [1,2,3,4,5,6,7,8,9,10,11,12];
   var count1 = 0;
   var count2 = 0;
   var count3 = 0;
+
+  var count = 0;
   getotalcases();
    async function getotalcases(){
       const coll = collection(db, "incident_reports");
@@ -86,7 +109,7 @@
    async function getotalongoingcases(){
     const coll = collection(db, "incident_reports");
     for (let i = 0; i < 12; i++) {
-      
+
       const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('report_status', '==', 'Ongoing'));
       const querySnapshot = await getDocs(query_1);
         querySnapshot.forEach((doc) => {
@@ -97,7 +120,7 @@
       count2 = 0;
     }
 
-      
+
   }
   getotalclosedcases();
    async function getotalclosedcases(){
@@ -112,7 +135,69 @@
       yValues3.push(count3);
       count3 = 0;
     }
-  }  
+  }
+
+  getphysicalAbuse();
+   async function getphysicalAbuse(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('type_of_incident', '==', 'Physical Abuse'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      physicalAbuse.push(count);
+      count = 0;
+    }
+  } 
+  var sexualviolence = [];
+  getsexualviolence();
+   async function getsexualviolence(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('type_of_incident', '==', 'Sexual Violence'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      sexualviolence.push(count);
+      count = 0;
+    }
+  } 
+
+  var emotionalAbuse = [];
+  getemotionalAbuse();
+   async function getemotionalAbuse(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('type_of_incident', '==', 'Emotional Abuse'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      emotionalAbuse.push(count);
+      count = 0;
+    }
+  }
+
+  var childAbuse = [];
+  getchildAbuse();
+   async function getchildAbuse(){
+      const coll = collection(db, "incident_reports");
+      for (let i = 0; i < 12; i++) {
+      const query_1 = query(coll,where('creatorType', '==', 'barangay'), where('barangay', '==', 'Mabolo'),where('month_sent', '==', i+1),where('type_of_incident', '==', 'Child Abuse'));
+      const querySnapshot = await getDocs(query_1);
+        querySnapshot.forEach((doc) => {
+        count++;
+        //console.log(doc.id, " => ", doc.data());
+      });
+      childAbuse.push(count);
+      count = 0;
+    }
+  }
 
 
     var xValues = ["January", "February", "March", "April", "May", "June", "July", "August","September", "October", "November","December"];
@@ -168,8 +253,9 @@ new Chart("totalclosedcased", {
       text: "Total Closed Cases"
     }
   }
-  
+
 });
+
 new Chart("totalopencases", {
   type: "bar",
   data: {
@@ -187,7 +273,83 @@ new Chart("totalopencases", {
       text: "Total Open Cases"
     }
   }
+});
 
+new Chart("totalphysicalabuse", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        label: 'Total Physical Abuse Cases',
+        backgroundColor: barColors,
+        data: physicalAbuse
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Physical Abuse Cases"
+    }
+  }
+});
+
+new Chart("totalsexualviolence", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        label: 'Total Sexual Violence Cases',
+        backgroundColor: barColors,
+        data: sexualviolence
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Sexual Violence Cases"
+    }
+  }
+});
+
+
+new Chart("totalemotionalAbuse", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        label: 'Total Emotional Abuse Cases',
+        backgroundColor: barColors,
+        data: emotionalAbuse
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Emotional Abuse Cases"
+    }
+  }
+});
+
+new Chart("totalChildAbuse", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+        label: 'Total Child Abuse Cases',
+        backgroundColor: barColors,
+        data: childAbuse
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Child Abuse Cases"
+    }
+  }
 });
 
 //window.onload = getotalcases;

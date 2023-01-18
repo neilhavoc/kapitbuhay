@@ -132,7 +132,6 @@ class RegisterVawController extends Controller
 
                 //store image in firebase storage
                 $bucket = $storage->getBucket();
-                //$fileLocation = $bucket;
 
                 //get the user-input image
                 $imagebrgyLogo = $request->file('fileBrgyLogo');

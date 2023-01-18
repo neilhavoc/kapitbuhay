@@ -36,10 +36,6 @@
 
             </div>
             <div class="col-md-8">
-                <div class="row">
-                    <h5 class="col-md-2">User ID: </h5>
-                    <h5 id="userID" class="col-md-4">{{ $monitor['victimUserID'] }}</h5>
-                </div>
                 <div class="row mt-1">
                     <h5 class="col-md-2">Victim Name:</h5>
                     <input type="text" disabled ="true" class="col-md-4" value="{{ $monitor['victimFullName'] }}">
@@ -59,27 +55,53 @@
                 <table class="table table-hover table-bordered text-center">
                     <thead class="bill-header cs">
                         <tr>
-                            <th id="trs-hd-1" class="col-lg-1">Date Created</th>
-                            <th id="trs-hd-2" class="col-lg-2">Title</th>
-                            <th id="trs-hd-3" class="col-lg-2">Physical Health</th>
-                            <th id="trs-hd-4" class="col-lg-2">Mental Health</th>
-                            <th id="trs-hd-5" class="col-lg-3">Last Modified </th>
-                            <th id="trs-hd-6" class="col-lg-3">Monitoring Status</th>
-                            <th id="trs-hd-7" class="col-lg-2"></th>
+                            <th id="trs-hd-1" class="col-lg-1">Day of Monitoring</th>
+                            <th id="trs-hd-2" class="col-lg-1">Date Created</th>
+                            <th id="trs-hd-3" class="col-lg-1">Physical Health Status</th>
+                            <th id="trs-hd-4" class="col-lg-1">Mental Health Status</th>
+                            <th id="trs-hd-5" class="col-lg-1"></th>
+                            <th id="trs-hd-6" class="col-lg-1"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="justify-contents-center ">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="vaw_edithealthmonitoring" class="btn btn-warning" role="button" aria-disabled="true">Edit</a>
-                            </td>
-                        </tr>
+                        @if ($report == null)
+
+                        @else
+                            @foreach ($report as $data)
+                                <tr class="justify-contents-center ">
+                                    <td>Day {{ $data['monitoring_day'] }}</td>
+                                    <td>{{ $data['physicalmon_datecreated'] }}</td>
+                                    <td>Monitored</td>
+                                    @if ($monitor['mentalhealth_form'] != 'send' && ($data['mentalhealth_id'] == '' || $data['mentalhealth_id'] == null))
+                                        <td>Not Sent</td>
+                                    @elseif ($data['mentalhealth_id'] == '' || $monitor['mentalhealth_form'] == 'send')
+                                        <td>Not Yet Answered</td>
+                                    @else
+                                        <td>Answered</td>
+                                    @endif
+                                    <td>
+                                        <form action="vaw_updatehealthmonitoring/{{ $monitor->id() }}" method="POST">
+                                            @csrf
+                                            @method ('PUT')
+                                            <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
+                                            @if ($data['mentalhealth_id'] == '' && $monitor['mentalhealth_form'] != 'send')
+                                                <button type="submit" class="btn btn-primary">Send Mental Health Form</button>
+                                            @else
+                                                <button type="submit" class="btn btn-primary" disabled>Send Mental Health Form</button>
+                                            @endif
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="vaw_updatehealthmonitoring" method="POST">
+                                            @csrf
+                                            <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
+                                            <button type="submit" class="btn btn-warning"> View </button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

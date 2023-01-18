@@ -43,7 +43,6 @@
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="dashboard" >Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="distress" >Distress Messages</a></li>
                     <li class="nav-item"><a class="nav-link"  href="policeAcc" >Manage Accounts</a></li>
                     <li class="nav-item"><a class="nav-link"  href="article" >Articles</a></li>
                     <li class="nav-item"><a class="nav-link"  href="feedback" >User Feedbacks</a></li>

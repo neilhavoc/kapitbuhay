@@ -74,14 +74,14 @@
                                 </div>
                             @else
                                 <div class="col-md-6">
-                                    <select class="form-select" name="disMesStatus" aria-label="Default select example" disabled>
+                                    <select class="form-select" name="disMesStatus" aria-label="Default select example">
                                         <option selected value="Unread">Unread</option>
                                         <option value="Read">Help is on the Way</option>
                                         <option value="Completed">Completed</option>
                                     </select>
                                 </div>
                                 <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-primary" disabled>Save</button>
+                                    <button type="submit" class="btn btn-primary" >Save</button>
                                 </div>
                             @endif
                         </div>

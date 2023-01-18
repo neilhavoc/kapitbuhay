@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class VawEditHealthMonitoringController extends Controller
+class RegisterPurokLeaderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,29 +13,8 @@ class VawEditHealthMonitoringController extends Controller
      */
     public function index()
     {
-        $firestore = app('firebase.firestore');
-
-        $database = $firestore->database();
-
-        $victimUID = session('viewMonitoringReport');
-
-        $viewMonitoringReportID = session('viewMonitoringReport');
-
-        $phyMonID = session('monitoringID');
-        $victimMonitoringRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring')->document($phyMonID);
-        $victimMonitoring = $victimMonitoringRef->snapshot();
-
-        $questionsRef = $database->collection('monitoring_questions')->document('questions');
-        $questions = $questionsRef->snapshot();
-
-        $answersRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('mentalhealth_answers')->document($victimMonitoring['mentalhealth_id']);
-        $answers = $answersRef->snapshot();
-
-        return view('pages.vaw_EditHealthMonitoring', [
-            'report'    => $victimMonitoring,
-            'questions' => $questions,
-            'answers'   => $answers
-        ]);
+        //
+        return view('pages.register_PurokLeader');
     }
 
     /**

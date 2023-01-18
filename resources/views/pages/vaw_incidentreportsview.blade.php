@@ -58,9 +58,15 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-8 fw-bold">
-                    Report Details:
-                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" disabled="disabled">{{ $incident['reportDetails'] }}</textarea>
+            <div class="col-md-8 fw-bold">
+                    Narrative Incident Report Details:
+                    <textarea class="form-control" name="reportDetails" id="exampleFormControlTextarea2" disabled="disabled">{{ $incident['reportDetails'] }}</textarea>
+                    Person's Involve in the Incident:
+                    <textarea class="form-control" name="reportDetails2" id="exampleFormControlTextarea3" disabled="disabled">{{ $incident['reportDetails2'] }}</textarea>
+                    Exact time and Location of the Incident(Time, Road, Zone, Barangay):
+                    <textarea class="form-control" name="reportDetails3" id="exampleFormControlTextarea4" disabled="disabled">{{ $incident['reportDetails3'] }}</textarea>
+                    Type of Incident:
+                    <textarea class="form-control" name="reportDetails4" id="exampleFormControlTextarea5" disabled="disabled">{{ $incident['type_of_incident'] }}</textarea>
                 </div>
                 <div class="col-md-4">
                     <div class="row">
@@ -130,7 +136,9 @@
 var barangay = document.getElementById('brgy').textContent;
 var incident_date = document.getElementById('incident_date').textContent;
 var victim = document.getElementById('victim').textContent;
-var incident_location = document.getElementById('incident_location').textContent;
+var involve = document.getElementById('exampleFormControlTextarea3').value;
+var incident_type = document.getElementById('exampleFormControlTextarea5').value;
+var incident_location = document.getElementById('exampleFormControlTextarea4').value;
 var creation_date = document.getElementById('creation_date').textContent;
 var report_status = document.getElementById('report_status').textContent;
 var report_creator = document.getElementById('report_creator').value;
@@ -138,10 +146,34 @@ var report_details = document.getElementById("exampleFormControlTextarea2").valu
 
 var logo_img = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t1.18169-9/268568_10150219891722775_3261354_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=cdbe9c&_nc_eui2=AeF6gBxbZ-zxX4XJXRHq2xK9zF0e0KXGMaDMXR7QpcYxoOkE0__b2FkYF1ipK8-_Qjk7BQXCexwPWTNu9BO_AC7T&_nc_ohc=CHNnI5TzS0gAX-OeCjz&_nc_ht=scontent.fceb3-1.fna&oh=00_AfA6UiRxOeuwlCjbJ1BNiTAUZbjv9hrPANyZyWdcFiK9OQ&oe=63DE225E'
 window.jsPDF = window.jspdf.jsPDF;
-
+var mabolo_logo = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/310140411_415424797401909_5713781217450722707_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEOB9PIfWy6TyM1w_BDRjZgytgEoHp0AaLK2ASgenQBovzDUoE0Yajin-e7l_mfQDUu6wAIoClq1ORw1whN7wEJ&_nc_ohc=XeOWoZdmsHcAX8JU1l9&_nc_ht=scontent.fceb3-1.fna&oh=00_AfAVLtbzlkQPPrPWhsYv6BzIzGUo8MkpbRAzbZh7_iXMIA&oe=63CAFF22'
+var lahug_logo = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t1.6435-9/134049684_838792583583201_7523817186570954022_n.png?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeERszkBz8Hdtkx8xbVA8vJ7f7euoZkAUhN_t66hmQBSE-mQQz6FGt_-M5XhNCzC9RNTu35LzFBX16gGjMHz3FEv&_nc_ohc=bO8K9UR2JDkAX8nrKFN&tn=ZuH1WNSOVatA01uB&_nc_ht=scontent.fceb3-1.fna&oh=00_AfDEvyF26l60HrS4yT_XggjXoqMMBZ4xLOhJ_HZgpI0KHg&oe=63EE2DF8';
+var apas_logo = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t1.6435-9/37390749_303659613714325_606709090277654528_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGW_rnf20XQ9tqdUTKx3E-0UQSDh_cf2LNRBIOH9x_Ys3UJzXoPIWXTHb16XTaTS9to59NtdVsCCIc6C8MxVk1-&_nc_ohc=FXFraXW6oh0AX-f3gi7&_nc_ht=scontent.fceb3-1.fna&oh=00_AfBWeCPZObH83KiK1bqwQBu9J5mfb714Ntdk6cpVk7C2Pw&oe=63EDF6AD'
+var luz_logo = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/271233751_283864047104903_1843354317895849483_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHpEDFRdARNEjswSWzu2OmNAIhDYB6nTgwAiENgHqdODOaYCIELqV5tTb9tofDsmZeYLTQwIxvxAlP9PqVxWt2Y&_nc_ohc=A-12HB4zMMEAX-OPTcV&_nc_ht=scontent.fceb3-1.fna&oh=00_AfAktb-7F-B5jrwlSlw_OvfCqscUw4U65a08Siq5juLw1Q&oe=63CC055C'
+var kasambagan_logo = 'https://scontent.fceb3-1.fna.fbcdn.net/v/t31.18172-8/1559472_641792742568326_8208207190343495535_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=19026a&_nc_eui2=AeF2MkEwBSx2HMq1q9E4U0V4ky6pFSLqoe6TLqkVIuqh7qPueBilqpKpmgkMOSDHh6CcyHpEiFWFXiXEHiOjvAlN&_nc_ohc=xaUmQOFG5_QAX-lLfEF&_nc_ht=scontent.fceb3-1.fna&oh=00_AfAMJ82K6KuiRJyyzvMowqjyGssOJsQkzsQ50e42Any7xQ&oe=63EE2932'
 // Convert HTML content to PDF
+var logo_toUse;
 function Convert_HTML_To_PDF() {
     var doc = new jsPDF();
+
+
+if(barangay == 'Mabolo'){
+    logo_toUse = mabolo_logo;
+}
+if(barangay == 'Lahug'){
+    logo_toUse = lahug_logo;
+}
+if(barangay == 'Luz'){
+    logo_toUse = luz_logo;
+}
+if(barangay == 'Kasambagan'){
+    logo_toUse = kasambagan_logo;
+}
+if(barangay == 'Apas'){
+    logo_toUse = apas_logo;
+}
+
+
 
 doc.setFont("helvetica", "bold");
 doc.setFontSize(14);
@@ -152,7 +184,8 @@ doc.text("City of Cebu", 105, 30,null,null,"center");
 doc.setFont("times", "bold");
 doc.text("BARANGAY " + barangay, 105, 35,null,null,"center");
 doc.text("-ooOoo-", 105, 40,null,null,"center");
-doc.addImage(logo_img, "JPEG", 10, 10,30,30);
+doc.addImage(logo_toUse, "JPEG", 15, 10,30,30);
+doc.addImage(logo_img, "JPEG", 165, 10, 30, 30);
 //doc.addImage("examples/images/Octonyan.jpg", "JPEG", 170, 10,30,30);
 doc.autoTable({
   //styles: { fillColor: [255, 0, 0] },
@@ -163,7 +196,8 @@ doc.autoTable({
   body: [
     ['Inclusive Dates and Time of Incident', incident_date],
     ['Exact Location of Incident', incident_location],
-    ['Involved Person/Specific Identification', victim],
+    ['Involved Person/Specific Identification', involve],
+    ['Type of Incident', incident_type],
     ['Narrative Details of Incident', report_details],
     ['Case Status', report_status],
   ],
@@ -185,7 +219,7 @@ doc.autoTable({
 })
 //doc.addPage();
 // Save the PDF
-doc.save('document.pdf');
+doc.save('BARANGAY_'+barangay+'_'+victim+'.pdf');
 //window.location.href = "/vaw_incidentreportview";
 }
 </script>

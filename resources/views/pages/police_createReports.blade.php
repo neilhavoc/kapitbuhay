@@ -53,10 +53,21 @@
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-8 fw-bold">
-                Report Details:
+        <div class="col-md-8 fw-bold">
+                Narrative Incident Report Details:
                 <textarea class="form-control" name="reportDetails" id="exampleFormControlTextarea2" rows="3"></textarea>
-            </div>
+                Person's Involve in the Incident/Specific Identification:
+                <textarea class="form-control" name="reportDetails2" id="exampleFormControlTextarea3" rows="4"></textarea>
+                Exact time and Location of the Incident(Time, Road, Zone, Barangay):
+                <textarea class="form-control" name="reportDetails3" id="exampleFormControlTextarea4" rows="4"></textarea>
+                Type of Incident:
+                <select class="form-select" name="incident_type" aria-label="Default select example">
+                                        <option selected value="Physical Abuse">Physical Violence</option>
+                                        <option value="Sexual Violence">Sexual Violence</option>
+                                        <option value="Emotional Violence">Emotional Violence</option>
+                                        <option value="Child Abuse">Child Abuse</option>
+                                    </select>
+        </div>
             <div class="col-md-4">
                 <div class="row">
                     <div class="row">
