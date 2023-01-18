@@ -1,4 +1,4 @@
-@extends('layouts.Vaw')
+@extends('layouts.PurokLeader')
 
 <!-- Page Title -->
 @section('title', 'Title')
@@ -41,7 +41,6 @@
                         <th id="trs-hd-4" class="col-lg-2">Contact</th>
                         <th id="trs-hd-4" class="col-lg-2">Strike Status</th>
                         <th id="trs-hd-4" class="col-lg-2">Account Status</th>
-                        <th id="trs-hd-4" class="col-lg-2">Purok Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2"></th>
                     </tr>
@@ -53,34 +52,35 @@
                         </tr>
                     @else
                         @foreach ($account as $item)
-                            @if ($item['purok_verification'] == 'Verified')
-                                <tr>
-                                    <td>{{ $item->id() }}</td>
-                                    <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
-                                    <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
-                                    <td>{{ $item['email'] }}</td>
-                                    <td>{{ $item['phonenumber'] }}</td>
-                                    <td>{{ $item['strike'] }}</td>
-                                    <td>{{ $item['account_status'] }}</td>
-                                    <td>{{ $item['purok_verification'] }}</td>
-                                    <td>{{ $item['verification_status'] }}</td>
-                                    <td>
-                                        <form action="VictimAcc" method="POST">
-                                            @csrf
-                                            <input type="text" hidden="true" name="victimID" class="col-md-3" value="{{ $item->id() }}">
-                                            <button class="btn btn-warning" type="submit">
-                                                View
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
+                            @if ($item['barangay'] == 'Mabolo')
+                                @if ($item['purok'] == 'Purok 1')
+                                    <tr>
+                                        <td>{{ $item->id() }}</td>
+                                        <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
+                                        <td>{{ $item['purok'] }} {{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
+                                        <td>{{ $item['email'] }}</td>
+                                        <td>{{ $item['phonenumber'] }}</td>
+                                        <td>{{ $item['strike'] }}</td>
+                                        <td>{{ $item['account_status'] }}</td>
+                                        <td>{{ $item['purok_verification'] }}</td>
+                                        <td>
+                                            <form action="purokmanage_VicAcc" method="POST">
+                                                @csrf
+                                                <input type="text" hidden="true" name="victimID" class="col-md-3" value="{{ $item->id() }}">
+                                                <button class="btn btn-warning" type="submit">
+                                                    View
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endif
                         @endforeach
                     @endif
                 </tbody>
             </table>
         </div>
+    </div>
 @stop
 
 <!-- Scripts -->

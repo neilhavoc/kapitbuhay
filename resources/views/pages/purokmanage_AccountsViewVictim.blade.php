@@ -1,4 +1,4 @@
-@extends('layouts.Vaw')
+@extends('layouts.PurokLeader')
 
 <!-- Page Title -->
 @section('title', 'Title')
@@ -71,7 +71,7 @@
                         <h5 class="col-md-2">
                             Street:
                         </h5>
-                        <input type="text" disabled ="true" class="col-md-3" value="{{ $victim['street'] }}">
+                        <input type="text" disabled ="true" class="col-md-3" value="{{ $victim['purok'] }}, {{ $victim['street'] }}">
                     </div>
                     <div class="row mt-1">
                         <h5 class="col-md-2">
@@ -100,26 +100,7 @@
             </div>
             <div class="row row3 mt-5">
                 <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>
-                                Purok Verification Status: {{ $victim['purok_verification'] }}
-                            </h5>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5>
-                                Verified by: {{ $victim['purok_approvedby'] }}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row3 mt-5">
-                <div class="col-md-8">
-                    <form action="manage_accountsvictimprofileview/{{ $victim->id() }}" method="POST">
+                    <form action="purokmanage_ViewVicAcc/{{ $victim->id() }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -156,35 +137,6 @@
                     <form action="manage_accountsvictimprofileview/updateAccStatus/{{ $victim->id() }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="row mt-3">
-                            <div class="col-md-2">
-                                <h5>
-                                    Account Status:
-                                </h5>
-                            </div>
-                            @if($disable == 'disabled')
-                            <div class="col-md-5">
-                                <select class="form-select" name="AccountStatus" id="AccountStatus" aria-label="verification selection" disabled>
-                                    <option selected disabled>{{ $victim['account_status'] }}</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5">
-                                <button type="submit" class="btn btn-info" disabled>Update Account Status</button>
-                            </div>
-                            @else
-                            <div class="col-md-5">
-                                <select class="form-select" name="AccountStatus" id="AccountStatus" aria-label="verification selection">
-                                    <option selected disabled>{{ $victim['account_status'] }}</option>
-                                    <option value="Not Banned">Not Banned</option>
-                                    <option value="Banned">Banned</option>
-                                    <option value="Warning">Warning</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5">
-                                <button type="submit" class="btn btn-info">Update Account Status</button>
-                            </div>
-                            @endif
-                        </div>
                     </form>
                 </div>
                 <div class="col-md-4">

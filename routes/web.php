@@ -40,8 +40,9 @@ use App\Http\Controllers\ManageAccountsVawProfileViewController;
 use App\Http\Controllers\ManageAccountsVictimProfileViewController;
 use App\Http\Controllers\VawIncidentReportViewController;
 use App\Http\Controllers\PoliceReportsViewController;
-
-
+use App\Http\Controllers\PurokAccountController;
+use App\Http\Controllers\PurokManageVictimAccController;
+use App\Http\Controllers\PurokManageViewVictimAccController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +79,10 @@ Route::put('/manage_accountspoliceprofileview/updateAccStatus/{id}', [ManageAcco
 Route::resource('/manage_accountsvawprofileview', ManageAccountsVawProfileViewController::class);
 Route::put('/manage_accountsvawprofileview/updateAccStatus/{id}', [ManageAccountsVawProfileViewController::class, 'updateAccStatus']);
 
+//VAW Reports
+Route::resource('/vaw_reports', VawReportsController::class);
+Route::post('/vaw_reports/displaySpecific/', [VawReportsController::class, 'displaySpecific']);
+
 Route::resource('/loginpage', LoginController::class);
 Route::resource('/register', RegisterController::class);
 Route::resource('/article', ArticleController::class);
@@ -97,7 +102,6 @@ Route::resource('/police_manageaccount', PoliceManageAccountController::class);
 Route::resource('/distress', DistressController::class);
 Route::resource('/register_police', RegisterPoliceController::class);
 Route::resource('/register_vaw', RegisterVawController::class);
-Route::resource('/vaw_reports', VawReportsController::class);
 Route::resource('/vaw_createReports', VawCreateReportController::class);
 Route::resource('/vaw_monitoring', VawMonitoringController::class);
 Route::resource('/vaw_record', VawRecordController::class);
@@ -112,4 +116,6 @@ Route::resource('/vaw_createhealthmonitoring', VawCreateHealthMonitoringControll
 Route::resource('/vaw_edithealthmonitoring', VawEditHealthMonitoringController::class);
 Route::resource('/vaw_incidentreportview', VawIncidentReportViewController::class);
 Route::resource('/police_reportsview', PoliceReportsViewController::class);
-
+Route::resource('/purok_account', PurokAccountController::class);
+Route::resource('/purokmanage_VicAcc', PurokManageVictimAccController::class);
+Route::resource('/purokmanage_ViewVicAcc', PurokManageViewVictimAccController::class);

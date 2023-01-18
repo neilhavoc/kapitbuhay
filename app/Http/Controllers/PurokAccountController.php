@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class VawReportsController extends Controller
+class PurokAccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,13 @@ class VawReportsController extends Controller
      */
     public function index()
     {
-        if(!session()->has('userID') && !session()->has('brgyName')) {
-            return redirect('loginpage');
-        }
-        else {
-            $firestore = app('firebase.firestore');
+        $firestore = app('firebase.firestore');
             $storage = app('firebase.storage');
 
             $database = $firestore->database();
             $bucket = $storage->getBucket();
 
-            $userid = session('userID');
+            $userid = 'm66u1KNCe5NnosRjddR7bWExsuK2';
             $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
 
             $urlLogo = $brgyLogo->signedUrl(
@@ -34,49 +30,22 @@ class VawReportsController extends Controller
                 ]
             );
 
-            $brgyLogoRef = $database->collection('barangay_accounts')->document($userid);
+            $brgyLogoRef = $database->collection('purok-leader')->document('Yvg2BqbpSLRwS5bWRmfthnOO5mZ2');
 
             $brgyLogoRef->update([
                 ['path' => 'brgyLogo', 'value' => $urlLogo]
             ]);
 
-            $brgyUserIDRef = $database->collection('barangay_accounts')->document($userid);
+            $brgyUserIDRef = $database->collection('purok-leader')->document('Yvg2BqbpSLRwS5bWRmfthnOO5mZ2');
             $brgyUser = $brgyUserIDRef->snapshot();
 
-            $incidentRefID = $database->collection('incident_reports');
-            $incidentRef = $incidentRefID->documents();
-
-            if (session('searchedtrue') != null)
-            {
-                $isSearched = session('searchedtrue');
-
-                session(['searchedtrue' => null]);
-            }
-            else
-            {
-                $isSearched = 'empty';
-            }
-
-            return view('pages.vaw_incidents', [
-                'incident' => $incidentRef,
-                'brgyLogo' => $brgyUser,
-                'isSearched' => $isSearched
+            $password = 'false';
+            $notStrong = 'false';
+            return view('pages.purok_manageaccounts', [
+                'account'   => $brgyUser,
+                'password'  => $password,
+                'notStrong' => $notStrong
             ]);
-        }
-    }
-
-    public function displaySpecific(Request $request)
-    {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-
-        $incidentRefID = $database->collection('incident_reports');
-        $incidentRef = $incidentRefID->documents();
-
-        $isSearched = $request->input('sortby');
-        session(['searchedtrue' => $isSearched]);
-
-        return redirect('vaw_reports');
     }
 
     /**
@@ -98,13 +67,10 @@ class VawReportsController extends Controller
     public function store(Request $request)
     {
         //
-        session(['viewIncidentID' => $request->input('incidentID')]);
-
-        return redirect('vaw_incidentreportview');
     }
 
     /**
-     * DisplabrgyLogoy the specified resource.
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -134,7 +100,7 @@ class VawReportsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
