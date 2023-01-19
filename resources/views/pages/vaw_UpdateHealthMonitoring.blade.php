@@ -74,7 +74,7 @@
                                     <td>Monitored</td>
                                     @if ($monitor['mentalhealth_form'] != 'send' && ($data['mentalhealth_id'] == '' || $data['mentalhealth_id'] == null))
                                         <td>Not Sent</td>
-                                    @elseif ($data['mentalhealth_id'] == '' || $monitor['mentalhealth_form'] == 'send')
+                                    @elseif ($data['mentalhealth_id'] == 0 && $monitor['mentalhealth_form'] == 'send')
                                         <td>Not Yet Answered</td>
                                     @else
                                         <td>Answered</td>
@@ -84,7 +84,7 @@
                                             @csrf
                                             @method ('PUT')
                                             <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
-                                            @if ($data['mentalhealth_id'] == '' && $monitor['mentalhealth_form'] != 'send')
+                                            @if ($data['mentalhealth_id'] == 0 && $monitor['mentalhealth_form'] != 'send')
                                                 <button type="submit" class="btn btn-primary">Send Mental Health Form</button>
                                             @else
                                                 <button type="submit" class="btn btn-primary" disabled>Send Mental Health Form</button>
@@ -92,11 +92,19 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="vaw_updatehealthmonitoring" method="POST">
-                                            @csrf
-                                            <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
-                                            <button type="submit" class="btn btn-warning"> View </button>
-                                        </form>
+                                        @if ($data['mentalhealth_id'] == 0 && $monitor['mentalhealth_form'] != 'send')
+                                            <form action="vaw_updatehealthmonitoring" method="POST">
+                                                @csrf
+                                                <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
+                                                <button type="submit" class="btn btn-warning" disabled> View </button>
+                                            </form>
+                                        @elseif ($data['mentalhealth_id'] != 0 )
+                                            <form action="vaw_updatehealthmonitoring" method="POST">
+                                                @csrf
+                                                <input type="text" hidden="true" name="phyMonID" class="col-md-3" value="{{ $data->id() }}">
+                                                <button type="submit" class="btn btn-warning"> View </button>
+                                            </form>
+                                        @endif
                                     </td>
 
                                 </tr>

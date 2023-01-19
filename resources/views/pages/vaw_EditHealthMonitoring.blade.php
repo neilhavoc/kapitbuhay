@@ -6,6 +6,39 @@
 <!-- Styles -->
 @section('styles')
 <style>
+
+.container-text-center .wrapper {
+    position: relative;
+    height: 500px;
+    width: 75%;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed #c2cdda;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.wrapper .active {
+    border: none;
+}
+
+.wrapper .image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
     .profile{
     height: 170x;
     width: 200px;
@@ -42,9 +75,34 @@
               <button class="nav-link" id="mental-tab" data-bs-toggle="tab" data-bs-target="#mental" type="button" role="tab" aria-controls="mental" aria-selected="false">Mental Health</button>
             </li>
           </ul>
-          <div class="tab-content" id="myTabContent">
+        <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="physical" role="tabpanel" aria-labelledby="physical-tab">
                 <textarea class="form-control" name="physicalmonitoring" id="physicalmonitoring" rows="3" disabled>{{$report['physicalmon_details']}}</textarea>
+                <div class="container-text-center">
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <img src="{{$report['physicalmon_image1']}}" alt="Article Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <img src="{{$report['physicalmon_image2']}}" alt="Article Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <img src="{{$report['physicalmon_image3']}}" alt="Article Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="mental" role="tabpanel" aria-labelledby="mental-tab">
                 <table class="table table-hover table-bordered">
@@ -114,9 +172,9 @@
                     </tbody>
                 </table>
             </div>
-          </div>
+        </div>
     </div>
-    <div class="row mt-5 mx-1 justify-content-evenly">
+    <div class="row mx-1 justify-content-evenly">
         <!-- <div class="col-md-auto">
             <div class="row">
                 <div class="col-md-auto">

@@ -80,7 +80,7 @@ class VawReviewDistressMessageController extends Controller
             $statUpdate = '<br><br>[' . $date . ']: Barangay ' . $sosRefID['receiving_Brgy'] .
                             ' Authorities has transferred the message to your nearest Police Station'  . $sosRefID['status_update_1'];
         }
-        elseif ($request->input('disMesStatus') == 'Completed')
+        elseif ($request->input('disMesStatus') == 'Responded')
         {
             $statUpdate = '<br><br>[' . $date . ']: Barangay ' . $sosRefID['receiving_Brgy'] .
                             ' Authorities has arrived and responded to the scene.'  . $sosRefID['status_update_1'];

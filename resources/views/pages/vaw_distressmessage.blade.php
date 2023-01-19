@@ -19,32 +19,23 @@
 <!-- Content -->
 @section('content')
 <div class="container search mb-2" style="overflow-y: scroll; overflow-x: hidden; height:560px;">
-    <div class="row g-1 mb-5">
-        <div class="col-md-5">
-            <input class= "container-fluid h-100" type="text" placeholder="Search">
-        </div>
-        <div class="col-md-6">
-            <button type="button" class="btn btn-primary">Search</button>
-        </div>
-    </div>
-    <div class="col-md-6 mb-2">
-      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Separated link</a></li>
-      </ul>
-    </div>
-
-
-        <div class="row">
-            <div class="col-md-6  mb-0">
-                <button class="btn btn-primary h-100" type="button">Recent</button>
-                <button class="btn btn-primary h-100" type="button">List of Distress Message</button>
+    <form action="vaw_distressmessage/displaySpecific" method="POST">
+        @csrf
+        <div class="row g-1 mb-5">
+            <div class="col-md-2">
+                <select class="form-select" name="sortby" id="sortby" aria-label="Sort By" required>
+                    <option selected disabled">Sort by</option>
+                    <option value="Unread">Unread</option>
+                    <option value="Read">Read</option>
+                    <option value="Transferred">Transferred</option>
+                    <option value="Responded">Responded</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </div>
+    </form>
         <div class="form-group mt-0 mb-5" style="overflow: hidden; overflow-y: scroll;">
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
@@ -71,7 +62,7 @@
                         </tr>
                     @else
                         @foreach ($message as $item)
-                            @if($item['receiving_Brgy'] == session('barangay'))
+                            @if($item['receiving_Brgy'] == session('barangay') && $isSearched == 'empty')
                                 <tr class="justify-contents-center ">
                                     <td>{{ $item->id() }}</td>
                                     <td>{{ $item['sender_FullName'] }}</td>
@@ -87,7 +78,22 @@
                                             </form>
                                     </td>
                                 </tr>
-                            @else
+                            @elseif ($item['receiving_Brgy'] == session('barangay') && $isSearched == $item['status'])
+                                <tr class="justify-contents-center ">
+                                    <td>{{ $item->id() }}</td>
+                                    <td>{{ $item['sender_FullName'] }}</td>
+                                    <td>{{ $item['sender_barangay'] }}, {{ $item['sender_city'] }}</td>
+                                    <td>{{ $item['sender_phoneNo'] }}</td>
+                                    <td>{{ $item['distressMessage'] }}</td>
+                                    <td>{{ $item['status'] }}</td>
+                                    <td>
+                                            <form action="vaw_distressmessage" method="POST">
+                                                @csrf
+                                                <input type="text" hidden="true" name="distressID" class="col-md-3" value="{{ $item->id() }}">
+                                                <button type="submit" class="btn btn-success"> View </button>
+                                            </form>
+                                    </td>
+                                </tr>
                             @endif
                         @endforeach
                     @endif

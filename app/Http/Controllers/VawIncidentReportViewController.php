@@ -24,6 +24,7 @@ class VawIncidentReportViewController extends Controller
             $storage = app('firebase.storage');
             $bucket = $storage->getBucket();
             $userid = session('userID');
+
             $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
 
             $urlLogo = $brgyLogo->signedUrl(
@@ -43,8 +44,22 @@ class VawIncidentReportViewController extends Controller
             $brgyUser = $brgyUserIDRef->snapshot();
 
             $database = $firestore->database();
+
             $viewdisID = session('viewIncidentID');
 
+            $imageEvidence = $bucket->object('incident-reports/'. $viewdisID .'/evidence/Evidenece.png');
+
+            $urlEvidence = $imageEvidence->signedUrl(
+                # This URL is valid for 15 minutes
+                new \DateTime('15 min'),
+                [
+                    'version' => 'v4',
+                ]
+            );
+            $incidentEvidenceRef = $database->collection('incident_reports')->document($viewdisID);
+            $incidentEvidenceRef->update([
+                ['path' => 'incident_evidence', 'value' => $urlEvidence]
+            ]);
 
             $incidentRef = $database->collection('incident_reports')->document($viewdisID);
             $incRef = $incidentRef->snapshot();
@@ -110,6 +125,8 @@ class VawIncidentReportViewController extends Controller
     public function update(Request $request, $id)
     {
         $firestore = app('firebase.firestore');
+        $storage = app('firebase.storage');
+
         $database = $firestore->database();
 
         $incidentRef = $database->collection('incident_reports')->document($id);
@@ -120,23 +137,30 @@ class VawIncidentReportViewController extends Controller
 
         if ($request->input('CaseStatus')  == "Closed")
         {
-            $incidentReportRef = $database->collection('incident_reports')->document($id);
-            $userIDRef = $incidentReportRef->snapshot();
+            //store image in firebase storage
+            $bucket = $storage->getBucket();
 
-            $victimUsersRef = $database->collection('civilian-users')->document($userIDRef['sender_UID']);
-            $userRef = $victimUsersRef->snapshot();
+            //get the user-input image
+            $imageEvidence = $request->file('fileEvidence');
 
-            $data = [
-                'victimUserID'      => $userIDRef['sender_UID'],
-                'victimFullName'    => $userRef['fName'] . ' ' . $userRef['midName'] . ' ' . $userRef['lName'],
-                'victimAddress'     => $userRef['street'] . ', ' . $userRef['barangay'] . ', ' . $userRef['city'],
-                'victimPhoneNum'    => '0' . $userRef['phonenumber'],
-                'monitoring_status' => 'Not Yet Monitored',
-                'victim_image'      => 'empty'
+            //get the original name of the file
+            $imageEvidenceName = $imageEvidence->getClientOriginalName();
+
+            //store to temporary local folder
+            $localfolder = public_path('storage-temp-folder') .'/';
+
+            //create file path in storage
+            $brgyLogo = [
+                'name' => 'incident-reports/' . $id . '/evidence/Evidenece.png',
             ];
 
-            $monitoringRef = $database->collection('monitoring_reports')->document($userIDRef['sender_UID'])->set($data);
-
+            //upload evidence in storage
+            if ($imageEvidence->move($localfolder, $imageEvidenceName)) {
+                $imgfile = fopen($localfolder.$imageEvidenceName, 'r');
+                $bucket->upload($imgfile, $brgyLogo);
+                //will remove from local laravel folder
+                unlink($localfolder . $imageEvidenceName);
+            }
 
         }
 

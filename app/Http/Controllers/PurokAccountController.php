@@ -19,8 +19,8 @@ class PurokAccountController extends Controller
             $database = $firestore->database();
             $bucket = $storage->getBucket();
 
-            $userid = 'm66u1KNCe5NnosRjddR7bWExsuK2';
-            $brgyLogo = $bucket->object('barangay-vaw/'. $userid .'/credentials/Barangay-Logo.png');
+            $userid = session('userID');
+            $brgyLogo = $bucket->object('purok-leader/'. $userid .'/credentials/Purok-Logo.png');
 
             $urlLogo = $brgyLogo->signedUrl(
                 # This URL is valid for 15 minutes
@@ -30,13 +30,13 @@ class PurokAccountController extends Controller
                 ]
             );
 
-            $brgyLogoRef = $database->collection('purok-leader')->document('Yvg2BqbpSLRwS5bWRmfthnOO5mZ2');
+            $brgyLogoRef = $database->collection('purok-leader')->document($userid);
 
             $brgyLogoRef->update([
                 ['path' => 'brgyLogo', 'value' => $urlLogo]
             ]);
 
-            $brgyUserIDRef = $database->collection('purok-leader')->document('Yvg2BqbpSLRwS5bWRmfthnOO5mZ2');
+            $brgyUserIDRef = $database->collection('purok-leader')->document($userid);
             $brgyUser = $brgyUserIDRef->snapshot();
 
             $password = 'false';

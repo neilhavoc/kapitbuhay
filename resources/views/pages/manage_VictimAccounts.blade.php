@@ -34,13 +34,10 @@
             <table class="table table-hover table-bordered text-center">
                 <thead class="bill-header cs">
                     <tr>
-                        <th id="trs-hd-1" class="col-lg-1">ID</th>
                         <th id="trs-hd-2" class="col-lg-3">Victim Name</th>
                         <th id="trs-hd-3" class="col-lg-3">Address</th>
                         <th id="trs-hd-4" class="col-lg-3">Email</th>
                         <th id="trs-hd-4" class="col-lg-2">Contact</th>
-                        <th id="trs-hd-4" class="col-lg-2">Strike Status</th>
-                        <th id="trs-hd-4" class="col-lg-2">Account Status</th>
                         <th id="trs-hd-4" class="col-lg-2">Purok Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2">Verification Status</th>
                         <th id="trs-hd-4" class="col-lg-2"></th>
@@ -55,13 +52,10 @@
                         @foreach ($account as $item)
                             @if ($item['purok_verification'] == 'Verified')
                                 <tr>
-                                    <td>{{ $item->id() }}</td>
                                     <td>{{ $item['fName'] }} {{ $item['lName'] }}</td>
                                     <td>{{ $item['street'] }} {{ $item['barangay'] }} {{ $item['city'] }}</td>
                                     <td>{{ $item['email'] }}</td>
                                     <td>{{ $item['phonenumber'] }}</td>
-                                    <td>{{ $item['strike'] }}</td>
-                                    <td>{{ $item['account_status'] }}</td>
                                     <td>{{ $item['purok_verification'] }}</td>
                                     <td>{{ $item['verification_status'] }}</td>
                                     <td>

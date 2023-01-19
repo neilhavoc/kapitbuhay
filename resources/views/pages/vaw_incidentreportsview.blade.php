@@ -16,11 +16,48 @@
 }
 .modal-footer-text-center{
     text-align: center;
-    padding-bottom: 50px;
+    padding-bottom: 200px;
 }
 .modal-profile
 {
     width: 100%;
+}
+.container-text-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.container-text-center .wrapper {
+    position: relative;
+    height: 670px;
+    width: 500px;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed #c2cdda;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.wrapper .active {
+    border: none;
+}
+
+.wrapper .image{
+    position: absolute;
+    height: 670px;
+    width: 500px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
 }
 </style>
 
@@ -92,38 +129,94 @@
                                 <input type="text" class="form-control align-content-center w-75" disabled value="{{ $incident['reportPosition'] }}">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="fw-bold ">Case Status:</div>
+                        <div class="row mt-3">
+                            @if ($incident['report_status'] != 'Closed')
+                            <div class="col-md-auto">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#reportSave" >
+                                    Update Status
+                                </button>
+                            </div>
+                            @else
+                            <div class="col-md-auto">
+                                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#reportViewEvi" >
+                                    View Evidence
+                                </button>
+                            </div>
+                            @endif
                         </div>
-                        <form action="vaw_incidentreportview/{{ $incident->id() }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="row">
-                                <div class="col-md-auto">
-                                    <select class="form-select " name="CaseStatus" aria-label="Default select example">
-                                    <option selected value="Ongoing">Ongoing</option>
-                                    <option value="Closed">Closed</option>
-                                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5 mb-5">
+                <button onclick="Convert_HTML_To_PDF();" class="btn btn-success w-25" >
+                    Generate PDF
+                </button>
+            </div>
+            <div style="display: none" id="report_status" >{{ $incident['report_status'] }}</div>
+            <div style="display: none" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
+            <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="reportSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <form action="vaw_incidentreportview/{{ $incident->id() }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method ('PUT')
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+                                <!-- <h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">Report User</h3> -->
+                            </div>
+                            <div class="modal-body">
+                                <h3 class="text-center mb-5">Upload Evidence as Image</h3>
+                                <div class="row mb-2 justify-content-center">
+                                    <div class="fw-bold col-md-auto">Incident Status:</div>
+                                    <div class="col-md-auto">
+                                        <select class="form-select " name="CaseStatus" aria-label="Default select example">
+                                            <option selected value="Ongoing">Ongoing</option>
+                                            <option value="Closed">Closed</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-primary" >
-                                        Save
-                                    </button>
+                                <div class="row mt-3 mx-5 mb-5 justify-content-between">
+                                    <input name="fileEvidence" type="file" class="form-control align-content-center btn btn-success w-100" required>
+                                    <div class="row mt-5 justify-content-center">
+                                        <div class="col-md-auto">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+    <div class="modal fade" id="reportViewEvi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <form action="feedback" method="GET">
+                            @csrf
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                                <!--<h3 class="modal-title position-absolute top-30 start-50 translate-middle" id="staticBackdropLabel">View User Feedback</h3>-->
+                            </div>
+                            <div class="modal-body">
+                            <h3 class="text-center ">Evidence</h3>
+                                <!--<div class="container border-secondary" style="height:400px; margin-top:0%; margin-bottom:0%;">-->
+                                <div class="container-text-center">
+                                    <div class="wrapper" style="margin-left: auto; margin-right: auto;">
+                                        <div class="image">
+                                            <img src="{{ $incident['incident_evidence'] }}" alt="Article Image">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-                        <div class="row justify-content-center mt-5 mb-5">
-                            <button onclick="Convert_HTML_To_PDF();" class="btn btn-success w-25" >
-                                Generate PDF
-                            </button>
-                        </div>
-                        <div style="display: none" id="report_status" >{{ $incident['report_status'] }}</div>
-                        <div style="display: none" id="brgylogo" >{{ $brgyLogo['brgyLogo'] }}</div>
-                        <div style="display: none" id="brgy" >{{ $brgyLogo['barangay'] }}</div>
-    </div>
 
 @stop
 

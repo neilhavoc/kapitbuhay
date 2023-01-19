@@ -14,14 +14,56 @@ class VawEditHealthMonitoringController extends Controller
     public function index()
     {
         $firestore = app('firebase.firestore');
+        $storage = app('firebase.storage');
 
+        $bucket = $storage->getBucket();
         $database = $firestore->database();
-
-        $victimUID = session('viewMonitoringReport');
 
         $viewMonitoringReportID = session('viewMonitoringReport');
 
         $phyMonID = session('monitoringID');
+
+        $victimMonitoringRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring')->document($phyMonID);
+        $victimMonitoring = $victimMonitoringRef->snapshot();
+
+        $brgyLogo1 = $bucket->object('civilian-users/' . $viewMonitoringReportID . '/monitoringdetails_images/day' . $victimMonitoring['monitoring_day'] . '/MonitoringImage1.png');
+
+        $brgyLogo2 = $bucket->object('civilian-users/' . $viewMonitoringReportID . '/monitoringdetails_images/day' . $victimMonitoring['monitoring_day'] . '/MonitoringImage2.png');
+
+        $brgyLogo3 = $bucket->object('civilian-users/' . $viewMonitoringReportID . '/monitoringdetails_images/day' . $victimMonitoring['monitoring_day'] . '/MonitoringImage3.png');
+
+        $urlLogo1 = $brgyLogo1->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $urlLogo2 = $brgyLogo2->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $urlLogo3 = $brgyLogo3->signedUrl(
+            # This URL is valid for 15 minutes
+            new \DateTime('15 min'),
+            [
+                'version' => 'v4',
+            ]
+        );
+
+        $brgyLogoRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring')->document($victimMonitoringRef->id());
+
+        $brgyLogoRef->update([
+            ['path' => 'physicalmon_image1', 'value' => $urlLogo1],
+            ['path' => 'physicalmon_image2', 'value' => $urlLogo2],
+            ['path' => 'physicalmon_image3', 'value' => $urlLogo3]
+        ]);
+
         $victimMonitoringRef = $database->collection('monitoring_reports')->document($viewMonitoringReportID)->collection('physicalhealth_monitoring')->document($phyMonID);
         $victimMonitoring = $victimMonitoringRef->snapshot();
 

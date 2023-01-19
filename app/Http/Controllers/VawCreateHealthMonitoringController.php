@@ -155,7 +155,7 @@ class VawCreateHealthMonitoringController extends Controller
             'physicalmon_monitoredbyUID'    => session('userID'),
             'monitoring_day'                => $day,
             'physicalmon_brgy'              => session('barangay'),
-            'mentalhealth_id'               => ''
+            'mentalhealth_id'               => 0
         ];
 
         $database->collection('monitoring_reports')->document($victimUID)->collection('physicalhealth_monitoring')->document($newPhyMonID)->set($data);

@@ -108,7 +108,7 @@ class PurokManageViewVictimAccController extends Controller
         {
             $civilianUsers->update([
                 ['path' => 'purok_verification', 'value' => $request->input('verification')],
-                ['path' => 'purok_approvedby', 'value' => 'Purok 1 Leader Khef Rey Manlise']
+                ['path' => 'purok_approvedby', 'value' => session('purokLeaderName')]
             ]);
 
             if($request->input('verification') == 'Verified')

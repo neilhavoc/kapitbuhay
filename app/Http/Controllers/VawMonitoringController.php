@@ -24,8 +24,20 @@ class VawMonitoringController extends Controller
             $monitoringIDRef = $database->collection('monitoring_reports');
             $monitoringRef = $monitoringIDRef->documents();
 
+            if (session('searchedtrue') != null)
+            {
+                $isSearched = session('searchedtrue');
+
+                session(['searchedtrue' => null]);
+            }
+            else
+            {
+                $isSearched = 'empty';
+            }
+
             return view('pages.vaw_monitoring', [
                 'reports' => $monitoringRef,
+                'isSearched' => $isSearched
             ]);
         }
     }
@@ -51,6 +63,14 @@ class VawMonitoringController extends Controller
         session(['viewMonitoringReport' => $request->input('monitoringID')]);
 
         return redirect('vaw_updatehealthmonitoring');
+    }
+
+    public function displaySpecific(Request $request)
+    {
+        $isSearched = $request->input('sortby');
+        session(['searchedtrue' => $isSearched]);
+
+        return redirect('vaw_monitoring');
     }
 
     /**

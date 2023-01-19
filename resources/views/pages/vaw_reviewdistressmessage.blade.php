@@ -60,7 +60,7 @@
                                         <option selected value="Unread">Unread</option>
                                         <option value="Read">Help is on the Way</option>
                                         <option value="Transferred">Transfer to Police</option>
-                                        <option value="Completed">Completed</option>
+                                        <option value="Responded">Issue has been responded</option>
                                     </select>
                                 </div>
                                 <div class="col-md-auto">
@@ -69,44 +69,10 @@
                             @else
                                 <div class="col-md-6">
                                     <select class="form-select" name="disMesStatus" aria-label="Default select example" disabled>
-                                        <option selected value="Unread">Unread</option>
-                                        <option value="Read">Help is on the Way</option>
-                                        <option value="Transferred">Transfer to Police</option>
-                                        <option value="Completed">Completed</option>
                                     </select>
                                 </div>
                                 <div class="col-md-auto">
                                     <button type="submit" class="btn btn-primary" disabled>Save</button>
-                                </div>
-                            @endif
-                        </div>
-                    </form>
-                    <form action="vaw_reviewdistressmessage/transferDistress/{{ $message['sosID'] }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="row mt-5 mx-5 justify-content-between">
-                            @if ($message['status'] != 'Transferred')
-                                <div class="col-md-6">
-                                    <select class="form-select" name="transferDistress" aria-label="Default select example" disabled>
-                                        <option selected disabled>Select police station </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-warning" disabled>Transfer to police</button>
-                                </div>
-                            @else
-                                <div class="col-md-6">
-                                    <select class="form-select" name="transferDistress" aria-label="Default select example">
-                                        <option selected disabled>Select police station </option>
-                                        @foreach ($police as $row)
-                                            @if ($row['policeJurisdiction'] == session('barangay'))
-                                                <option value="{{$row['policeUID']}}">{{$row['policeName']}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-auto">
-                                    <button type="submit" class="btn btn-warning">Transfer to police</button>
                                 </div>
                             @endif
                         </div>

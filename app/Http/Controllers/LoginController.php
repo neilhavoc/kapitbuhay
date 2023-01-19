@@ -67,6 +67,8 @@ class LoginController extends Controller
         $idRefVAW = $vawUsers->documents();
         $policeUsers = $database->collection('police_accounts');
         $idRefPolice = $policeUsers->documents();
+        $purokUsers = $database->collection('purok-leader');
+        $idRefPurok = $purokUsers->documents();
 
         foreach ($idRefVAW as $vawID)
         {
@@ -98,6 +100,47 @@ class LoginController extends Controller
                         return redirect('loginpage')->withSuccess('Account is banned!');
                     }
                     elseif ($vawID['verification_status'] == 'Verification Failed') {
+                        return redirect('loginpage')->withSuccess('Account has Failed its Verification');
+                    }
+                }
+                else
+                {
+                    return redirect('loginpage')->withSuccess('Account is not yet verified! Please check email');
+                }
+
+            }
+        }
+
+        foreach ($idRefPurok as $purokID)
+        {
+            if ($purokID['purokEmail'] == $email)
+            {
+                $user = $auth->getUser($purokID['purokUID']);
+                $verify = $user->emailVerified;
+
+                if ($verify == 1)
+                {
+                    if ($purokID['verification_status'] == 'To Verify' && $purokID['account_status'] == 'Not Banned') {
+                        return redirect('loginpage')->withSuccess('Account is not yet Verified!');
+                    }
+                    elseif ($purokID['verification_status'] == 'Verified' && $purokID['account_status'] == 'Not Banned') {
+                        try
+                        {
+                            $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+                            session(['userID' => $purokID['purokUID']]);
+                            session(['purokName' => $purokID['purokName']]);
+                            session(['barangay' => $purokID['barangay']]);
+                            session(['purokLeaderName' => $purokID['purokLeaderName']]);
+
+                            return redirect('purok_account');
+                        } catch(invalidInput $e) {
+                            return redirect('loginpage')->withSuccess('Invalid Email or Password!');
+                        };
+                    }
+                    elseif ($purokID['account_status'] == 'Banned') {
+                        return redirect('loginpage')->withSuccess('Account is banned!');
+                    }
+                    elseif ($purokID['verification_status'] == 'Verification Failed') {
                         return redirect('loginpage')->withSuccess('Account has Failed its Verification');
                     }
                 }

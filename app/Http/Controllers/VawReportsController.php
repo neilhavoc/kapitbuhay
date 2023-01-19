@@ -67,12 +67,6 @@ class VawReportsController extends Controller
 
     public function displaySpecific(Request $request)
     {
-        $firestore = app('firebase.firestore');
-        $database = $firestore->database();
-
-        $incidentRefID = $database->collection('incident_reports');
-        $incidentRef = $incidentRefID->documents();
-
         $isSearched = $request->input('sortby');
         session(['searchedtrue' => $isSearched]);
 

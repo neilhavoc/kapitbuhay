@@ -22,8 +22,22 @@ class VawDistressMessageController extends Controller
             $distressRef = $database->collection('sos-distress-message');
             $messageRef = $distressRef->documents();
 
+
+
+            if (session('searchedtrue') != null)
+            {
+                $isSearched = session('searchedtrue');
+
+                session(['searchedtrue' => null]);
+            }
+            else
+            {
+                $isSearched = 'empty';
+            }
+
             return view('pages.vaw_distressmessage', [
-                'message' => $messageRef
+                'message' => $messageRef,
+                'isSearched' => $isSearched
             ]);
         }
     }
@@ -50,6 +64,14 @@ class VawDistressMessageController extends Controller
         session(['viewDistressID' => $request->input('distressID')]);
 
         return redirect('vaw_reviewdistressmessage');
+    }
+
+    public function displaySpecific(Request $request)
+    {
+        $isSearched = $request->input('sortby');
+        session(['searchedtrue' => $isSearched]);
+
+        return redirect('vaw_distressmessage');
     }
 
     /**
